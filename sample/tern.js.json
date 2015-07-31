@@ -1,0 +1,57 @@
+{
+  "!name": "tern",
+  "!define": {
+    "!node": {
+      "node_modules/tern/lib/tern`js": {
+        "registerPlugin": "fn(name: string, init: ?)",
+        "defaultOptions": {
+          "debug": "bool",
+          "async": "bool",
+          "getFile": "fn(_f: ?, c: ?)",
+          "defs": "[?]",
+          "fetchTimeout": "number",
+          "dependencyBudget": "number",
+          "reuseInstances": "bool",
+          "stripCRs": "bool"
+        },
+        "defineQueryType": "fn(name: string, desc: ?)",
+        "Server": {
+          "prototype": {
+            "addFile": "fn(name: string, text: string, parent: ?)",
+            "delFile": "fn(name: string)",
+            "reset": "fn()",
+            "request": "fn(doc: ?, c: fn(number, number) -> number|fn(err: string|?, data: ?))",
+            "findFile": "fn(name: string) -> !this.fileMap.<i>",
+            "flush": "fn(c: fn())",
+            "startAsyncAction": "fn()",
+            "finishAsyncAction": "fn(err: ?)"
+          },
+          "!type": "fn(options: ?)"
+        },
+        "resolvePos": "fn(file: ?, pos: ?|number, tolerant: bool) -> !1",
+        "outputPos": "fn(query: ?|?, file: ?, pos: ?) -> ?",
+        "findQueryExpr": "fn(file: ?, query: ?, wide: bool) -> !node.node_modules/tern/lib/tern`js.findQueryExpr.!ret",
+        "getSpan": "fn(obj: ?) -> ?",
+        "storeSpan": "fn(srv: +!node.node_modules/tern/lib/tern`js.Server, query: ?|?, span: ?, target: ?)",
+        "version": "string"
+      }
+    },
+    "!node.node_modules/tern/lib/tern`js.outputPos.!1": {
+      "lineOffsets": "[number]",
+      "text": "string",
+      "scope": {}
+    },
+    "!node.node_modules/tern/lib/tern`js.outputPos.!ret": {
+      "line": "number",
+      "ch": "number"
+    },
+    "!node.node_modules/tern/lib/tern`js.findQueryExpr.!ret": {
+      "node": {
+        "type": "string"
+      }
+    },
+    "!node.node_modules/tern/lib/tern`js.getSpan.!ret": {},
+    "!node.node_modules/tern/lib/tern`js.storeSpan.!0": "+!node.node_modules/tern/lib/tern`js.Server"
+  },
+  "tern": {}
+}

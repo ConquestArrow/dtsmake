@@ -1,0 +1,29 @@
+{
+  "name": "dtsgen",
+  "version": "0.0.1",
+  "description": "TypeScript d.ts file generator from JavaScript files",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers ts:espower-typescript/guess test/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ConquestArrow/dtsgen/"
+  },
+  "keywords": [
+    "TypeScript"
+  ],
+  "author": "ConquestArrow",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "tsd": "^0.6.3"
+  },
+  "dependencies": {
+    "clone": "^1.0.2",
+    "espower-typescript": "^0.1.1",
+    "mocha": "^2.2.5",
+    "power-assert": "^0.11.0"
+  }
+}

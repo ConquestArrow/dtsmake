@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true,
+        "removeComments": false,
+        "preserveConstEnums": false,
+		"noEmitOnError": true,
+		"target": "ES5",
+		"outDir": "lib"
+    },
+    "files": [
+        "src/dtsgen.ts",
+		"test/file-test.ts"
+    ]
+}

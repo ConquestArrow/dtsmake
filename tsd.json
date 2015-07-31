@@ -1,0 +1,27 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "clone/clone.d.ts": {
+      "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
+    },
+    "node/node.d.ts": {
+      "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
+    },
+    "mocha/mocha.d.ts": {
+      "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
+    },
+    "power-assert-formatter/power-assert-formatter.d.ts": {
+      "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
+    },
+    "power-assert/power-assert.d.ts": {
+      "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
+    },
+    "empower/empower.d.ts": {
+      "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "!name": "node_modules/tern/lib/infer.js",
+  "!define": {
+    "tern.toString.!2": "+tern.Arr",
+    "tern.simplifyTypes.!ret": "[?]",
+    "tern.constraint.!0": {
+      "construct": "fn(inner: ?, weight: ?)",
+      "addType": "fn(tp: ?, weight: ?)",
+      "propagatesTo": "fn()",
+      "typeHint": "fn()",
+      "propHint": "fn()"
+    },
+    "tern.constraint.!ret": "fn()",
+    "tern.getInstance.!1": "+tern.TimedOut",
+    "tern.Fn.prototype.getFunctionType.!ret": "+tern.Fn",
+    "tern.withContext.!1": "fn()",
+    "tern.findExpressionAt.!4": "fn(_t: ?, node: ?) -> bool",
+    "tern.findExpressionAround.!4": "fn(_t: ?, node: ?) -> bool",
+    "tern.expressionType.!0": {},
+    "tern.forAllPropertiesOf.!0": {
+      "toString": "fn(maxDepth: number) -> !this.name",
+      "hasProp": "fn(prop: ?, searchProto: ?)",
+      "defProp": "fn(prop: ?, originNode: ?) -> !this.maybeProps",
+      "getProp": "fn(prop: ?) -> !this.maybeProps",
+      "broadcastProp": "fn(prop: ?, val: ?, local: ?)",
+      "onProtoProp": "fn(prop: ?, val: ?, _local: ?)",
+      "ensureMaybeProps": "fn() -> !this.maybeProps",
+      "removeProp": "fn(prop: ?)",
+      "forAllProps": "fn(c: ?)",
+      "maybeUnregProtoPropHandler": "fn()",
+      "unregPropHandler": "fn(handler: ?)",
+      "gatherProperties": "fn(f: ?, depth: ?)",
+      "getObjType": "fn() -> !this",
+      "constructor": "tern.Obj"
+    },
+    "tern.Obj.instances.<i>": {
+      "instance": "+tern.Obj"
+    }
+  },
+  "tern": {
+    "toString": "fn(type: ?, maxDepth: number, parent: +tern.Fn|+tern.Arr) -> string",
+    "AVal": {
+      "prototype": {
+        "purge": "fn(test: ?)"
+      },
+      "!type": "fn()",
+      "types": "[?]",
+      "maxWeight": "number"
+    },
+    "simplifyTypes": "fn(types: ?) -> [!0.<i>]",
+    "constraint": {
+      "!type": "fn(methods: tern.constraint.!0|?) -> fn()",
+      "!doc": "PROPAGATION STRATEGIES"
+    },
+    "PropHasSubset": "fn()",
+    "IsCallee": "fn()",
+    "IsCtor": "fn()",
+    "getInstance": "fn(obj: +tern.Obj, ctor: ?) -> +tern.Obj",
+    "IsProto": "fn()",
+    "IfObj": "fn()",
+    "Type": {
+      "!type": "fn()",
+      "!doc": "TYPE OBJECTS"
+    },
+    "Prim": "fn(proto: ?, name: string)",
+    "Obj": {
+      "prototype": {
+        "purge": "fn(test: ?) -> bool"
+      },
+      "!type": "fn(proto: bool, name: string)",
+      "name": "string",
+      "instances": "[tern.Obj.instances.<i>]"
+    },
+    "Fn": {
+      "prototype": {
+        "toString": "fn(maxDepth: number) -> string",
+        "getProp": "fn(prop: ?)",
+        "defProp": "fn(prop: ?, originNode: ?)",
+        "getFunctionType": "fn() -> !this",
+        "purge": "fn(test: ?)",
+        "!proto": "tern.Obj.prototype",
+        "constructor": "tern.Fn"
+      },
+      "!type": "fn(name: string, self: +tern.AVal, args: [?], argNames: [string], retval: ?)",
+      "self": "+tern.AVal",
+      "args": "[?]",
+      "argNames": "[string]",
+      "proto": "bool",
+      "name": "string"
+    },
+    "Arr": {
+      "prototype": {
+        "toString": "fn(maxDepth: number) -> string",
+        "!proto": "tern.Obj.prototype",
+        "constructor": "tern.Arr"
+      },
+      "!type": "fn(contentType: +tern.AVal)",
+      "proto": "bool",
+      "name": "string"
+    },
+    "Context": {
+      "!type": "fn(defs: ?, parent: ?)",
+      "!doc": "INFERENCE CONTEXT"
+    },
+    "cx": "fn()",
+    "withContext": "fn(context: ?, f: fn())",
+    "TimedOut": {
+      "prototype": {
+        "name": "string",
+        "!proto": "Error.prototype"
+      },
+      "!type": "fn()",
+      "message": "string"
+    },
+    "withTimeout": "fn(ms: ?, f: ?)",
+    "addOrigin": "fn(origin: string)",
+    "Scope": {
+      "prototype": {
+        "defVar": "fn(name: ?, originNode: ?)",
+        "!proto": "tern.Obj.prototype",
+        "constructor": "tern.Scope"
+      },
+      "!type": "fn(prev: ?)",
+      "!doc": "SCOPES"
+    },
+    "parse": "fn(text: ?, passes: ?, options: ?)",
+    "analyze": {
+      "!type": "fn(ast: ?, name: string, scope: ?, passes: ?)",
+      "!doc": "ANALYSIS INTERFACE"
+    },
+    "purge": {
+      "!type": "fn(origins: ?, start: ?, end: ?)",
+      "!doc": "PURGING"
+    },
+    "findExpressionAt": "fn(ast: ?, start: ?, end: ?, defaultScope: ?, filter: ?)",
+    "findExpressionAround": "fn(ast: ?, start: ?, end: ?, defaultScope: ?, filter: ?)",
+    "expressionType": "fn(found: tern.expressionType.!0)",
+    "parentNode": {
+      "!type": "fn(child: ?, ast: ?)",
+      "!doc": "Finding the expected type of something, from context"
+    },
+    "typeFromContext": "fn(ast: ?, found: tern.expressionType.!0)",
+    "resetGuessing": "fn(val: ?)",
+    "didGuess": "fn() -> bool",
+    "forAllPropertiesOf": "fn(type: ?, f: ?)",
+    "findRefs": "fn(ast: ?, baseScope: ?, name: ?, refScope: ?, f: ?)",
+    "findPropRefs": "fn(ast: ?, scope: ?, objType: ?, propName: ?, f: ?)",
+    "scopeAt": {
+      "!type": "fn(ast: ?, pos: ?, defaultScope: ?) -> !2",
+      "!doc": "LOCAL-VARIABLE QUERIES"
+    },
+    "forAllLocalsAt": "fn(ast: ?, pos: ?, defaultScope: ?, f: ?)"
+  }
+}
