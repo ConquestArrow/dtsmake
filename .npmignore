@@ -3,3 +3,4 @@ typings
 tmp
 tsconfig.json
 tsd.json
+.tmp
