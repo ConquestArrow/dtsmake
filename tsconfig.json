@@ -10,7 +10,6 @@
 		"outDir": "lib"
     },
     "files": [
-        "src/dtsgen.ts",
-		"test/file-test.ts"
+        "src/dtsgen.ts"
     ]
 }

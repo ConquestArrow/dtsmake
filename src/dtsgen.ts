@@ -15,21 +15,39 @@ export namespace dtsgen{
 		 * ternjs json format data
 		 */
 		ternjsData:JSON;
+		isDebug:boolean = true;
+		
+		/**
+		 * main function
+		 */
+		main(pathStr:string){
+			this.loadTernJson(pathStr, (data:JSON)=>{
+				this.parseTernJson(data);
+			})
+		}
 		
 		/**
 		 * load ternjs json format data
+		 * @param pathStr path/to/file/example.json, must be strings
 		 */
-		loadTernJson(pathStr:string){
+		loadTernJson(pathStr:string, cb:(data:JSON)=>void){
 			fs.readFile(pathStr,{encoding:"UTF-8"}, (err:NodeJS.ErrnoException, data:Buffer)=>{
 				if(err)throw Error(err.name+" "+err.code+" "+err.message+" "+err.path);
 				
 				this.ternjsData = JSON.parse(data.toString());
 				//console.log(JSON.stringify(this.ternjsData));
 				console.log("Load a JSON file complete.");
-				this.parseTernJson(this.ternjsData);
+				//this.parseTernJson(this.ternjsData);
+				cb(this.ternjsData);
 			});
 		}
 		
+		/**
+		 * save typescript d.ts file.
+		 * TODO: add line feed option (LF/CR/CR-LF)
+		 * @param name path/to/filename, no need file ext. like ".d.ts"
+		 * @param src file data strings.
+		 */
 		saveTSDFile(name:string,src:string):boolean{
 			try{
 			fs.writeFile(`${name}.d.ts`, src, {encoding:"UTF-8"}, (err:NodeJS.ErrnoException)=>{
@@ -45,6 +63,13 @@ export namespace dtsgen{
 			return true;
 		}
 		
+		saveJSON(pathStr:string, data:string, complete:Function){
+			fs.writeFile(pathStr, data, {encoding:"UTF-8"}, (e:NodeJS.ErrnoException)=>{
+				if(e)throw Error(e.name+" "+e.code+" "+e.message+" "+e.path);
+				complete();
+			});
+		}
+		
 		parseTernJson(data:JSON){
 			this.depth = 0;
 			
@@ -53,12 +78,13 @@ export namespace dtsgen{
 			//console.log(JSON.stringify(o));
 			
 			let d = this.preModifiedJson(o);
-			console.info("-----------------------");
-			console.log(JSON.stringify(d));
+			//console.info("-----------------------");
+			//console.log(JSON.stringify(d));
+			if(this.isDebug) this.saveJSON("./sample/sample.json", JSON.stringify(d), ()=>{})
 			
 			let s = this.parseToDTS(d);
-			console.info("-----------------------");
-			console.log("output\n"+s);
+			//console.info("-----------------------");
+			//console.log("output\n"+s);
 			
 		}
 		
@@ -191,6 +217,11 @@ export namespace dtsgen{
 			return nsp.reverse().join(".");
 		}
 		
+		/**
+		 * @param path searching ref path
+		 * @param name a new name to replace
+		 * @param isCheckDefine when in true, search & replace in "!define" object
+		 */
 		searchAndReplaceDTS(
 			data:{},
 			path:string[],
@@ -203,37 +234,13 @@ export namespace dtsgen{
 			
 			
 			//type check
-			let t = path[len-1];
-			let rt:ReplaceType;
-			
-			rt = this.checkReplaceType(t);
-			
-			if(data[path[0]]) isCheckDefine = false;
-			
-			let ref = isCheckDefine ? data[TernDef.DEFINE] : data;
+			const t = path[len-1];
+			const rt = this.checkReplaceType(t);
 			
 			
-			const OBJECT_TO_STRING = "$toString";
-			
-			for(let i=0; i<len-1; i++){
-				let s = path[i];
-				
-				//Object prototype prop special replace
-				if(s==="toString") s = OBJECT_TO_STRING;
-				
-				if(ref[s] === undefined){
-					//no path ref
-					console.log("no path ref:"+path.join("."));
-					return;		//do nothing
-				}else{
-					ref = ref[s];
-				}
-			}
-			
-			//has !type node
-			if(ref[TernDef.TYPE]){
-				ref = ref[TernDef.TYPE];
-			}
+			//search
+			let ref = this.searchRef(data, path, isCheckDefine);
+			if(!ref)return;	//no path
 			
 			
 			//replace
@@ -251,16 +258,16 @@ export namespace dtsgen{
 						o.type = TSObjType.CLASS;
 						ret.push(o);
 					}
-					console.log("ret_name:"+name);
-					console.log(`replace[${t}]:${JSON.stringify(ref[0]["ret"])}`);
+					//console.log("ret_name:"+name);
+					//console.log(`replace[${t}]:${JSON.stringify(ref[0]["ret"])}`);
 					break;
 				case ReplaceType.PARAM:
 					let n = Number(t.replace(/^!/,""));
 					
 					
-					console.log(`ref:${JSON.stringify(ref)}`);
-					console.log(`ref[0]:${JSON.stringify(ref[0])}`);
-					console.log(`ref[0]["params"]:${ref[0]["params"]}`);
+					//console.log(`ref:${JSON.stringify(ref)}`);
+					//console.log(`ref[0]:${JSON.stringify(ref[0])}`);
+					//console.log(`ref[0]["params"]:${ref[0]["params"]}`);
 					
 					let param = ref[0]["params"][n];
 					if(param instanceof Array){
@@ -274,30 +281,65 @@ export namespace dtsgen{
 					}
 					
 					//ref[0].class = name;
-					console.log(`replace[${t}]:${JSON.stringify(ref[0]["params"])}`);
+					//console.log(`replace[${t}]:${JSON.stringify(ref[0]["params"])}`);
 					break;
 				case ReplaceType.CLASS:
-					console.log("REP CLASS "+name);
+					//console.log("REP CLASS "+name);
 					ref[0]["class"] = "";
 					ref[0].class = name;
-					console.log(`replace[${t}]:${JSON.stringify(ref[0])}`);
+					//console.log(`replace[${t}]:${JSON.stringify(ref[0])}`);
 					break;
 				case ReplaceType.OTHER:
 					//ref[0].class = `/* ${name} */ any`;
 					break;
 			}
-			
-			/*
-			console.log(`ref:${ref}`);
-			console.log(path.join(".")+", type:"+rt+", define?:"+isCheckDefine);
-			throw Error("debug stop");
-			*/
-			
-			//console.log("replace:"+JSON.stringify(ref[0]));
-			
 		}
 		
-		private checkReplaceType(s:string):ReplaceType{
+		searchRef(
+			data:{}, 
+			path:string[], 
+			isCheckDefine:boolean
+		):any{
+			
+			const len = path.length;
+			if(data[path[0]]) isCheckDefine = false;
+			
+			let ref = isCheckDefine ? data[TernDef.DEFINE] : data;
+			
+			
+			const OBJECT_TO_STRING = "$toString";
+			
+			for(let i=0; i<len-1; i++){
+				let s = path[i];
+				
+				//Object prototype prop special replace
+				if(s==="toString") s = OBJECT_TO_STRING;
+				
+				if(
+					s === "prototype" &&
+					!ref[s] &&
+					/^[A-Z].?/.test(path[i-1])
+				){
+					//may be class member
+					continue;
+				}else if(ref[s] === undefined){
+					//no path ref
+					console.log("no path ref:"+path.join("."));
+					return;		//do nothing
+				}else{
+					ref = ref[s];
+				}
+			}
+			
+			//has !type node
+			if(ref[TernDef.TYPE]){
+				ref = ref[TernDef.TYPE];
+			}
+			
+			return ref;
+		}
+		
+		checkReplaceType(s:string):ReplaceType{
 			let rt:ReplaceType;
 			if(s === "!ret"){
 				//return
@@ -971,7 +1013,7 @@ export namespace dtsgen{
 						
 					break;
 				case TSObjType.FUNCTION:
-					console.log("TStoDTS:fn("+t.params+")"+(t.ret)?"=>"+t.ret:"");
+					//console.log("TStoDTS:fn("+t.params+")"+(t.ret)?"=>"+t.ret:"");
 					
 					s += "("+ this.paramsToDTS(t.params) +")";
 					
@@ -999,7 +1041,7 @@ export namespace dtsgen{
 							}
 							
 							let rep:TSObj|TSObj[] = parentTSObj.params[n];
-							console.log("rep_rep:"+JSON.stringify(rep))
+							//console.log("rep_rep:"+JSON.stringify(rep))
 							if(rep instanceof Array){
 								s += this.tsObjsToUnionDTS(rep,false,null,false);
 							}else{
@@ -1252,7 +1294,7 @@ export namespace dtsgen{
 		 * | other above | OBJECT |
 		 * @return TSObjType return enums (number)
 		 */
-		private checkType(ternDef:string):TSObjType{
+		checkType(ternDef:string):TSObjType{
 			if(this.splitUnions(ternDef).length>1){
 				return TSObjType.UNIONS;
 			}else if(/^fn\(/.test(ternDef)){
@@ -1271,7 +1313,7 @@ export namespace dtsgen{
 			}else if(/^\+.+$/.test(ternDef)){
 				return TSObjType.CLASS;
 			}else if(ternDef!=""){
-				console.log(`\u001b[35mWARNING: \u001b[0m ${ternDef} may not be type string. Is this a Object?`);
+				//console.log(`\u001b[35mWARNING: \u001b[0m ${ternDef} may not be type string. Is this a Object?`);
 				return TSObjType.OBJECT;
 			}else{
 				throw Error("\u001b[31mcan not check type. : \u001b[0m"+ternDef);
@@ -1357,6 +1399,7 @@ export namespace dtsgen{
 		}
 		
 		tests(fn:string){
+			let dgen = new DTSGen();
 			switch (fn) {
 				case "tsObjToDTS":
 				
@@ -1403,7 +1446,7 @@ console.log(o);
 					)
 					break;
 				case "loadTernJson":
-					this.loadTernJson("./sample/infer.js.json");
+					
 					break;
 				default:
 					console.error("no method on test. "+fn)
@@ -1447,7 +1490,7 @@ console.log(o);
 		NODE
 	}
 	
-	const enum ReplaceType{
+	export /*const*/ enum ReplaceType{
 		RETURN,
 		PARAM,
 		CLASS,
@@ -1471,7 +1514,7 @@ console.log(o);
 		//only for class
 		class?:string;
 	}
-	enum TSObjType{
+	export enum TSObjType{
 		ANY,
 		VOID,
 		BOOLEAN,
@@ -1526,7 +1569,7 @@ export namespace dtsgen.TernDef{
 ///////////////////////////////
 // CLI 
 //////////////////////////////
-var dgen = new dtsgen.DTSGen();
+//var dgen = new dtsgen.DTSGen();
 
 /*---------------------------
 * tests
@@ -1551,7 +1594,7 @@ dgen.tests("parseParams");
 dgen.tests("parseTernDef");
 //*/
 //*
-dgen.tests("loadTernJson");
+//dgen.tests("loadTernJson");
 //*/
 //*
 //dgen.tests("tsObjToDTS");
