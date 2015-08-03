@@ -346,6 +346,23 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 					`${cs[i]} may not be Class`
 				);
 			}
+		});
+		
+		it("should match array type",()=>{
+			let cs = [
+				"A",
+				"Ab",
+				"Abc",
+				"ABC",
+				"KlassA"
+			];
+			for(let i in cs){
+				let out = dg.checkReplaceType(cs[i]);
+				assert(
+					out === dtsgen.ReplaceType.ARRAY,
+					`${cs[i]} may not be Array`
+				);
+			}
 		})
 	});
 	

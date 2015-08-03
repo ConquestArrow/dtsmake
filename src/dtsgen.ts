@@ -175,6 +175,7 @@ export namespace dtsgen{
 					//console.log("DEFNAME2:" + s);
 				}
 				else if(reg3.test(paths[j])){
+					//array type 
 					let tmp = paths[j]
 						.replace(/^</,"")
 						.replace(/>$/,"")
@@ -354,6 +355,9 @@ export namespace dtsgen{
 			}else if(/^[A-Z].*/.test(s)){
 				//class or object, may be class
 				rt = ReplaceType.CLASS;
+			}else if(/^<.+>$/.test(s)){
+				//array type
+				//TODO:Array type replace
 			}else{
 				//other
 				rt = ReplaceType.OTHER;
@@ -1524,6 +1528,7 @@ console.log(o);
 		RETURN,
 		PARAM,
 		CLASS,
+		ARRAY,
 		OTHER
 	}
 	
