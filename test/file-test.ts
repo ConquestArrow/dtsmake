@@ -61,7 +61,7 @@ declare var Hoge:Hoge;
 `;
 		it("should return true when save complate",(done)=>{
 			
-			assert(dg.saveTSDFile("test/test",fileData));
+			assert(dg.saveTSDFile("test/.tmp/test",fileData));
 			//this.timeout(30000);
 			done();
 		});
