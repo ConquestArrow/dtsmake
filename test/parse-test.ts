@@ -120,6 +120,22 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 				`${path[path.length-1]} is not match ReplaceType.RETURN`
 			);
 		});
+		
+		it("should match may be Class",()=>{
+			let cs = [
+				"A",
+				"Ab",
+				"Abc",
+				"ABC",
+				"KlassA"
+			];
+			for(let i in cs){
+				assert(
+					dg.checkReplaceType(cs[i]) === dtsgen.ReplaceType.CLASS,
+					`${cs[i]} may not be Class`
+				);
+			}
+		})
 	});
 	
 	
@@ -149,7 +165,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 					"type":dtsgen.TSObjType.NUMBER
 				}
 			}
-		}
+		};
 		
 		it("should search prototype ref (Klass.prototype.prop.!ret)", ()=>{
 			let ref = dg.searchRef(
@@ -158,8 +174,6 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 				false
 			);
 			assert(ref, "no ref");
-			
-			
 		});
 		
 		it("should search prototype prop ref", ()=>{
@@ -185,8 +199,18 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		it("should replace prototype ref to Class ref", ()=>{
 			dg.searchAndReplaceDTS(
 				test,
-				["Klass","prototype","prop","!ret"],
-				"PropRet"
+				["Klass","prototype","prop"],
+				"PropRet",
+				false
+			)
+		});
+		
+		it("should replace prototype ref to Class ref 2", ()=>{
+			dg.searchAndReplaceDTS(
+				test,
+				["Klass","prototype","prop2"],
+				"Prop2",
+				false
 			)
 		});
 		
