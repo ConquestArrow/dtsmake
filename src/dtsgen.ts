@@ -318,7 +318,8 @@ export namespace dtsgen{
 				if(
 					s === "prototype" &&
 					!ref[s] &&
-					/^[A-Z].?/.test(path[i-1])
+					///^[A-Z].*/.test(path[i-1])
+					this.checkReplaceType(path[i-1]) === ReplaceType.CLASS
 				){
 					//may be class member
 					continue;
@@ -347,8 +348,8 @@ export namespace dtsgen{
 			}else if(/^![0-9]+/.test(s)){
 				//param
 				rt = ReplaceType.PARAM;
-			}else if(/^[A-Z].+/.test(s)){
-				//class or object
+			}else if(/^[A-Z].*/.test(s)){
+				//class or object, may be class
 				rt = ReplaceType.CLASS;
 			}else{
 				//other
