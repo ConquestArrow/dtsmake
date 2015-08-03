@@ -6,6 +6,217 @@ import fs = require('fs');
 
 describe("Parsing TernJS definition JSON file(s), ",()=>{
 	let dg = new dtsgen.DTSGen();
+	
+	
+	
+	context("parseToDTS()", ()=>{
+		
+		
+		it.skip("should parse !type type to DTS",()=>{
+			
+			let baseDef = {
+				"Fn": {
+			      "!type": "fn(name: string, self: +tern.AVal, args: [?], argNames: [string], retval: ?)",
+			      "name": "string",
+				  "test": "?"
+			    }
+			};
+			
+			let parsedJson = dg.parseJsonNodeDTS(baseDef);
+			
+			let out = dg.parseToDTS(parsedJson);
+			const answer3 = `"Fn":{"new ":{}}`;
+			assert.deepEqual(
+				out,answer3,
+				`out string ${out} is not match answer str ${answer3}.`
+			);
+			
+		});
+		
+	});
+	
+	context("parseJsonNodeDTS()",()=>{
+		it("should be output !type param array type",()=>{
+			
+			const def = {
+				"Fn":{
+					"!type": "fn(sParams: [string], nParams: [number])"
+				}
+			};
+			
+			let out = dg.parseJsonNodeDTS(def);
+			let answer = {
+				"Fn":{
+					"!type":[
+						{"type":dtsgen.TSObjType.FUNCTION,
+					"params":[
+						{
+						"type":dtsgen.TSObjType.ARRAY,
+						"arrayType": [
+						{"type":dtsgen.TSObjType.STRING}
+						],
+						"name":"sParams"
+						},
+						{
+						"type":dtsgen.TSObjType.ARRAY,
+						"arrayType": [
+						{"type":dtsgen.TSObjType.NUMBER}
+						],
+						"name":"nParams"
+						}
+					],
+					"ret":[
+						{
+						"type":dtsgen.TSObjType.VOID
+						}
+					]
+					}
+					]
+					
+				}
+			}
+			assert.deepEqual(
+				out,answer,
+				`out ${JSON.stringify(out)}\n, answer ${JSON.stringify(answer)}`
+			)
+			
+			
+		})
+	})
+	
+	context("parseTernDef()",()=>{
+		
+		it("should parse simple array",()=>{
+			const def = "[string]";
+			const answer = [
+				{
+					"type":dtsgen.TSObjType.ARRAY,
+					//"name":"test",
+					"arrayType": [
+						{"type":dtsgen.TSObjType.STRING}
+					]
+				}
+			];
+			
+			let out = dg.parseTernDef(def);
+			assert.deepEqual(
+				out, answer,
+				`out ${JSON.stringify(out)},\n`+
+				`ans ${JSON.stringify(answer)}`
+			);
+		});
+		
+		it("should parse single array param fn",()=>{
+			const def = "fn(p1: [string])";
+			const answer = 
+			[
+				{
+				"type":dtsgen.TSObjType.FUNCTION,
+				"ret":[
+					{
+					"type":dtsgen.TSObjType.VOID
+					}
+				],
+				"params":[
+					{
+					"type":dtsgen.TSObjType.ARRAY,
+					"name":"p1",
+					"arrayType": [
+						{"type":dtsgen.TSObjType.STRING}
+					]
+				}
+				]
+				}
+			];
+			
+			let out = dg.parseTernDef(def);
+			assert.deepEqual(
+				out, answer,
+				`out ${JSON.stringify(out)},\n`+
+				`ans ${JSON.stringify(answer)}`
+			);
+		});
+		
+		it("should parse double array params fn",()=>{
+			const def = "fn(sParams: [string], nParams: [number])";
+			const answer = [
+					{"type":dtsgen.TSObjType.FUNCTION,
+				"ret":[
+					{
+					"type":dtsgen.TSObjType.VOID
+					}
+				],
+				"params":[
+					{
+					"type":dtsgen.TSObjType.ARRAY,
+					"arrayType": [
+						{"type":dtsgen.TSObjType.STRING}
+					],
+					"name":"sParams"
+					},
+					{
+					"type":dtsgen.TSObjType.ARRAY,
+					"arrayType": [
+						{"type":dtsgen.TSObjType.NUMBER}
+					],
+					"name":"nParams"
+					}
+				]
+				}
+			];
+			let out = dg.parseTernDef(def);
+			assert.deepEqual(out,answer, `\ndef out ${JSON.stringify(out)},\nanswer ${JSON.stringify(answer)}`);
+			
+		});
+		
+		//it("should parse ")
+	});
+	
+	context("parseParams()",()=>{
+		it("should parse fn params array",()=>{
+			const def = "fn(sParams:[string],nParams:[number])";
+			const answer =
+			[
+				{
+				"type":dtsgen.TSObjType.ARRAY,
+				"arrayType": [
+					{"type":dtsgen.TSObjType.STRING}
+				],
+				"name":"sParams"
+				},
+				{
+				"type":dtsgen.TSObjType.ARRAY,
+				"arrayType": [
+					{"type":dtsgen.TSObjType.NUMBER}
+				],
+				"name":"nParams"
+				}
+			];
+				
+			let out = dg.parseParams(def);
+			assert.deepEqual(out,answer, `\ndef out ${JSON.stringify(out)},\nanswer ${JSON.stringify(answer)}`);
+			
+		});
+		
+	});
+	
+	context("splitParams()",()=>{
+		it("should parse fn params array",()=>{
+			const def = "sParams:[string],nParams:[number]";
+			const answer =
+			[
+				"sParams:[string]",
+				"nParams:[number]"
+			];
+				
+			let out = dg.splitParams(def);
+			assert.deepEqual(out,answer, `\ndef out ${JSON.stringify(out)},\nanswer ${JSON.stringify(answer)}`);
+			
+		});
+		
+	});
+	
+	
 	context("parseTernJson()",()=>{
 		let loadData;
 		beforeEach((done)=>{
@@ -32,7 +243,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			done();
 		});
 		
-		it.skip("should parsing ternjs files and debug save.", ()=>{
+		it("should parsing ternjs files and debug save.", ()=>{
 			assert(loadData,"load data is invalid");
 			assert.ifError(dg.parseTernJson(loadData));
 		});
@@ -202,7 +413,8 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 				["Klass","prototype","prop"],
 				"PropRet",
 				false
-			)
+			);
+			//console.log(JSON.stringify(test));
 		});
 		
 		it("should replace prototype ref to Class ref 2", ()=>{
@@ -211,7 +423,8 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 				["Klass","prototype","prop2"],
 				"Prop2",
 				false
-			)
+			);
+			
 		});
 		
 	});

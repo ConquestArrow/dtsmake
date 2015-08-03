@@ -85,6 +85,9 @@ export namespace dtsgen{
 			let s = this.parseToDTS(d);
 			//console.info("-----------------------");
 			//console.log("output\n"+s);
+			if(this.isDebug){
+				this.saveTSDFile("test/.tmp/sample",s);
+			}
 			
 		}
 		
@@ -950,7 +953,10 @@ export namespace dtsgen{
 			parentTSObj?:TSObj,
 			isOutName:boolean = true
 		):string{
-			if(!t) return "!!ERROR!!";
+			if(!t){
+				//not unions
+				throw Error("union needs dts any tsObjs.")
+			} //return "!!ERROR!!";
 			
 			//merge `any` only union
 			let isOnlyAny = t
@@ -1010,7 +1016,16 @@ export namespace dtsgen{
 					break;
 				case TSObjType.CLASS:
 					//ref to user class
-					s += t.class;//this.ternDefClassToDTSClass(t.class);
+					
+					if(/^\+.+/.test(t.class)){
+						//class instance
+						s += t.class.replace(/^\+/,"");
+						//TODO:check real path
+					}else{
+						s += t.class;
+					}
+					
+					//this.ternDefClassToDTSClass(t.class);
 						
 					break;
 				case TSObjType.FUNCTION:
@@ -1206,7 +1221,7 @@ export namespace dtsgen{
 			return ret;
 		}
 		
-		private parseParams(fnStr:string):any[]{
+		parseParams(fnStr:string):any[]{
 			let fns = this.splitReturn(fnStr)[0];
 			//console.log("paramFnStr: "+fns);
 			let reg1 = /^fn\(/;
@@ -1256,22 +1271,36 @@ export namespace dtsgen{
 					let name = (n===-1) ? null : i.substring(0,n);
 					let sType = i.substring(n+1); 
 					//console.log(`sType:${sType}`);
-					if(TSObjType.UNIONS === this.checkType(sType)){
+					let checked = this.checkType(sType);
+					if(TSObjType.UNIONS === checked){
 						//unions
 						
 						let pa = this.parseTernDef(sType, name);
 						ret.push(pa);
-					}else{
+					}
+					else if(TSObjType.ARRAY === checked){
+						let a = this.parseTernDef(sType,name);
+						if(a.length===1){
+							ret.push(a[0]);
+						}else{
+							ret.push(a);
+						}
+						
+					}
+					else{
 						
 						let ts = <TSObj>{};
 						if(n!==-1)ts.name = name;
-						ts.type = this.checkType(sType);
+						ts.type = checked;
+						
 						if(
 							ts.type === TSObjType.OBJECT ||
 							ts.type === TSObjType.CLASS
 						){
 							ts.class = sType;
 						}
+						
+						
 						//if(n===-1)console.log(`ts:${ts.name},${ts.type}`);
 						ret.push(ts);
 					}
@@ -1326,7 +1355,7 @@ export namespace dtsgen{
 			return this.splits(ternDef, "(", ")", "|");
 		}
 		
-		private splitParams(paramStr:string):string[]{
+		splitParams(paramStr:string):string[]{
 			return this.splits(paramStr, "(", ")", ",");
 		}
 		
