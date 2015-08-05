@@ -59,7 +59,7 @@ describe("TypeScript d.ts file output tests,", ()=>{
 	
 	context("paramsToDTS()", ()=>{
 		
-		it("should be replace ternjs Class instance path", ()=>{
+		it("should be able to replace ternjs Class instance path", ()=>{
 			
 			const p = [
 				{
@@ -76,5 +76,32 @@ describe("TypeScript d.ts file output tests,", ()=>{
 		})
 	});
 	
+	context("convertTSObjToString()", ()=>{
+		it("should convert constructor", ()=>{
+			const def:dtsgen.TSObj[] = [
+				{
+					type:dtsgen.TSObjType.FUNCTION,
+					ret:[
+						{type:dtsgen.TSObjType.NUMBER},
+						{type:dtsgen.TSObjType.STRING},
+					],
+					params:null
+				}
+			];
+			const defName = "example";
+			
+			const out = dg.convertTSObjToString(defName,def);
+			const answer = 
+`
+/**
+ * 
+ */
+function ${defName}(): number | string;
+`;
+			
+			assert.deepEqual(out, answer);
+			
+		});
+	});
 	
 });
