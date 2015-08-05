@@ -95,6 +95,7 @@ describe("TypeScript d.ts file output tests,", ()=>{
 `
 /**
  * 
+ * @return  
  */
 function ${defName}(): number | string;
 `;
@@ -126,6 +127,70 @@ function ${defName}();
 			
 			assert.deepEqual(out, answer);
 			
+		});
+	});
+	
+	
+	context("outJSDoc()", ()=>{
+		
+		it("should output simple jsdoc",()=>{
+			const c = "COMMENT";
+			const u = "http://example.jp/";
+			const p = ["hoge","fuga"];
+			const r = "RETURN";
+			
+			const out = dg.outJSDoc(c,u,p,r);
+			const answer = 
+`
+/**
+ * ${c}
+ * @param ${p[0]} 
+ * @param ${p[1]} 
+ * @return ${r}
+ * @url ${u}
+ */
+`;
+			assert.deepEqual(out, answer);
+			
+		})
+		
+	});
+	
+	context("outFuncJsDocs()", ()=>{
+		it("should output simple function jsdoc",()=>{
+			const t:dtsgen.TSObj = {
+				type:dtsgen.TSObjType.FUNCTION,
+				params:[
+					{
+						type:dtsgen.TSObjType.NUMBER,
+						name:"hoge"
+					},
+					{
+						type:dtsgen.TSObjType.STRING,
+						name:"fuga"
+					}
+				],
+				ret:[
+					{
+						type:dtsgen.TSObjType.NUMBER
+					},
+					{
+						type:dtsgen.TSObjType.STRING
+					}
+				]
+			};
+			
+			const out = dg.outFuncJsDocs(t);
+			const answer =
+`
+/**
+ * 
+ * @param hoge 
+ * @param fuga 
+ * @return  
+ */
+`;
+			assert.deepEqual(out, answer);
 		});
 	});
 	

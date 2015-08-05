@@ -806,7 +806,7 @@ export namespace dtsgen{
 			//returns
 			if(ret){
 				s += this.indent();
-				s += ` * @return \n`;
+				s += ` * @return ${ret}\n`;
 			}
 			
 			//url
@@ -836,10 +836,15 @@ export namespace dtsgen{
 					}) :
 				null;
 			let rs = 
-				t.ret
-				.every((v,i,a)=>v.type !== TSObjType.VOID) ? 
-				null :
-				t.ret.map((v,i,a)=> v.class ? v.class : "").join(", ");
+				(
+					!t.ret || 
+					t.ret
+					.every((v,i,a)=>v.type === TSObjType.VOID) 
+				) ? 
+				null :	//no ret or void only 
+				//t.ret.map((v,i,a)=> v.class ? v.class : "").join(", ");
+				//TODO:return info
+				" "
 			s += this.outJSDoc(docData,urlData,ps,rs);
 			return s;
 		}
