@@ -869,6 +869,7 @@ export namespace dtsgen{
 				isMaybeClass = true;
 			}
 			
+			//keyword
 			if(this.isInClassOrInterface){
 				
 			}else if(this.isInObjectLiteral){
@@ -879,12 +880,14 @@ export namespace dtsgen{
 				if(isFunc && !isMaybeClass){
 					keyword = "function ";
 				}else if(isFunc && isMaybeClass){
+					//TODO:option class or interface (default)
 					keyword = "class ";
 				}else{
 					keyword = "let ";
 				}
 			}
 			
+			//function not class/interface
 			if(isFunc && !isMaybeClass){
 				let ol = tsObjects.length;
 				//TODO:overloads support
@@ -905,9 +908,10 @@ export namespace dtsgen{
 					if(
 						t.ret &&
 						symbolName === "new " &&
-						t.ret.every((v)=>v.type === TSObjType.VOID)
+						t.ret.every((v)=>v.type !== TSObjType.VOID)
 					){
-						s += ": " + "any /* Class */";
+						//constructor maynot return self instance
+						s += `: ${this.tsObjsToUnionDTS(t.ret)} `;
 					}
 					else if(
 						t.ret && 
@@ -920,8 +924,10 @@ export namespace dtsgen{
 				
 				//s += keyword + symbolName + "():" + JSON.stringify(tsObjects);
 			}
-			//may be function
+			//may be class/interface
 			else if(isFunc && isMaybeClass){
+				//TODO:replace interfaceDTS()
+				
 				
 				//class open
 				s += this.outJSDoc(docData,urlData);
@@ -953,7 +959,10 @@ export namespace dtsgen{
 				if(!this.isInDefine && !this.isInObjectLiteral && !this.isInClassOrInterface) keyword = "declare " + keyword;
 				s += keyword + symbolName+" : "+this.tsObjsToUnionDTS(tsObjects);
 			}
-			s += ";\n";
+			
+			//close ;
+			if(isMaybeClass)s += "\n";
+			else s += ";\n";
 			//this.depth--;
 			
 			return s;
@@ -1573,7 +1582,7 @@ console.log(o);
 	 * 
 	 * TODO:compat to TypeScript AST
 	 */
-	interface TSObj{
+	export interface TSObj{
 		type:TSObjType;
 		//only for param/object/class
 		name?:string;
