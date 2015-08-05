@@ -415,6 +415,34 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			}
 		};
 		
+		beforeEach(()=>{
+			test = {
+				"!define":{
+					"Klass.prop.!ret":[
+						{
+							"type": dtsgen.TSObjType.CLASS,
+							"class":"+Klass"
+						}
+					]
+				},
+				"Klass":{
+					"prop":{
+						"type":dtsgen.TSObjType.FUNCTION,
+						"ret":[
+							{
+								"type": dtsgen.TSObjType.OBJECT,
+								"class": "!this"
+							}
+						],
+						"params": null
+					},
+					"prop2":{
+						"type":dtsgen.TSObjType.NUMBER
+					}
+				}
+			};
+		});
+		
 		it("should search prototype ref (Klass.prototype.prop.!ret)", ()=>{
 			let ref = dg.searchRef(
 				test,
@@ -461,6 +489,73 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 				"Prop2",
 				false
 			);
+			
+		});
+		
+		it.skip("should replace local !ret", ()=>{
+			
+			const o = {
+				"scopeAt": {
+					"!type": [
+						{
+							"type": 5,
+							"ret": [
+								{
+									"type": 9,
+									"class": "!2"
+								}
+							],
+							"params": [
+								{
+									"name": "ast",
+									"type": 0
+								},
+								{
+									"name": "pos",
+									"type": 0
+								},
+								{
+									"name": "defaultScope",
+									"type": 0
+								}
+							]
+						}
+					]
+				}
+			};
+			const answer = {
+				"scopeAt": {
+					//"!type": "fn(ast: ?, pos: ?, defaultScope: ?) -> !2"
+					"!type":[{
+						"type":dtsgen.TSObjType.FUNCTION,
+						"params":[
+							{
+								"type":dtsgen.TSObjType.ANY,
+								"name":"ast"
+							},
+							{
+								"type":dtsgen.TSObjType.ANY,
+								"name":"pos"
+							},
+							{
+								"type":dtsgen.TSObjType.ANY,
+								"name":"defaultScope"
+							}
+						],
+						"ret":[
+							{
+								"type":dtsgen.TSObjType.ANY,
+								"class":"!2"
+							}
+						]
+					}]
+				}
+			};
+			let out = dg.searchRef(o,["!2"],false);
+			console.log("ref", JSON.stringify(out));
+			dg.searchAndReplaceDTS(o, ["!ret"],"",false);
+			
+			assert.deepEqual(o, answer);
 			
 		});
 		

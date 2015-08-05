@@ -312,12 +312,15 @@ export namespace dtsgen{
 			
 			
 			const OBJECT_TO_STRING = "$toString";
+			const OBJECT_VALUE_OF = "$valueOf";
 			
 			for(let i=0; i<len-1; i++){
 				let s = path[i];
 				
 				//Object prototype prop special replace
 				if(s==="toString") s = OBJECT_TO_STRING;
+				if(s==="valueOf") s = OBJECT_VALUE_OF;
+				//TODO:revert prop name when output
 				
 				if(
 					s === "prototype" &&
@@ -916,13 +919,13 @@ export namespace dtsgen{
 						t.ret.every((v)=>v.type !== TSObjType.VOID)
 					){
 						//constructor maynot return self instance
-						s += `: ${this.tsObjsToUnionDTS(t.ret)} `;
+						s += `: ${this.tsObjsToUnionDTS(t.ret, false, t, false)} `;
 					}
 					else if(
 						t.ret && 
 						symbolName !== "new "
 					){
-						s += ": " + this.tsObjsToUnionDTS(t.ret, false, t);
+						s += ": " + this.tsObjsToUnionDTS(t.ret, false, t, false);
 					}
 				}
 				
@@ -1011,7 +1014,7 @@ export namespace dtsgen{
 			let isOnlyAny = t
 				.every((v,i,a)=>(v.type === TSObjType.ANY));
 			if(isOnlyAny){
-				return this.tsObjToDTS(t[0], wrap, parentTSObj);
+				return this.tsObjToDTS(t[0], wrap, parentTSObj, isOutName);
 			}
 			
 			//replace `any` to `{}` or `Object` if this is not `any` only union
@@ -1030,15 +1033,12 @@ export namespace dtsgen{
 			
 			return t
 				.map((v, i, a)=>{
-					if(i!==0 && v.name) v.name = null;	//don't output
-					if(!isOutName) v.name = null;
+					let isOutParamName = isOutName;
+					if(i!==0) isOutParamName = false;
+					// v.name = null;	//don't output
+					//if(!isOutName) v.name = null;
 					
-					/*if(v.type === TSObjType.ANY && hasAny){
-						//replace any to {}
-						return "{}";
-					}else{*/
-						return this.tsObjToDTS(v, wrap, parentTSObj);
-					//}
+					return this.tsObjToDTS(v, wrap, parentTSObj, isOutParamName);
 				})
 				.join(" | ");
 		}
@@ -1046,10 +1046,11 @@ export namespace dtsgen{
 		tsObjToDTS(
 			t:TSObj,
 			wrap:boolean = false,
-			parentTSObj?:TSObj
+			parentTSObj?:TSObj,
+			isOutName:boolean = true
 		):string{
 			let s = "";
-			if(t.name) s += t.name + " : ";
+			if(t.name && isOutName) s += t.name + " : ";
 			wrap = wrap && (t.type === TSObjType.FUNCTION);
 			if(wrap) s += "(";	//wrap start
 			switch(t.type){
@@ -1085,7 +1086,7 @@ export namespace dtsgen{
 					if(!t.ret){
 						t.ret = [<TSObj>{type:TSObjType.VOID}];
 					}
-					s += " => " + this.tsObjsToUnionDTS(t.ret);
+					s += " => " + this.tsObjsToUnionDTS(t.ret, false, null, false);
 					
 					
 					break;
@@ -1110,7 +1111,11 @@ export namespace dtsgen{
 							if(rep instanceof Array){
 								s += this.tsObjsToUnionDTS(rep,false,null,false);
 							}else{
-								s += this.tsObjToDTS(<TSObj>rep);
+								s += this.tsObjToDTS(<TSObj>rep,false,null,false);
+								if((<TSObj>rep).type===TSObjType.ANY){
+									s += ` /* same type param "${(<TSObj>rep).name}" */`;
+									//TODO:generate class/interface
+								}
 							}
 							
 							

@@ -128,6 +128,40 @@ function ${defName}();
 			assert.deepEqual(out, answer);
 			
 		});
+		
+		it("should not output ret name prop", ()=>{
+			const def:dtsgen.TSObj[] = [
+				{
+					type:dtsgen.TSObjType.FUNCTION,
+					ret:[
+						{
+							type:dtsgen.TSObjType.NUMBER,
+							name:"notOutput"
+						},
+						{
+							type:dtsgen.TSObjType.STRING,
+							name:"notOutput"
+						},
+					],
+					params:null
+				}
+			];
+			const defName = "example";
+			
+			const out = dg.convertTSObjToString(defName,def);
+			const answer = 
+`
+/**
+ * 
+ * @return  
+ */
+function ${defName}(): number | string;
+`;
+			
+			assert.deepEqual(out, answer);
+			
+		});
+		
 	});
 	
 	
