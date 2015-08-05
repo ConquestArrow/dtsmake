@@ -357,6 +357,7 @@ export namespace dtsgen{
 				rt = ReplaceType.CLASS;
 			}else if(/^<.+>$/.test(s)){
 				//array type
+				rt = ReplaceType.ARRAY;
 				//TODO:Array type replace
 			}else{
 				//other
@@ -434,15 +435,15 @@ export namespace dtsgen{
 						//node end
 							
 							//Object has same name default
-							if(
-								i === "toString" ||
-								i === "valueOF"	//TODO: Object.prototype.valueOf is native prop
-							){
-								let newPropName = "$"+i;
-								o[newPropName] = {};
-								o[newPropName] = this.parseTernDef(value);
-							}else{
-								o[i] = this.parseTernDef(value);
+							switch(i){
+								case "toString":
+								case "valueOf":
+									let newPropName = `$${i}`;
+									o[newPropName] = {};
+									o[newPropName] = this.parseTernDef(value);
+									break;
+								default:
+									o[i] = this.parseTernDef(value);
 							}
 						}else if(
 							value[TernDef.TYPE] && 
@@ -689,6 +690,36 @@ export namespace dtsgen{
 			);
 			s += this.indent();
 			s += `interface ${defName}`;
+			
+			//extending other class/interface
+			if(value[TernDef.PROTO]){
+				let proto = value[TernDef.PROTO];
+				
+				if(
+					proto instanceof Array &&
+					proto.length > 1
+				){
+					let str = "Object extends 2 or more other objects, but TypeScript only extends SINGLE Class/Interface.";
+					console.warn(str);
+					s += `/* ${str} */`;
+					
+				}else{
+					
+					let t:TSObj = proto[0];
+					
+					//resolve path to object prototype
+					let p = t.class.split(".");
+					if(p[p.length-1]==="prototype"){
+						//output
+						let ext = p.slice(0, p.length-1).join(".");
+						s += ` extends ${ext}`;
+					}
+					
+					//delete temp property
+					value[TernDef.PROTO] = undefined;
+					delete value[TernDef.PROTO];
+				}
+			}
 			
 			//interface body
 			this.isInClassOrInterface = true;
@@ -1072,6 +1103,11 @@ export namespace dtsgen{
 							break;
 						case ReplaceType.RETURN:
 							//TODO:replace
+							s += `/* ${t.class} */`;
+							break;
+						case ReplaceType.ARRAY:
+							//TODO:replace
+							s += `/* Array<${t.class}> */`;
 							break;
 						default:
 							s += `/* ${t.class} */ `;

@@ -81,7 +81,27 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			)
 			
 			
-		})
+		});
+		
+		
+		it.skip("should be output !proto collectly",()=>{
+			const def = {
+				"Fn":{
+					"!type":"fn()",
+					"prototype":{
+						"!proto": "tern.Obj.prototype"
+					}
+				}
+			};
+			const out = dg.parseJsonNodeDTS(def);
+			const answer = {
+				"Fn":{}
+			};
+			assert.deepEqual(
+				out, answer
+			);
+			
+		});
 	})
 	
 	context("parseTernDef()",()=>{
@@ -350,11 +370,11 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		
 		it("should match array type",()=>{
 			let cs = [
-				"A",
-				"Ab",
-				"Abc",
-				"ABC",
-				"KlassA"
+				"<i>",
+				"<i>",
+				"<i>",
+				"<i>",
+				"<hoge>"
 			];
 			for(let i in cs){
 				let out = dg.checkReplaceType(cs[i]);

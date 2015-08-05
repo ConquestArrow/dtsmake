@@ -39,6 +39,22 @@ describe("TypeScript d.ts file output tests,", ()=>{
 			let answer = "Array<any>";
 			assert(out === answer, `out strings ${out} should be ${answer}.`);
 		});
+		
+		
+		it.skip("shoud be replace ternjs !ret",()=>{
+			const p = [
+				{
+					type:dtsgen.TSObjType.OBJECT,
+					name:"param",
+					class:"!ret"
+				}
+			];
+			let out = dg.tsObjToDTS(p[0]);
+			let answer = "param : /* !ret */"
+			assert(out === answer, `out strings should be ${answer}.`);
+			
+		});
+		
 	});
 	
 	context("paramsToDTS()", ()=>{
