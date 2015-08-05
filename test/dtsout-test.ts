@@ -77,7 +77,7 @@ describe("TypeScript d.ts file output tests,", ()=>{
 	});
 	
 	context("convertTSObjToString()", ()=>{
-		it("should convert constructor", ()=>{
+		it("should convert simple function", ()=>{
 			const def:dtsgen.TSObj[] = [
 				{
 					type:dtsgen.TSObjType.FUNCTION,
@@ -97,6 +97,31 @@ describe("TypeScript d.ts file output tests,", ()=>{
  * 
  */
 function ${defName}(): number | string;
+`;
+			
+			assert.deepEqual(out, answer);
+			
+		});
+		
+		it("should convert constructor", ()=>{
+			const def:dtsgen.TSObj[] = [
+				{
+					type:dtsgen.TSObjType.FUNCTION,
+					ret:[
+						{type:dtsgen.TSObjType.VOID}
+					],
+					params:null
+				}
+			];
+			const defName = "new ";
+			
+			const out = dg.convertTSObjToString(defName,def);
+			const answer = 
+`
+/**
+ * 
+ */
+function ${defName}();
 `;
 			
 			assert.deepEqual(out, answer);
