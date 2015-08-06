@@ -366,7 +366,7 @@ export namespace dtsgen{
 				//Object prototype prop special replace
 				if(s==="toString") s = OBJECT_TO_STRING;
 				if(s==="valueOf") s = OBJECT_VALUE_OF;
-				//TODO:revert prop name when output
+				
 				
 				if(
 					s === "prototype" &&
@@ -913,6 +913,13 @@ export namespace dtsgen{
 			if(tsObjects[0].type === TSObjType.FUNCTION){
 				isFunc = true;
 			}
+			
+			//Object property special replace revert
+			if(/^\$(toString|valueOf)$/.test(symbolName)){
+				console.log(symbolName+" should revert.");
+				symbolName = symbolName.replace(/^\$/,"");
+			}
+			
 			
 			//may be class
 			let isMaybeClass = false;
