@@ -278,7 +278,38 @@ export namespace dtsgen{
 						let o = <TSObj>{};
 						o.class = name;
 						o.type = TSObjType.CLASS;
-						<Array<TSObj>>param.push(o);
+						
+						//if same type has, then replace
+						const pStr = path.slice(0, path.length-2).join(".")+"."+name;
+						let hasSameClass = (<Array<TSObj>>param)
+							.some((v,i,a)=>{
+								return v.class && this.resolvePathToDTSName(v.class.split(".")) === name
+							});
+						
+						//console.log("hasSameClass:", hasSameClass, name);
+						
+						let test = (<Array<TSObj>>param)
+							.some((v,i,a)=>{
+								return v.class && this.resolvePathToDTSName(v.class.split(".")) === name
+							});
+						
+						//console.log("test",test);
+						
+						if(hasSameClass){
+							(<Array<TSObj>>param)
+								.filter((v,i,a)=>{
+									return v.class && this.resolvePathToDTSName(v.class.split(".")) === name
+								})
+								.map((v,i,a)=>{
+									v.type = TSObjType.CLASS;
+									v.class = name;
+								});
+						}else{
+							<Array<TSObj>>param.push(o);
+						}
+						
+						
+						
 					}else{
 						param.class = name;
 						param.type = TSObjType.CLASS;
@@ -292,6 +323,21 @@ export namespace dtsgen{
 					ref[0]["class"] = "";
 					ref[0].class = name;
 					//console.log(`replace[${t}]:${JSON.stringify(ref[0])}`);
+					break;
+				case ReplaceType.ARRAY:
+					//replacing array type
+					
+					let at = ref[0]["arrayType"];
+					
+					let nspace = path.slice(0, path.length-2).join(".") + "." + name;
+					
+					let nt:TSObj = {
+						type:TSObjType.CLASS,
+						class:nspace
+					};
+					//ref[0]["arrayType"] = nt;
+					at[at.length-1] = nt;
+					console.log("REP_ARRAY:", name, JSON.stringify(at));
 					break;
 				case ReplaceType.OTHER:
 					//ref[0].class = `/* ${name} */ any`;
