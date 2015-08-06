@@ -989,32 +989,42 @@ export namespace dtsgen{
 			else if(isFunc && isMaybeClass){
 				//TODO:replace interfaceDTS()
 				
-				
-				//class open
-				s += this.outJSDoc(docData,urlData);
-				s += this.indent();
-				s += keyword + symbolName + "{\n";
-				this.depth++;
-				
-				//constructor only
+				let nt:any = {
+					//type:TSObjType.FUNCTION,
+					["new "]:[]
+				};
 				for(let i in tsObjects){
-					//constructor overloads
-					let t = tsObjects[i];
-					
-					//jsdoc
-					s += this.indent();
-					s += this.outFuncJsDocs(t, docData,urlData)
-					
-					
-					s += this.indent();
-					s += "constructor(" + this.paramsToDTS(t.params) +");\n";
+					if(i==="type")continue;
+					nt["new "].push(tsObjects[i]);
 				}
+				s += this.interfaceDTS(symbolName, nt);
 				
-				//class close
-				this.depth--;
-				s += this.indent();
-				s += "}";
-				
+				if(false){
+					//class open
+					s += this.outJSDoc(docData,urlData);
+					s += this.indent();
+					s += keyword + symbolName + "{\n";
+					this.depth++;
+					
+					//constructor only
+					for(let i in tsObjects){
+						//constructor overloads
+						let t = tsObjects[i];
+						
+						//jsdoc
+						s += this.indent();
+						s += this.outFuncJsDocs(t, docData,urlData)
+						
+						
+						s += this.indent();
+						s += "constructor(" + this.paramsToDTS(t.params) +");\n";
+					}
+					
+					//class close
+					this.depth--;
+					s += this.indent();
+					s += "}";
+				}
 			}
 			else{
 				if(!this.isInDefine && !this.isInObjectLiteral && !this.isInClassOrInterface) keyword = "declare " + keyword;
