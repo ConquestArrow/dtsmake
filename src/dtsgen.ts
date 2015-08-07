@@ -1605,62 +1605,6 @@ export namespace dtsgen{
 			return retStr;
 		}
 		
-		tests(fn:string){
-			let dgen = new DTSGen();
-			switch (fn) {
-				case "tsObjToDTS":
-				
-					var tso = `{"type":5,"ret":[{"type":1}],"params":[{"name":"doc","type":0},[{"type":5,"name":"c","ret":[{"type":3}],"params":[{"type":3},{"type":3}]},{"type":5,"name":"c","ret":[{"type":1}],"params":[[{"type":4,"name":"err"},{"type":0,"name":"err"}],{"name":"data","type":0}]}]]}`;
-					var dts = dgen.tsObjToDTS(JSON.parse(tso) );
-					console.log("test end.\n"+dts);
-				case "splitUnions":
-					var s = dgen.splitUnions("fn(doc: ?, c: fn(number, number) -> number|fn(err: string|?, data: ?))|fn()|fn()->any");
-console.log(s);
-					break;
-				case "parseTernDef":
-					var o:any = this.parseTernDef("fn(doc: ?, c: fn(number, number) -> number|fn(err: string|?, data: ?))|fn()|fn() -> ?|string|fn([number]|[string])");
-					
-					console.log(JSON.stringify(o));
-					break;
-				case "parseTernDef2":
-					var o:any = this.parseTernDef("[string]|[number]");
-console.log(o);
-					break;
-				case "parseParams":
-					let pp =  this.parseParams("fn(doc: ?, c: fn(number, number) -> number|fn(err: string|?, data: ?))");
-					console.log("parseParams.test:", pp);
-					break;
-				case "splitParams":
-					let sp =  this.splitParams("fn(number,number)");
-					console.log("splitParams.test:", sp);
-					break;
-				case "checkType":
-					console.assert(
-						TSObjType.FUNCTION === this.checkType("fn(doc:?, c:fn()->number, data:?|string) -> ?"),
-						"function test"
-					);
-					console.assert(
-						TSObjType.ANY === this.checkType("?"),
-						"any test"
-					);
-					console.assert(
-						TSObjType.BOOLEAN === this.checkType("bool"),
-						"boolean test"
-					)
-					console.assert(
-						TSObjType.CLASS === this.checkType("+!node.node_modules/tern/lib/tern`js.Server"),
-						"class instance test"
-					)
-					break;
-				case "loadTernJson":
-					
-					break;
-				default:
-					console.error("no method on test. "+fn)
-					break;
-			}
-
-		}
 	}
 	
 	/**
@@ -1794,32 +1738,3 @@ export namespace dtsgen.TernDef{
 // CLI 
 //////////////////////////////
 //var dgen = new dtsgen.DTSGen();
-
-/*---------------------------
-* tests
-*---------------------------*/
-
-/*
-dgen.tests("splitUnions");
-*/
-/*
-dgen.tests("parseTernDef");
-//*/
-/*
-dgen.tests("checkType");
-*/
-/*
-dgen.tests("splitParams");
-*/
-/*
-dgen.tests("parseParams");
-//*/
-/*
-dgen.tests("parseTernDef");
-//*/
-//*
-//dgen.tests("loadTernJson");
-//*/
-//*
-//dgen.tests("tsObjToDTS");
-//*/
