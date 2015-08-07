@@ -104,7 +104,7 @@ function ${defName}(): number | string;
 			
 		});
 		
-		it("should convert constructor", ()=>{
+		it("should convert constructor without return type annotation", ()=>{
 			const def:dtsgen.TSObj[] = [
 				{
 					type:dtsgen.TSObjType.FUNCTION,
@@ -115,7 +115,7 @@ function ${defName}(): number | string;
 				}
 			];
 			const defName = "new ";
-			
+			dg.option.isAnnotateTypeInstance = false;
 			const out = dg.convertTSObjToString(defName,def);
 			const answer = 
 `
@@ -123,6 +123,58 @@ function ${defName}(): number | string;
  * 
  */
 function ${defName}();
+`;
+			
+			assert.deepEqual(out, answer);
+			
+		});
+		
+		it("should convert constructor with return type annotation", ()=>{
+			const def:dtsgen.TSObj[] = [
+				{
+					type:dtsgen.TSObjType.FUNCTION,
+					ret:[
+						{type:dtsgen.TSObjType.VOID}
+					],
+					params:null
+				}
+			];
+			const defName = "new ";
+			dg.option.isAnnotateTypeInstance = true;
+			dg.option.isOutVoidAsAny = false;
+			const out = dg.convertTSObjToString(defName,def);
+			const answer = 
+`
+/**
+ * 
+ */
+function ${defName}(): void;
+`;
+			
+			assert.deepEqual(out, answer);
+			
+		});
+		
+		it("should convert constructor with return type annotation void as any", ()=>{
+			const def:dtsgen.TSObj[] = [
+				{
+					type:dtsgen.TSObjType.FUNCTION,
+					ret:[
+						{type:dtsgen.TSObjType.VOID}
+					],
+					params:null
+				}
+			];
+			const defName = "new ";
+			dg.option.isAnnotateTypeInstance = true;
+			dg.option.isOutVoidAsAny = true;
+			const out = dg.convertTSObjToString(defName,def);
+			const answer = 
+`
+/**
+ * 
+ */
+function ${defName}(): /* void */ any;
 `;
 			
 			assert.deepEqual(out, answer);

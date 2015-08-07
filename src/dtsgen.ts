@@ -17,10 +17,37 @@ export namespace dtsgen{
 		ternjsData:JSON;
 		isDebug:boolean = true;
 		
+		
+		/*
+		* options
+		*/
+		option = {
+			// force output "void" to "any"
+			isOutVoidAsAny:true,
+			// export a namespace property same with a interface 
+			isExportInterfaceSameNameVar:true,
+			// annotate interface constructor type as return type instance
+			isAnnotateTypeInstance:true
+		};
+		
+		
+		
+		
 		/**
 		 * main function
 		 */
-		main(pathStr:string){
+		main(
+			pathStr:string, 
+			options?:{
+				isOutVoidAsAny:boolean,
+				isExportInterfaceSameNameVar:boolean,
+				isAnnotateTypeInstance:boolean
+			}
+		){
+			if(options){
+				this.option = options;
+			}
+			
 			this.loadTernJson(pathStr, (data:JSON)=>{
 				this.parseTernJson(data);
 			})
@@ -502,8 +529,8 @@ export namespace dtsgen{
 							o[i] = {};
 							
 							//constructor
-							o[i]["new "] = {};
-							o[i]["new "] = this.parseTernDef(value[TernDef.TYPE]);
+							o[i][DTSDef.NEW] = {};
+							o[i][DTSDef.NEW] = this.parseTernDef(value[TernDef.TYPE], i);
 							
 							//prototype
 							
@@ -607,7 +634,7 @@ export namespace dtsgen{
 							if(ns!=""){
 								//namespace open
 								s += this.indent();
-								s += `declare namespace ${ns}{\n`;
+								s += `export declare namespace ${ns}{\n`;
 								this.depth++;
 							}
 							
@@ -658,7 +685,7 @@ export namespace dtsgen{
 						s += i + " : " + value;
 					}
 					//has "new ()" is class interface
-					else if(value && value["new "]){
+					else if(value && value[DTSDef.NEW]){
 						
 						s += this.interfaceDTS(i,value);
 					}
@@ -685,7 +712,7 @@ export namespace dtsgen{
 						this.isNamespace(value)
 					){
 						s += this.indent();
-						s += `declare namespace ${i}{\n`;
+						s += `export declare namespace ${i}{\n`;
 						this.depth++;
 						s += this.parseToDTS(value);
 						this.depth--;
@@ -784,7 +811,7 @@ export namespace dtsgen{
 			this.isInObjectLiteral = false;
 			this.isInClassOrInterface = false;
 			//interface var to new()
-			if(value["new "]){
+			if(value[dtsgen.DTSDef.NEW] && this.option.isExportInterfaceSameNameVar){
 				s += this.indent();
 				s += `var ${defName}: ${defName};\n`;
 			}
@@ -809,7 +836,7 @@ export namespace dtsgen{
 				for(let i in value){
 					if(!value[i])continue;
 					//console.log(`value[${i}]:${value[i]}`);
-					if(value[i]["new "]){
+					if(value[i][DTSDef.NEW]){
 						hasNewFunc=true;
 						break;
 					}
@@ -966,19 +993,19 @@ export namespace dtsgen{
 					
 					//output function d.ts
 					s += keyword + symbolName + "("+ this.paramsToDTS(t.params) +")";
+					
+					//return type					
 					if(
 						t.ret &&
-						symbolName === "new " &&
-						t.ret.every((v)=>v.type !== TSObjType.VOID)
+						symbolName === DTSDef.NEW &&
+						t.ret.every((v)=>v.type === TSObjType.VOID) &&
+						!this.option.isAnnotateTypeInstance
 					){
 						//constructor maynot return self instance
-						s += `: ${this.tsObjsToUnionDTS(t.ret, false, t, false)} `;
+						//no output type annotation
 					}
-					else if(
-						t.ret && 
-						symbolName !== "new "
-					){
-						s += ": " + this.tsObjsToUnionDTS(t.ret, false, t, false);
+					else if(t.ret){
+						s += `: ${this.tsObjsToUnionDTS(t.ret, false, t, false)}`;
 					}
 				}
 				
@@ -987,15 +1014,29 @@ export namespace dtsgen{
 			}
 			//may be class/interface
 			else if(isFunc && isMaybeClass){
-				//TODO:replace interfaceDTS()
 				
 				let nt:any = {
 					//type:TSObjType.FUNCTION,
-					["new "]:[]
+					[DTSDef.NEW]:[],
+					[TernDef.DOC]:docData ? docData : null//,
+					//[TernDef.URL]:urlData ? urlData : null
 				};
+				if(urlData)nt[TernDef.URL] = urlData;
 				for(let i in tsObjects){
-					if(i==="type")continue;
-					nt["new "].push(tsObjects[i]);
+					if(i===TSObj.Def.TYPE)continue;
+					let tmp = tsObjects[i];
+					//console.log("TMP:", JSON.stringify(tmp));
+					tmp.ret
+						.filter((v,i,a)=>v.type===TSObjType.VOID)
+						.map((v,i,a)=>{
+							//console.log("V1:",JSON.stringify(v))
+							v.type = TSObjType.CLASS;
+							v.class = symbolName;
+							//console.log("V2:",JSON.stringify(v))
+							return v;
+						});
+					
+					nt[DTSDef.NEW].push(tmp);
 				}
 				s += this.interfaceDTS(symbolName, nt);
 				
@@ -1027,7 +1068,7 @@ export namespace dtsgen{
 				}
 			}
 			else{
-				if(!this.isInDefine && !this.isInObjectLiteral && !this.isInClassOrInterface) keyword = "declare " + keyword;
+				if(!this.isInDefine && !this.isInObjectLiteral && !this.isInClassOrInterface) keyword = "export declare " + keyword;
 				s += keyword + symbolName+" : "+this.tsObjsToUnionDTS(tsObjects);
 			}
 			
@@ -1113,6 +1154,7 @@ export namespace dtsgen{
 			isOutName:boolean = true
 		):string{
 			let s = "";
+			if(t.type === TSObjType.VOID && !this.option.isOutVoidAsAny) isOutName = false;
 			if(t.name && isOutName) s += t.name + " : ";
 			wrap = wrap && (t.type === TSObjType.FUNCTION);
 			if(wrap) s += "(";	//wrap start
@@ -1208,7 +1250,8 @@ export namespace dtsgen{
 					throw Error("unions? "+ JSON.stringify(t));
 					break;
 				case TSObjType.VOID:
-					s += "void";
+					if(this.option.isOutVoidAsAny) s += "/* void */ any";
+					else s += "void";
 					break;
 				default:
 					s += "/*no type*/{}";	//no type
@@ -1227,7 +1270,7 @@ export namespace dtsgen{
 			}else{
 				for(let j in value){
 					//open namespace
-					s += `declare module "${j}"{\n`;
+					s += `export declare module "${j}"{\n`;
 					//TODO:use namespace keyword option
 					this.depth++;
 					//s += this.indent();
@@ -1301,7 +1344,7 @@ export namespace dtsgen{
 					case TSObjType.FUNCTION:
 						//console.log(`fn:${i}`);
 						
-						ts.ret = this.parseFnReturn(i);
+						ts.ret = this.parseFnReturn(i, parentName);
 						
 						ts.params = 
 							this.parseParams(i);
@@ -1324,10 +1367,14 @@ export namespace dtsgen{
 			return ret;
 		}
 		
-		private parseFnReturn(fnStr:string):TSObj[]{
+		private parseFnReturn(fnStr:string, parentName?:string):TSObj[]{
 			let sa = this.splitReturn(fnStr);
 			
-			if(sa.length===1){
+			if(this.option.isAnnotateTypeInstance && parentName && sa.length === 1){
+				//force annotate constructor return type instance
+				return [<TSObj>{type:TSObjType.CLASS,class:parentName}];
+			}
+			else if(sa.length===1){
 				//void
 				return [<TSObj>{type:TSObjType.VOID}];
 			}
@@ -1340,6 +1387,14 @@ export namespace dtsgen{
 				ret.push(this.parseTernDef(i));
 			}*/
 			let ret = this.parseTernDef(sa[1]);
+			if(this.option.isAnnotateTypeInstance && parentName){
+				ret
+					.filter((v,i,a)=>v.type===TSObjType.VOID)
+					.map((v,i,a)=>{
+						return <TSObj>{type:TSObjType.CLASS,class:parentName}
+					});
+				
+			}
 			return ret;
 		}
 		
@@ -1608,6 +1663,9 @@ console.log(o);
 		}
 	}
 	
+	/**
+	 * config option interface
+	 */
 	interface DTSGenConfig{
 		
 	}
@@ -1680,6 +1738,19 @@ console.log(o);
 		OBJECT
 	}
 }
+export namespace dtsgen.DTSDef{
+	export const NEW = "new ";
+}
+
+export namespace dtsgen.TSObj.Def{
+	export const TYPE = "type";
+	export const NAME = "name";
+	export const PARAMS = "params";
+	export const RET = "ret";
+	export const ARRAYTYPE = "arrayType";
+	export const CLASS = "class";
+}
+
 export namespace dtsgen.TernDef{
 	export const NAME = "!name";
 	export const DEFINE = "!define";
