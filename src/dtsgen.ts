@@ -15,13 +15,14 @@ export namespace dtsgen{
 		 * ternjs json format data
 		 */
 		ternjsData:JSON;
-		isDebug:boolean = true;
 		
 		
 		/*
 		* options
 		*/
 		option = {
+			// debug mode
+			isDebug:false,
 			// force output "void" to "any"
 			isOutVoidAsAny:true,
 			// export a namespace property same with a interface 
@@ -39,6 +40,7 @@ export namespace dtsgen{
 		main(
 			pathStr:string, 
 			options?:{
+				isDebug:boolean,
 				isOutVoidAsAny:boolean,
 				isExportInterfaceSameNameVar:boolean,
 				isAnnotateTypeInstance:boolean
@@ -107,12 +109,12 @@ export namespace dtsgen{
 			let d = this.preModifiedJson(o);
 			//console.info("-----------------------");
 			//console.log(JSON.stringify(d));
-			if(this.isDebug) this.saveJSON("./sample/sample.json", JSON.stringify(d), ()=>{})
+			if(this.option.isDebug) this.saveJSON("./sample/sample.json", JSON.stringify(d), ()=>{})
 			
 			let s = this.parseToDTS(d);
 			//console.info("-----------------------");
 			//console.log("output\n"+s);
-			if(this.isDebug){
+			if(this.option.isDebug){
 				this.saveTSDFile("test/.tmp/sample",s);
 			}
 			
