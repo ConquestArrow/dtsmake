@@ -24,7 +24,7 @@ describe("File manipulation tests", ()=>{
 	context("save a JSON file",()=>{
 		let realFile;
 		beforeEach((done)=>{
-			dg.option.isOutVoid = false;
+			dg.option.isOutVoidAsAny = false;
 			dg.loadTernJson("sample/infer.js.json",(data:JSON)=>{
 				realFile = data;
 				done();

@@ -33,6 +33,51 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			
 		});
 		
+
+		
+	});
+	
+	context("replaceExportNamespace()",()=>{
+		
+		it("should replace module name when isOutExport ON",()=>{
+			
+			const def = {
+				[dtsgen.TernDef.NAME]:"TEST_NAME",
+				[dtsgen.TernDef.DEFINE]:{
+					[dtsgen.TernDef.NODE]:{
+						"node_modules/path/to/module`js":{
+							"prop":{
+								type:dtsgen.TSObjType.BOOLEAN
+							}
+						}
+					}
+				}
+			};
+			
+			dg.option.isOutExport = true;
+			dg.nodeModuleName = "node_modules/path/to/module`js";
+			dg.userDefinedModuleName = "TEST_NAME";
+			
+			let out = dg.replaceExportNamespace(def);
+			//console.log(JSON.stringify(out))
+			let answer = {
+				[dtsgen.TernDef.NAME]:"TEST_NAME",
+				[dtsgen.TernDef.DEFINE]:{
+					[dtsgen.TernDef.NODE]:{
+						[dg.userDefinedModuleName]:{
+							"prop":{
+								type:dtsgen.TSObjType.BOOLEAN
+							}
+						}
+					}
+				}
+			};
+			
+			assert.deepEqual(out, answer);
+			
+			
+		});
+		
 	});
 	
 	context("parseJsonNodeDTS()",()=>{
@@ -102,6 +147,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			);
 			
 		});
+
 	})
 	
 	context("parseTernDef()",()=>{
@@ -190,6 +236,72 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		});
 		
 		//it("should parse ")
+		
+		it("should parse union params fn",()=>{
+			const def = "fn(a: string|number)";
+			const answer = [
+					{"type":dtsgen.TSObjType.FUNCTION,
+				"ret":[
+					{
+					"type":dtsgen.TSObjType.VOID
+					}
+				],
+				"params":[
+					[
+						{
+							"name":"a",
+							"type":dtsgen.TSObjType.STRING
+						},
+						{
+							"name":"a",
+							"type":dtsgen.TSObjType.NUMBER
+						}
+					]
+				]
+				}
+			];
+			let out = dg.parseTernDef(def);
+			assert.deepEqual(out, answer);
+		});
+		
+		it("should parse fn union params fn",()=>{
+			const def = "fn(a: fn(string)|fn(number))";
+			const answer = [
+					{"type":dtsgen.TSObjType.FUNCTION,
+				"ret":[
+					{
+					"type":dtsgen.TSObjType.VOID
+					}
+				],
+				"params":[
+					[
+						{
+							"name":"a",
+							"params":[{
+							"type":dtsgen.TSObjType.STRING
+							}],
+							"type":dtsgen.TSObjType.FUNCTION,
+							"ret":[{
+								"type":dtsgen.TSObjType.VOID
+							}]
+						},
+						{
+							"name":"a",
+							"params":[{
+							"type":dtsgen.TSObjType.NUMBER
+							}],
+							"type":dtsgen.TSObjType.FUNCTION,
+							"ret":[{
+								"type":dtsgen.TSObjType.VOID
+							}]
+						}
+					]
+				]
+				}
+			];
+			let out = dg.parseTernDef(def);
+			assert.deepEqual(out, answer);
+		});
 	});
 	
 	context("parseParams()",()=>{
@@ -216,6 +328,36 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			let out = dg.parseParams(def);
 			assert.deepEqual(out,answer, `\ndef out ${JSON.stringify(out)},\nanswer ${JSON.stringify(answer)}`);
 			
+		});
+		
+		it("should parse fn union params", ()=>{
+			const def = "fn(a: fn(string)|fn(number))";
+			const answer = [
+					[
+						{
+							"name":"a",
+							"params":[{
+							"type":dtsgen.TSObjType.STRING
+							}],
+							"type":dtsgen.TSObjType.FUNCTION,
+							"ret":[{
+								"type":dtsgen.TSObjType.VOID
+							}]
+						},
+						{
+							"name":"a",
+							"params":[{
+							"type":dtsgen.TSObjType.NUMBER
+							}],
+							"type":dtsgen.TSObjType.FUNCTION,
+							"ret":[{
+								"type":dtsgen.TSObjType.VOID
+							}]
+						}
+					]
+				];
+			let out = dg.parseParams(def);
+			assert.deepEqual(out, answer);
 		});
 		
 	});
@@ -261,11 +403,6 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		it("preModifiedJson()", (done)=>{
 			modifiedObj = dg.preModifiedJson(nodeDTSObj);
 			done();
-		});
-		
-		it("should parsing ternjs files and debug save.", ()=>{
-			assert(loadData,"load data is invalid");
-			assert.ifError(dg.parseTernJson(loadData));
 		});
 	});
 	

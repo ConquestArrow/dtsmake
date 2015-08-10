@@ -16,42 +16,63 @@ export namespace dtsgen{
 		 */
 		ternjsData:JSON;
 		
+		/**
+		 * currently nodejs module internal name
+		 * ex. "node_modules/path/to/module`js"
+		 */
+		nodeModuleName:string;
 		
-		/*
-		* options
-		*/
-		option = {
+		/**
+		 * user defined name when tern/condense
+		 */
+		userDefinedModuleName:string;
+		
+		/**
+		 * Default Options
+		 */
+		option:Option = {
 			// debug mode
 			isDebug:false,
 			// force output "void" to "any"
-			isOutVoidAsAny:true,
+			isOutVoidAsAny:false,
 			// export a namespace property same with a interface 
 			isExportInterfaceSameNameVar:true,
 			// annotate interface constructor type as return type instance
-			isAnnotateTypeInstance:true
+			isAnnotateTypeInstance:true,
+			// node module special replace
+			isNodeJSModule:false,
+			// add export statement in a bottom of d.ts file
+			isOutExport:true,
+			// if isOutExport true, select export style "es6" or "legacy"
+			exportStyle:Option.ExportStyle.LEGACY,
+			// exporting module name
+			// ex. "EXAMPLE"; usage 'import example = require("EXAMPLE");'
+			// ex. "EXAMPLE/lib"; usage 'import example = require("EXAMPLE/lib");'
+			// check javascript lib's import style
+			exportModuleName:""
 		};
-		
-		
-		
 		
 		/**
 		 * main function
 		 */
 		main(
-			pathStr:string, 
-			options?:{
-				isDebug:boolean,
-				isOutVoidAsAny:boolean,
-				isExportInterfaceSameNameVar:boolean,
-				isAnnotateTypeInstance:boolean
-			}
+			srcPathStr:string,
+			distPathStr:string, 
+			options?:Option
 		){
 			if(options){
-				this.option = options;
+				for(let i in options){
+					if(this.option[i]!==undefined || this.option[i]!==null){
+						//override default options
+						this.option[i] = options[i];
+					}
+				}
 			}
 			
-			this.loadTernJson(pathStr, (data:JSON)=>{
-				this.parseTernJson(data);
+			this.loadTernJson(srcPathStr, (data:JSON)=>{
+				let s = this.parseTernJson(data, distPathStr);
+				
+				this.saveTSDFile(distPathStr,s);
 			})
 		}
 		
@@ -99,7 +120,7 @@ export namespace dtsgen{
 			});
 		}
 		
-		parseTernJson(data:JSON){
+		parseTernJson(data:JSON, distPathStr?:string):string{
 			this.depth = 0;
 			
 			let o = this.parseJsonNodeDTS(data);
@@ -109,14 +130,44 @@ export namespace dtsgen{
 			let d = this.preModifiedJson(o);
 			//console.info("-----------------------");
 			//console.log(JSON.stringify(d));
-			if(this.option.isDebug) this.saveJSON("./sample/sample.json", JSON.stringify(d), ()=>{})
+			
+			if(
+				this.option.isOutExport &&
+				this.userDefinedModuleName &&
+				this.option.isNodeJsModule
+			){
+				d = this.replaceExportNamespace(d);
+			}
+			
+			
+			if(this.option.isDebug){
+				this.saveJSON(distPathStr+".json", JSON.stringify(d), ()=>{});
+			}
 			
 			let s = this.parseToDTS(d);
-			//console.info("-----------------------");
-			//console.log("output\n"+s);
-			if(this.option.isDebug){
-				this.saveTSDFile("test/.tmp/sample",s);
+			
+			if(this.option.isOutExport){
+				//TODO:add export statements
+				let n = this.option.exportModuleName ? this.option.exportModuleName : this.userDefinedModuleName;
+				s += 
+`
+declare module '${n}' {
+`;
+				if(this.option.exportStyle === dtsgen.Option.ExportStyle.ES6){
+					s += 
+`
+	export default ${this.userDefinedModuleName};    //es6 style module export 
+`;
+				}else{
+					s += 
+`
+	export = ${this.userDefinedModuleName};    //legacy ts module export
+`;
+				}
+				s += "}"+"\n";
 			}
+			
+			return s;
 			
 		}
 		
@@ -182,6 +233,44 @@ export namespace dtsgen{
 			return modJson; 
 		}
 		
+		replaceExportNamespace(data:{}):Object{
+			let modJson = clone(data);
+			
+			//nodejs node
+			if(modJson[TernDef.DEFINE][TernDef.NODE]){
+				let nodejsNode = modJson[TernDef.DEFINE][TernDef.NODE];
+				for(let i in nodejsNode){
+					//replace
+					nodejsNode[this.userDefinedModuleName] = clone(nodejsNode[i]);
+					
+					//remove
+					delete nodejsNode[i];
+				}
+			}
+			
+			//other nodes
+			for(let i in modJson[TernDef.DEFINE]){
+				let cNode = modJson[TernDef.DEFINE][i];
+				if(cNode[DTS_NAMESPACE_STR]){
+					//replace namespace
+					cNode[DTS_NAMESPACE_STR] = this.userDefinedModuleName;
+				}
+				
+				
+			}
+			
+			if(
+				modJson[this.userDefinedModuleName] &&
+				modJson[this.userDefinedModuleName] instanceof Object &&
+				Object.keys(modJson[this.userDefinedModuleName]).length === 0
+			){
+				//remove
+				delete modJson[this.userDefinedModuleName];
+			}
+			
+			return modJson;
+		}
+		
 		resolvePathToDTSName(paths:string[]):string{
 			let s = "";
 			const reg2 = /^!.+/;
@@ -238,6 +327,8 @@ export namespace dtsgen{
 			const reg2 = /^!.+/;
 			const reg3 = /<.+>/;
 			
+			const isOutRepNS = this.option.isOutExport;
+			
 			for(let i=len-1;i>=0;i--){
 				
 				if(reg2.test(p[i]) || reg3.test(p[i])){
@@ -245,7 +336,15 @@ export namespace dtsgen{
 					continue;
 				}
 				
-				nsp.push(p[i]);
+				
+				if(isOutRepNS && p[i] === this.nodeModuleName){
+					//replace nodejs namespace
+					nsp.push(this.userDefinedModuleName);
+				}else{
+					nsp.push(p[i]);
+				}
+				
+				
 			}
 			return nsp.reverse().join(".");
 		}
@@ -366,7 +465,7 @@ export namespace dtsgen{
 					};
 					//ref[0]["arrayType"] = nt;
 					at[at.length-1] = nt;
-					console.log("REP_ARRAY:", name, JSON.stringify(at));
+					//console.log("REP_ARRAY:", name, JSON.stringify(at));
 					break;
 				case ReplaceType.OTHER:
 					//ref[0].class = `/* ${name} */ any`;
@@ -407,7 +506,7 @@ export namespace dtsgen{
 					continue;
 				}else if(ref[s] === undefined){
 					//no path ref
-					console.log("no path ref:"+path.join("."));
+					console.warn("no path ref:"+path.join("."));
 					return;		//do nothing
 				}else{
 					ref = ref[s];
@@ -498,10 +597,15 @@ export namespace dtsgen{
 						
 						break;
 					case TernDef.NODE:
+						if(typeof value === "string"){
+							this.option.isNodeJsModule = true;
+							this.nodeModuleName = value;
+						}
 						o[i] = this.parseJsonNodeDTS(value);
 						break;
 					//no converts
 					case TernDef.NAME:
+						this.userDefinedModuleName = <string>value;
 					case TernDef.DOC:
 					case TernDef.URL:
 						o[i] = value;
@@ -532,7 +636,7 @@ export namespace dtsgen{
 							
 							//constructor
 							o[i][DTSDef.NEW] = {};
-							o[i][DTSDef.NEW] = this.parseTernDef(value[TernDef.TYPE], i);
+							o[i][DTSDef.NEW] = this.parseTernDef(value[TernDef.TYPE], i, true);
 							
 							//prototype
 							
@@ -636,7 +740,7 @@ export namespace dtsgen{
 							if(ns!=""){
 								//namespace open
 								s += this.indent();
-								s += `export declare namespace ${ns}{\n`;
+								s += `declare namespace ${ns}{\n`;
 								this.depth++;
 							}
 							
@@ -652,9 +756,10 @@ export namespace dtsgen{
 								);
 								s += ";\n";
 							}
+							//global variables
 							else if(typeof value[j] === "string"){
 								s += this.indent();
-								s += `let ${defName}: ${value[j]}\n`;
+								s += `var ${defName}: ${value[j]}\n`;
 							}
 							//interface
 							else{
@@ -714,7 +819,7 @@ export namespace dtsgen{
 						this.isNamespace(value)
 					){
 						s += this.indent();
-						s += `export declare namespace ${i}{\n`;
+						s += `declare namespace ${i}{\n`;
 						this.depth++;
 						s += this.parseToDTS(value);
 						this.depth--;
@@ -910,7 +1015,11 @@ export namespace dtsgen{
 				(t.params) ?
 				t.params
 					.map((v,i,a)=>{
-						return v.name;
+						if(v instanceof Array){
+							return v[0].name;
+						}else{
+							return v.name;
+						}
 					}) :
 				null;
 			let rs = 
@@ -945,7 +1054,7 @@ export namespace dtsgen{
 			
 			//Object property special replace revert
 			if(/^\$(toString|valueOf)$/.test(symbolName)){
-				console.log(symbolName+" should revert.");
+				//console.log(symbolName+" should revert.");
 				symbolName = symbolName.replace(/^\$/,"");
 			}
 			
@@ -997,11 +1106,14 @@ export namespace dtsgen{
 					s += keyword + symbolName + "("+ this.paramsToDTS(t.params) +")";
 					
 					//return type					
+					
 					if(
 						t.ret &&
 						symbolName === DTSDef.NEW &&
-						t.ret.every((v)=>v.type === TSObjType.VOID) &&
-						!this.option.isAnnotateTypeInstance
+						!this.option.isAnnotateTypeInstance &&
+						
+						t.ret.every((v)=>v.type === TSObjType.VOID) 
+						
 					){
 						//constructor maynot return self instance
 						//no output type annotation
@@ -1156,7 +1268,6 @@ export namespace dtsgen{
 			isOutName:boolean = true
 		):string{
 			let s = "";
-			if(t.type === TSObjType.VOID && !this.option.isOutVoidAsAny) isOutName = false;
 			if(t.name && isOutName) s += t.name + " : ";
 			wrap = wrap && (t.type === TSObjType.FUNCTION);
 			if(wrap) s += "(";	//wrap start
@@ -1272,7 +1383,8 @@ export namespace dtsgen{
 			}else{
 				for(let j in value){
 					//open namespace
-					s += `export declare module "${j}"{\n`;
+					s += "//nodejs module namespace\n";
+					s += `declare namespace ${j}{\n`;
 					//TODO:use namespace keyword option
 					this.depth++;
 					//s += this.indent();
@@ -1301,7 +1413,7 @@ export namespace dtsgen{
 			return ts;
 		}
 		
-		parseTernDef(ternDef:string, parentName?:string):any[]{
+		parseTernDef(ternDef:string, parentName?:string, isConstructor:boolean = false):any[]{
 			if(!ternDef) throw Error("need ternjs def string.");
 			
 			//remove spaces
@@ -1346,7 +1458,7 @@ export namespace dtsgen{
 					case TSObjType.FUNCTION:
 						//console.log(`fn:${i}`);
 						
-						ts.ret = this.parseFnReturn(i, parentName);
+						ts.ret = this.parseFnReturn(i, parentName, isConstructor);
 						
 						ts.params = 
 							this.parseParams(i);
@@ -1369,10 +1481,10 @@ export namespace dtsgen{
 			return ret;
 		}
 		
-		private parseFnReturn(fnStr:string, parentName?:string):TSObj[]{
+		private parseFnReturn(fnStr:string, parentName?:string, isConstructor:boolean = false):TSObj[]{
 			let sa = this.splitReturn(fnStr);
 			
-			if(this.option.isAnnotateTypeInstance && parentName && sa.length === 1){
+			if(isConstructor && this.option.isAnnotateTypeInstance && parentName && sa.length === 1){
 				//force annotate constructor return type instance
 				return [<TSObj>{type:TSObjType.CLASS,class:parentName}];
 			}
@@ -1389,7 +1501,7 @@ export namespace dtsgen{
 				ret.push(this.parseTernDef(i));
 			}*/
 			let ret = this.parseTernDef(sa[1]);
-			if(this.option.isAnnotateTypeInstance && parentName){
+			if(isConstructor && this.option.isAnnotateTypeInstance && parentName){
 				ret
 					.filter((v,i,a)=>v.type===TSObjType.VOID)
 					.map((v,i,a)=>{
@@ -1612,8 +1724,15 @@ export namespace dtsgen{
 	/**
 	 * config option interface
 	 */
-	interface DTSGenConfig{
-		
+	interface Option{
+		isDebug?:boolean,
+		isOutVoidAsAny?:boolean,
+		isExportInterfaceSameNameVar?:boolean,
+		isAnnotateTypeInstance?:boolean,
+		isNodeJsModule?:boolean,
+		isOutExport?:boolean,
+		exportStyle?:string,
+		exportModuleName?:string
 	}
 	
 	/**
@@ -1695,6 +1814,18 @@ export namespace dtsgen.TSObj.Def{
 	export const RET = "ret";
 	export const ARRAYTYPE = "arrayType";
 	export const CLASS = "class";
+}
+
+export namespace dtsgen.Option.ExportStyle{
+	/**
+	 * es6 style "export default MODULE;"
+	 */
+	export const ES6 = "es6";
+	/**
+	 * legacy ts style "export = MODULE;"
+	 */
+	export const LEGACY = "legacy";
+	
 }
 
 export namespace dtsgen.TernDef{
