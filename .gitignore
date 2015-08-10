@@ -4,3 +4,4 @@ node_modules
 tmp
 lib
 .tmp
+typings
