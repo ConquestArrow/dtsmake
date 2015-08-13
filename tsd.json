@@ -9,7 +9,7 @@
       "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
     },
     "node/node.d.ts": {
-      "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
+      "commit": "338f9db37074d197764e95a487ddb865c5f2d73c"
     },
     "mocha/mocha.d.ts": {
       "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
@@ -25,6 +25,18 @@
     },
     "sinon/sinon.d.ts": {
       "commit": "4df20c9706ce6ca27137617770b57f3a0d3f9689"
+    },
+    "commander/commander.d.ts": {
+      "commit": "71d072b7354936b88d57c2029042d2da7c6ec0e7"
+    },
+    "gulp/gulp.d.ts": {
+      "commit": "338f9db37074d197764e95a487ddb865c5f2d73c"
+    },
+    "gulp-typescript/gulp-typescript.d.ts": {
+      "commit": "338f9db37074d197764e95a487ddb865c5f2d73c"
+    },
+    "gulp-concat/gulp-concat.d.ts": {
+      "commit": "338f9db37074d197764e95a487ddb865c5f2d73c"
     }
   }
 }
