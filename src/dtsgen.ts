@@ -54,12 +54,47 @@ export namespace dtsgen{
 		
 		/**
 		 * main function
+		 * load json file
 		 */
 		main(
 			srcPathStr:string,
 			distPathStr:string, 
 			options?:Option
+		):void;
+		/**
+		 * 
+		 */
+		main(
+			srcString:string,
+			distPathStr:string,
+			options?:Option
+		):void;
+		
+		main(
+			param1:string,
+			distPathStr:string, 
+			options?:Option
 		){
+			this.overrideDefaultOptions(options);
+			
+			if(/\n/.test(param1)){
+				//source code text
+				let s = this.parseTernJson(JSON.parse(param1), distPathStr);
+				this.saveTSDFile(distPathStr,s);
+			}
+			else if(/\.json$/.test(param1)){
+				//src json path
+				this.loadTernJson(param1, (data:JSON)=>{
+					let s = this.parseTernJson(data, distPathStr);
+					
+					this.saveTSDFile(distPathStr,s);
+				})
+			}
+			
+		}
+		
+		
+		private overrideDefaultOptions(options?:Option){
 			if(options){
 				for(let i in options){
 					if(this.option[i]!==undefined || this.option[i]!==null){
@@ -68,12 +103,6 @@ export namespace dtsgen{
 					}
 				}
 			}
-			
-			this.loadTernJson(srcPathStr, (data:JSON)=>{
-				let s = this.parseTernJson(data, distPathStr);
-				
-				this.saveTSDFile(distPathStr,s);
-			})
 		}
 		
 		/**
@@ -1724,7 +1753,7 @@ declare module '${n}' {
 	/**
 	 * config option interface
 	 */
-	interface Option{
+	export interface Option{
 		isDebug?:boolean,
 		isOutVoidAsAny?:boolean,
 		isExportInterfaceSameNameVar?:boolean,
@@ -1818,11 +1847,11 @@ export namespace dtsgen.TSObj.Def{
 
 export namespace dtsgen.Option.ExportStyle{
 	/**
-	 * es6 style "export default MODULE;"
+	 * es6 style `export default MODULE;`
 	 */
 	export const ES6 = "es6";
 	/**
-	 * legacy ts style "export = MODULE;"
+	 * legacy ts style `export = MODULE;`
 	 */
 	export const LEGACY = "legacy";
 	
