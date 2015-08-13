@@ -23,3 +23,7 @@ gulp.task("cmdbuild",()=>{
 		.pipe(concat("dtsgen"))
 		.pipe(gulp.dest("./bin/"))
 });
+
+gulp.task("watch",()=>{
+	gulp.watch("./src/index.ts", ["cmdbuild"]);
+})
