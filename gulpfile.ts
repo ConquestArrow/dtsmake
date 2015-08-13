@@ -7,7 +7,7 @@ import concat = require("gulp-concat");
 //var sq = require("streamqueue");
 var header = require('gulp-header');
 
-
+/*
 gulp.task("cmdbuild", ()=>{
 	let result = gulp
 			.src(["./src/index.ts"])
@@ -31,11 +31,11 @@ gulp.task("cmdbuild", ()=>{
 			.pipe(header("#!/usr/bin/env node\n"))
 			.pipe(concat("dtsgen"))
 			.pipe(gulp.dest("./bin/"));
-});
+});*/
 
-gulp.task("libbuild", ()=>{
+gulp.task("build", ()=>{
 	let result = gulp
-		.src("./src/dtsgen.ts")
+		.src("./src/*.ts")
 		.pipe(gts(gts.createProject("./tsconfig.json")));
 	return result
 		.js
@@ -43,5 +43,5 @@ gulp.task("libbuild", ()=>{
 });
 
 gulp.task("watch",()=>{
-	gulp.watch("./src/index.ts", ["cmdbuild"]);
+	gulp.watch("./src/*.ts", ["build"]);
 })
