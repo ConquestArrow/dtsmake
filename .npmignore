@@ -3,4 +3,5 @@ typings
 tmp
 tsconfig.json
 tsd.json
+gulpfile.ts
 .tmp
