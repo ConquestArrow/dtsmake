@@ -6,7 +6,7 @@
  */
  
 import * as program from "commander";
-import {dtsgen} from "dtsgen";
+import {dtsgen} from "./dtsgen";
 import * as child_process from "child_process";
 var myPackage = require("../package.json");
 
