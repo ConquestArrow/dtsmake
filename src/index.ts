@@ -20,7 +20,7 @@ var defFiles = function(val:string):string[]{
 }
 var extraFiles = function(val:string):string[]{
 	console.log("[EXTRA]"+val);
-	return val.split("+");
+	return val.split(",");
 }
 
 
