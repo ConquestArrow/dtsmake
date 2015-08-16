@@ -54,7 +54,7 @@ program
 	.option("-a, --annotateTypeInstance", "annotate interface's constructor type as return type instance", true)
 	.option("-N, --NodeJSModule", "nodejs module special replace")
 	.option("-e, --export", "add export statement in a bottom of d.ts file")
-	.option("-s, --exportStyle [value]", `if --outExport true, select export style "es6" or "legacy"`, "legacy")
+	.option("-s, --exportStyle [value]", `if --outExport true, select export style "es6" or "legacy"`)
 	.option("-M, --exportModuleName [value]", 'exporting module name. ex. "EXAMPLE"; usage `import example = require("EXAMPLE");`')
 	
 	.parse(process.argv);
