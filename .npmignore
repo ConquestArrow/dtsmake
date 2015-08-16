@@ -5,3 +5,4 @@ tsconfig.json
 tsd.json
 gulpfile.ts
 .tmp
+.settings

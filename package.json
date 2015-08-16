@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha --compilers ts:espower-typescript/guess test/*-test.ts",
     "testw": "mocha --compilers ts:espower-typescript/guess -w test/*-test.ts",
+    "extest": "(cd example && npm install --save-dev ../ && node example.js)",
     "build": "tsc"
   },
   "repository": {
@@ -25,16 +26,14 @@
     "gulp-header": "^1.2.2",
     "gulp-typescript": "^2.8.0",
     "mocha": "^2.2.5",
+    "power-assert": "^0.11.0",
     "sinon": "^1.15.4",
-    "tern": "^0.13.0",
     "tsd": "^0.6.3",
     "typescript-require": "^0.2.9-1"
   },
   "dependencies": {
     "clone": "^1.0.2",
     "commander": "^2.8.1",
-    "espower-typescript": "^1.0.0",
-    "mocha": "^2.2.5",
-    "power-assert": "^0.11.0"
+    "tern": "^0.13.0"
   }
 }
