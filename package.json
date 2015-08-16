@@ -19,7 +19,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "espower-typescript": "^0.1.1",
+    "espower-typescript": "^1.0.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-header": "^1.2.2",
@@ -33,7 +33,7 @@
   "dependencies": {
     "clone": "^1.0.2",
     "commander": "^2.8.1",
-    "espower-typescript": "^0.1.1",
+    "espower-typescript": "^1.0.0",
     "mocha": "^2.2.5",
     "power-assert": "^0.11.0"
   }
