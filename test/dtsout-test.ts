@@ -97,7 +97,7 @@ describe("TypeScript d.ts file output tests,", ()=>{
  * 
  * @return  
  */
-function ${defName}(): number | string;
+declare function ${defName}(): number | string;
 `;
 			
 			assert.deepEqual(out, answer);
@@ -122,7 +122,7 @@ function ${defName}(): number | string;
 /**
  * 
  */
-function ${defName}();
+declare function ${defName}();
 `;
 			
 			assert.deepEqual(out, answer);
@@ -148,7 +148,7 @@ function ${defName}();
 /**
  * 
  */
-function ${defName}(): void;
+declare function ${defName}(): void;
 `;
 			
 			assert.deepEqual(out, answer);
@@ -174,7 +174,7 @@ function ${defName}(): void;
 /**
  * 
  */
-function ${defName}(): /* void */ any;
+declare function ${defName}(): /* void */ any;
 `;
 			
 			assert.deepEqual(out, answer);
@@ -207,7 +207,7 @@ function ${defName}(): /* void */ any;
  * 
  * @return  
  */
-function ${defName}(): number | string;
+declare function ${defName}(): number | string;
 `;
 			
 			assert.deepEqual(out, answer);
@@ -278,6 +278,19 @@ function ${defName}(): number | string;
 `;
 			assert.deepEqual(out, answer);
 		});
+	});
+	
+	
+	context("addDeclare()", ()=>{
+		
+		it("should out 'declare' when this.depth === 0", ()=>{
+			
+			
+			const out = dg.addDeclare();
+			const answer = "declare ";
+			assert.deepEqual(out, answer);
+		});
+		
 	});
 	
 });

@@ -711,6 +711,7 @@ declare module '${n}' {
 		private isNodeJsModule = false;
 		private isInClassOrInterface = false;
 		private isInObjectLiteral = false;
+		private isNeedDeclare = true;
 		
 		parseToDTS(data:{}):string{
 			let s = "";
@@ -769,7 +770,8 @@ declare module '${n}' {
 							if(ns!=""){
 								//namespace open
 								s += this.indent();
-								s += `declare namespace ${ns}{\n`;
+								s += this.addDeclare(true);
+								s += `namespace ${ns}{\n`;
 								this.depth++;
 							}
 							
@@ -818,11 +820,11 @@ declare module '${n}' {
 					}
 					else if(typeof value === "string"){
 						s += this.indent();
+						s += this.addDeclare();
 						s += i + " : " + value;
 					}
 					//has "new ()" is class interface
 					else if(value && value[DTSDef.NEW]){
-						
 						s += this.interfaceDTS(i,value);
 					}
 					//has only {} node end
@@ -848,7 +850,8 @@ declare module '${n}' {
 						this.isNamespace(value)
 					){
 						s += this.indent();
-						s += `declare namespace ${i}{\n`;
+						s += this.addDeclare();
+						s += `namespace ${i}{\n`;
 						this.depth++;
 						s += this.parseToDTS(value);
 						this.depth--;
@@ -861,6 +864,7 @@ declare module '${n}' {
 						s += this.indent();
 						//object literal type
 						if(!this.isInObjectLiteral && !this.isInClassOrInterface){
+							s += this.addDeclare();
 							s += "let ";
 						}
 						s += `${i} : {\n`;
@@ -879,6 +883,13 @@ declare module '${n}' {
 				}
 			}
 			return s;
+		}
+		
+		addDeclare(flag?:boolean):string{
+			const DECLARE_STR = "declare ";
+			if(flag && flag === true) return DECLARE_STR;
+			else if(this.depth===0) return DECLARE_STR;
+			else return "";
 		}
 		
 		/**
@@ -901,6 +912,7 @@ declare module '${n}' {
 				value[TernDef.URL] ? value[TernDef.URL] : null
 			);
 			s += this.indent();
+			s += this.addDeclare();
 			s += `interface ${defName}`;
 			
 			//extending other class/interface
@@ -911,7 +923,7 @@ declare module '${n}' {
 					proto instanceof Array &&
 					proto.length > 1
 				){
-					let str = "Object extends 2 or more other objects, but TypeScript only extends SINGLE Class/Interface.";
+					const str = "Object extends 2 or more other objects, but TypeScript only extends SINGLE Class/Interface.";
 					console.warn(str);
 					s += `/* ${str} */`;
 					
@@ -936,6 +948,7 @@ declare module '${n}' {
 			//interface body
 			this.isInClassOrInterface = true;
 			this.isInObjectLiteral = true;
+			this.isNeedDeclare = false;
 			s += ` {\n`;
 			this.depth++;
 			
@@ -946,9 +959,11 @@ declare module '${n}' {
 			s += `}\n`;
 			this.isInObjectLiteral = false;
 			this.isInClassOrInterface = false;
+			this.isNeedDeclare = true;
 			//interface var to new()
 			if(value[dtsgen.DTSDef.NEW] && this.option.isExportInterfaceSameNameVar){
 				s += this.indent();
+				s += this.addDeclare();
 				s += `var ${defName}: ${defName};\n`;
 			}
 			
@@ -1132,6 +1147,7 @@ declare module '${n}' {
 					s += this.indent();
 					
 					//output function d.ts
+					s += this.addDeclare();
 					s += keyword + symbolName + "("+ this.paramsToDTS(t.params) +")";
 					
 					//return type					
@@ -1211,7 +1227,8 @@ declare module '${n}' {
 				}
 			}
 			else{
-				if(!this.isInDefine && !this.isInObjectLiteral && !this.isInClassOrInterface) keyword = "export declare " + keyword;
+				if(!this.isInDefine && !this.isInObjectLiteral && !this.isInClassOrInterface) s += "export ";
+				s += this.addDeclare();
 				s += keyword + symbolName+" : "+this.tsObjsToUnionDTS(tsObjects);
 			}
 			
@@ -1413,7 +1430,8 @@ declare module '${n}' {
 				for(let j in value){
 					//open namespace
 					s += "//nodejs module namespace\n";
-					s += `declare namespace ${j}{\n`;
+					s += this.addDeclare();
+					s += `namespace ${j}{\n`;
 					//TODO:use namespace keyword option
 					this.depth++;
 					//s += this.indent();
