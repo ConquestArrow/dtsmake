@@ -77,6 +77,12 @@ describe("TypeScript d.ts file output tests,", ()=>{
 	});
 	
 	context("convertTSObjToString()", ()=>{
+		
+		beforeEach(()=>{
+			dg["depth"] = 0;
+		})
+		
+		
 		it("should convert simple function", ()=>{
 			const def:dtsgen.TSObj[] = [
 				{
@@ -219,6 +225,10 @@ declare function ${defName}(): number | string;
 	
 	context("outJSDoc()", ()=>{
 		
+		beforeEach(()=>{
+			dg["depth"] = 0;
+		})
+		
 		it("should output simple jsdoc",()=>{
 			const c = "COMMENT";
 			const u = "http://example.jp/";
@@ -238,11 +248,43 @@ declare function ${defName}(): number | string;
 `;
 			assert.deepEqual(out, answer);
 			
+		});
+		
+		
+		it("should output multiline jsdoc",()=>{
+			dg["depth"] = 1;
+			const c = "COMMENT\nMULTILINE\nSAMPLE";
+			const u = "http://example.jp/";
+			const p = ["hoge","fuga"];
+			const r = "RETURN";
+			
+			const out = dg.outJSDoc(c,u,p,r);
+			const answer = 
+`	
+	/**
+	 * COMMENT
+	 * MULTILINE
+	 * SAMPLE
+	 * @param ${p[0]} 
+	 * @param ${p[1]} 
+	 * @return ${r}
+	 * @url ${u}
+	 */
+`;
+			assert.deepEqual(out, answer);
+			dg["depth"]--;
 		})
 		
 	});
 	
+	
+	
 	context("outFuncJsDocs()", ()=>{
+		
+		beforeEach(()=>{
+			dg["depth"] = 0;
+		})
+		
 		it("should output simple function jsdoc",()=>{
 			const t:dtsgen.TSObj = {
 				type:dtsgen.TSObjType.FUNCTION,
@@ -282,6 +324,10 @@ declare function ${defName}(): number | string;
 	
 	
 	context("addDeclare()", ()=>{
+		beforeEach(()=>{
+			dg["depth"] = 0;
+		})
+		
 		
 		it("should out 'declare' when this.depth === 0", ()=>{
 			

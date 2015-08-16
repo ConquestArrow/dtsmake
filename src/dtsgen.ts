@@ -1016,7 +1016,14 @@ declare module '${n}' {
 			//base comment from js files
 			s += this.indent();
 			if(comment){
-				s += ` * ${comment}\n`;
+				//TODO:support multi platform BR
+				const aComment = comment.split("\n");
+				const len = aComment.length;
+				for(let i=0; i<len; i++){
+					if(i!==0) s += this.indent(); 
+					s += ` * ${aComment[i]}\n`;
+					
+				}
 			}else{
 				s += ` * \n`;
 			}
