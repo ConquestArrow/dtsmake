@@ -790,6 +790,10 @@ declare module '${n}' {
 							//global variables
 							else if(typeof value[j] === "string"){
 								s += this.indent();
+								s += this.outJSDoc(
+									value[j][TernDef.DOC] ? value[j][TernDef.DOC] : undefined,
+									value[j][TernDef.URL] ? value[j][TernDef.URL] : undefined
+								);
 								s += `var ${defName}: ${value[j]}\n`;
 							}
 							//interface
@@ -818,9 +822,13 @@ declare module '${n}' {
 					//node end
 					if(value instanceof Array){
 						s += this.indent();
-						s += this.convertTSObjToString(i, value);
+						s += this.convertTSObjToString(i, value, value[TernDef.DOC], value[TernDef.URL]);
 					}
 					else if(typeof value === "string"){
+						s += this.outJSDoc(
+							value[TernDef.DOC],
+							value[TernDef.URL]
+						);
 						s += this.indent();
 						s += this.addDeclare();
 						s += i + " : " + value;
@@ -835,7 +843,8 @@ declare module '${n}' {
 						
 						
 						s += this.indent();
-						s += this.convertTSObjToString(i, [<TSObj>{}]);
+						s += this.convertTSObjToString(i, [<TSObj>{}], value
+							[TernDef.DOC], value[TernDef.URL]);
 					}
 					//has only terndef children
 					else if(
@@ -863,6 +872,10 @@ declare module '${n}' {
 					//has child
 					else{
 						
+						s += this.outJSDoc(
+							value[TernDef.DOC],
+							value[TernDef.URL]
+						);
 						s += this.indent();
 						//object literal type
 						if(!this.isInObjectLiteral && !this.isInClassOrInterface){
@@ -1236,6 +1249,11 @@ declare module '${n}' {
 				}
 			}
 			else{
+				s += this.outJSDoc(
+					docData,
+					urlData
+				);
+				s += this.indent();
 				if(!this.isInDefine && !this.isInObjectLiteral && !this.isInClassOrInterface) s += "export ";
 				s += this.addDeclare();
 				s += keyword + symbolName+" : "+this.tsObjsToUnionDTS(tsObjects);
