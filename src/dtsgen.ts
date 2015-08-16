@@ -865,7 +865,7 @@ declare module '${n}' {
 						//object literal type
 						if(!this.isInObjectLiteral && !this.isInClassOrInterface){
 							s += this.addDeclare();
-							s += "let ";
+							s += "var ";
 						}
 						s += `${i} : {\n`;
 						this.isInObjectLiteral = true;
@@ -1133,7 +1133,7 @@ declare module '${n}' {
 					//TODO:option class or interface (default)
 					keyword = "class ";
 				}else{
-					keyword = "let ";
+					keyword = "var ";
 				}
 			}
 			
