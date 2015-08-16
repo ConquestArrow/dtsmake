@@ -175,6 +175,15 @@ export namespace dtsgen{
 			
 			let s = this.parseToDTS(d);
 			
+			//add header
+			s = 
+`// Type definitions for ${this.userDefinedModuleName}
+// Project: [LIBRARY_URL_HERE] 
+// Definitions by: [YOUR_NAME_HERE] <[YOUR_URL_HERE]> 
+// Definitions: https://github.com/borisyankov/DefinitelyTyped
+`
+				+ s;
+			
 			if(this.option.isOutExport){
 				//TODO:add export statements
 				let n = this.option.exportModuleName ? this.option.exportModuleName : this.userDefinedModuleName;
@@ -721,7 +730,7 @@ declare module '${n}' {
 				
 				switch (i) {
 				case TernDef.NAME:
-					s += `/* LIB: ${value} */\n`;
+					//s += `/* LIB: ${value} */\n`;
 					break;
 				case TernDef.DEFINE:
 					//already defined class instance
