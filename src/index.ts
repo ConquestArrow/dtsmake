@@ -12,11 +12,14 @@ var myPackage = require("../package.json");
 
 
 var srcFiles = (val:string):string[]=>{
-	return val.split(" ");
+	return val.split(",");
 };
+var plugins = (val:string):string[]=>{
+	return val.split(",");
+}
 //var distDir:string = "";
 var defFiles = function(val:string):string[]{
-	return val.split(" ");
+	return val.split(",");
 }
 var extraFiles = function(val:string):string[]{
 	console.log("[EXTRA]"+val);
@@ -43,7 +46,7 @@ program
 	
 	// ternjs bridge options
 	.option("-n, --n [value]", "module name")
-	.option("-p, --plugin [value]", "tern.js plugin")
+	.option("-p, --plugin <names>", "tern.js plugin", plugins)
 	.option("-d, --def <paths>","tern.js def files. DEFAULT:'ecma5'", defFiles)
 	.option("-x, --extrafiles <paths>", "sample files for target js lib. help for ternjs type inference.", extraFiles)
 	
@@ -81,8 +84,8 @@ var genCommand = ()=>{
 	var s = "";
 	s = `node ./node_modules/tern/bin/condense`;
 	s += (<any>program).n ? ` --name ${(<any>program).n}` : "";
-	s += (<any>program).plugin ? ` --plugin ${(<any>program).plugin}` : "";
-	s += (<any>program).def ? ` --def ${(<any>program).def}` : "";
+	s += (<any>program).plugin ? ` --plugin ${(<any>program).plugin.join(" ")}` : "";
+	s += (<any>program).def ? ` --def ${(<any>program).def.join(" ")}` : "";
 	s += (<any>program).extrafiles ? ` +${(<any>program).extrafiles.join(" +")}` : "";
 	s += " " + (<any>program).src.join(" ");
 	
