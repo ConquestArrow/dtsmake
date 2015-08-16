@@ -812,6 +812,8 @@ declare module '${n}' {
 				case TernDef.DOC:
 					//output only jsdoc
 					break;
+				case TernDef.SPAN:
+					break;
 				default:
 					//node end
 					if(value instanceof Array){
