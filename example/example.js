@@ -16,7 +16,7 @@
 	cmd += op.plugin ? " -p "+op.plugin : "";
 	cmd += op.name ? " -n "+op.name : "";
 	cmd += op.isExport ? " -e " : "";
-	cmd += op.exportStyle ? " -s '"+op.exportStyle+"'" : "";
+	cmd += op.exportStyle ? " -S '"+op.exportStyle+"'" : "";
 	cmd += op.exportModuleName ? " -M '"+op.exportModuleName+"'" : "";
 	
 	child_process.exec(

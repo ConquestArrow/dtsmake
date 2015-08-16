@@ -57,7 +57,7 @@ program
 	.option("-a, --annotateTypeInstance", "annotate interface's constructor type as return type instance", true)
 	.option("-N, --NodeJSModule", "nodejs module special replace")
 	.option("-e, --export", "add export statement in a bottom of d.ts file")
-	.option("-s, --exportStyle [value]", `if --outExport true, select export style "es6" or "legacy"`)
+	.option("-S, --exportStyle [value]", `if --outExport true, select export style "es6" or "legacy"`)
 	.option("-M, --exportModuleName [value]", 'exporting module name. ex. "EXAMPLE"; usage `import example = require("EXAMPLE");`')
 	
 	.parse(process.argv);
@@ -67,11 +67,11 @@ if(!(<any>program).src) {
 	console.warn("--src option is MUST.");
 	program.help();
 }
-else if((<any>program).exportStyle && !(<any>program).isOutExport){
+else if((<any>program).exportStyle && !(<any>program).export){
 	console.warn("--exportStyle option needs --export option.")
 	process.exit(1);
 }
-else if((<any>program).exportModuleName && !(<any>program).isOutExport){
+else if((<any>program).exportModuleName && !(<any>program).export){
 	console.warn("--exportModuleName option needs --export option.")
 	process.exit(1);
 }
@@ -82,7 +82,7 @@ else if((<any>program).exportModuleName && !(<any>program).isOutExport){
  */
 var genCommand = ()=>{
 	var s = "";
-	s = `node ./node_modules/tern/bin/condense`;
+	s = `node "${__dirname}/../node_modules/tern/bin/condense"`;
 	s += (<any>program).n ? ` --name ${(<any>program).n}` : "";
 	s += (<any>program).plugin ? ` --plugin ${(<any>program).plugin.join(" ")}` : "";
 	s += (<any>program).def ? ` --def ${(<any>program).def.join(" ")}` : "";
