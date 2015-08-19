@@ -185,7 +185,6 @@ export namespace dtsgen{
 				+ s;
 			
 			if(this.option.isOutExport){
-				//TODO:add export statements
 				let n = this.option.exportModuleName ? this.option.exportModuleName : this.userDefinedModuleName;
 				s += 
 `
@@ -298,9 +297,17 @@ declare module '${n}' {
 			}
 			
 			if(
-				modJson[this.userDefinedModuleName] &&
-				modJson[this.userDefinedModuleName] instanceof Object &&
-				Object.keys(modJson[this.userDefinedModuleName]).length === 0
+				(
+					modJson[this.userDefinedModuleName] &&
+					modJson[this.userDefinedModuleName] instanceof Object &&
+					Object.keys(modJson[this.userDefinedModuleName]).length === 0
+				) ||
+				(
+					modJson[this.userDefinedModuleName] &&
+					modJson[this.userDefinedModuleName] instanceof Object &&
+					Object.keys(modJson[this.userDefinedModuleName]).length === 1 &&
+					modJson[this.userDefinedModuleName][TernDef.SPAN]
+				)
 			){
 				//remove
 				delete modJson[this.userDefinedModuleName];
