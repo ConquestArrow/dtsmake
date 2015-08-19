@@ -225,7 +225,7 @@ declare function ${defName}(): number | string;
 	});
 	
 	context("parseToDTS()", ()=>{
-		it("shoud convert !type only interface",()=>{
+		it("should convert !type only interface",()=>{
 			const def = {
 				"!define":{
 						"!node.``/node_modules/tern/lib/tern`js.Server.prototype.flush.!0": {
@@ -274,6 +274,56 @@ declare function ${defName}(): number | string;
 			
 			
 		});
+		
+		
+		it("should not convert <!> prop (maybe ternjs internal def)",()=>{
+			
+			const def = {
+				"!define":{
+				"passes": {
+					"<i>": {
+						"!type": [
+							{
+								"type": 6,
+								"arrayType": [
+									{
+										"type": 0
+									}
+								]
+							}
+						],
+						"!span": [
+							{
+								"type": 9,
+								"class": "3425[113:43]-3429[113:47]"
+							}
+						]
+					},
+					"!span": [
+						{
+							"type": 9,
+							"class": "2904[103:9]-2910[103:15]"
+						}
+					]
+				}
+				}
+			};
+			dg.option.isOutVoidAsAny = false;
+			dg["isInInterfaceOrClass"] = true;
+			const out = dg.parseToDTS(def);
+			const ans = 
+`// passes
+
+/**
+ * 
+ */
+declare interface passes {
+}
+`;
+			assert.deepEqual(out, ans);
+			
+		});
+		
 	})
 	
 	

@@ -838,6 +838,11 @@ declare module '${n}' {
 						);
 					}
 					break;
+				case "<i>":
+					//TODO:research ternjs def's `<i>` mean & what to do
+					// Maybe ternjs cannot get prop name.
+					// so, currently, dtsgen don't output.
+					break;
 				default:
 					//node end
 					if(value instanceof Array){
