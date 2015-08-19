@@ -220,7 +220,61 @@ declare function ${defName}(): number | string;
 			
 		});
 		
+
+		
 	});
+	
+	context("parseToDTS()", ()=>{
+		it("shoud convert !type only interface",()=>{
+			const def = {
+				"!define":{
+						"!node.``/node_modules/tern/lib/tern`js.Server.prototype.flush.!0": {
+					"!type": [
+						{
+							"type": 5,
+							"ret": [
+								{
+									"type": 1
+								}
+							],
+							"params": null
+						}
+					],
+					"!span": [
+						{
+							"type": 9,
+							"class": "6371[214:6]-6643[223:7]"
+						}
+					],
+					"!!!dtsinterface!!!": "Flush0",
+					"!!!dtsnamespace!!!": "tern"
+				}
+				}
+			};
+			dg.option.isOutVoidAsAny = false;
+			const out = dg.parseToDTS(def);
+			const st = "!node.``/node_modules/tern/lib/tern`js.Server.prototype.flush.!0";
+			const ans =
+`declare namespace tern{
+	// ${st}
+	
+	/**
+	 * 
+	 */
+	interface Flush0 {
+				
+		/**
+		 * 
+		 */
+		(): void;
+	}
+}
+`;
+			assert.deepEqual(out,ans);
+			
+			
+		});
+	})
 	
 	
 	context("outJSDoc()", ()=>{

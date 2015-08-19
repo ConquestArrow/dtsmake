@@ -827,6 +827,17 @@ declare module '${n}' {
 					break;
 				case TernDef.SPAN:
 					break;
+				case TernDef.TYPE:
+					if(this.isInClassOrInterface){
+						s += this.indent();
+						s += this.convertTSObjToString(
+							"",
+							<TSObj[]>value,
+							value[TernDef.DOC],
+							value[TernDef.URL]
+						);
+					}
+					break;
 				default:
 					//node end
 					if(value instanceof Array){
