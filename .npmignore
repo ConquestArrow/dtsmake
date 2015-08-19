@@ -4,5 +4,7 @@ tmp
 tsconfig.json
 tsd.json
 gulpfile.ts
+sample
+test
 .tmp
 .settings
