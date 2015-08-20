@@ -88,6 +88,7 @@ var genCommand = ()=>{
 	s += (<any>program).def ? ` --def ${(<any>program).def.join(" ")}` : "";
 	s += (<any>program).extrafiles ? ` +${(<any>program).extrafiles.join(" +")}` : "";
 	s += " " + (<any>program).src.join(" ");
+	s += " --no-spans";	
 	
 	console.log(program.name());
 	console.log("[CMD]"+s);
@@ -102,7 +103,7 @@ var genCommand = ()=>{
 
 var child = child_process.exec(
 	genCommand(),
-	{maxBuffer: 1000*1024},
+	{maxBuffer: 1000000*2048},
 	(err:Error, stdout:Buffer, stderr:Buffer)=>{
 		if(err){
 			console.warn("[INFO] tern/condense error");
