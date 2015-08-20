@@ -443,4 +443,29 @@ declare interface passes {
 		
 	});
 	
+	context("resolveNamespace()", ()=>{
+		
+		it("should resolve !ret containing path",()=>{
+			const path = "sinon.spy.reset.!ret.named.!ret";
+			
+			const out = dg.resolveNamespace(path.split("."));
+			const ans = "sinon.spy.reset";
+			
+			assert.deepEqual(out, ans);
+			
+		})
+		
+		it("should resolve !node containing path",()=>{
+			const path = "!node.``/node_modules/tern/lib/tern`js.Server.prototype.flush.!0";
+			const out = dg.resolveNamespace(path.split("."));
+			//dg.option.isOutExport = true;
+			//dg.nodeModuleName = "``/node_modules/tern/lib/tern`js";
+			//dg.userDefinedModuleName = "tern";
+			const ans = "``/node_modules/tern/lib/tern`js.Server.prototype.flush";
+			
+			assert.deepEqual(out, ans);
+		})
+		
+	})
+	
 });

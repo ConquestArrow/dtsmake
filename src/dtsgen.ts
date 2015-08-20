@@ -363,7 +363,7 @@ declare module '${n}' {
 					
 					
 					//console.log("NEW NAME: "+s);
-					//break;	//end
+					break;	//end
 				}
 			}
 			return s;
@@ -380,7 +380,8 @@ declare module '${n}' {
 			for(let i=len-1;i>=0;i--){
 				
 				if(reg2.test(p[i]) || reg3.test(p[i])){
-					i--;
+					//i--;
+					if(i>1)nsp = [];//reset
 					continue;
 				}
 				
@@ -570,7 +571,7 @@ declare module '${n}' {
 					console.warn("current ref path:"+ s);
 					console.warn("no path ref:"+path.join("."));
 					
-					return null;		//do nothing
+					return undefined;		//do nothing
 				}else{
 					ref = ref[s];
 				}
@@ -1263,7 +1264,7 @@ declare module '${n}' {
 						//no output type annotation
 					}
 					else if(t.ret){
-						s += `: ${this.tsObjsToUnionDTS(t.ret, false, t, false)}`;
+						s += `: ${this.tsObjsToUnionDTS(t.ret, (t.ret.length>1) ? true : false, t, false)}`;
 					}
 				}
 				
@@ -1417,7 +1418,7 @@ declare module '${n}' {
 			parentTSObj?:TSObj,
 			isOutName:boolean = true
 		):string{
-			if(!t)return "";
+			if(!t)return " /* error */ any";
 			let s = "";
 			if(t.name && isOutName) s += t.name + " : ";
 			wrap = wrap && (t.type === TSObjType.FUNCTION);
