@@ -347,6 +347,9 @@ declare module '${n}' {
 						);
 					s = tmp + s;
 				}
+				else if(/\//.test(paths[j])){
+					break;
+				}
 				else{
 					//create defined name
 					
@@ -360,7 +363,7 @@ declare module '${n}' {
 					
 					
 					//console.log("NEW NAME: "+s);
-					break;	//end
+					//break;	//end
 				}
 			}
 			return s;
@@ -417,12 +420,16 @@ declare module '${n}' {
 			
 			//search
 			let ref = this.searchRef(data, path, isCheckDefine);
-			if(!ref)return;	//no path
+			if(!ref || !ref[0])return;	//no path
 			
 			
 			//replace
 			switch(rt){
 				case ReplaceType.RETURN:
+					if(!ref || !ref[0]){
+						console.log("t:"+t+","+JSON.stringify(ref));
+						return;
+					}
 					let ret:TSObj[] = ref[0]["ret"];
 					let retLen = ret.length;
 					if(retLen===1){
@@ -439,6 +446,11 @@ declare module '${n}' {
 					//console.log(`replace[${t}]:${JSON.stringify(ref[0]["ret"])}`);
 					break;
 				case ReplaceType.PARAM:
+					if(!ref || !ref[0]){
+						//console.log("t:"+t+","+JSON.stringify(ref));
+						return;
+					}
+					
 					let n = Number(t.replace(/^!/,""));
 					
 					
@@ -551,8 +563,14 @@ declare module '${n}' {
 					continue;
 				}else if(ref[s] === undefined){
 					//no path ref
+					
+					//TODO: ref path !n or !ret to searching
+					
+					
+					console.warn("current ref path:"+ s);
 					console.warn("no path ref:"+path.join("."));
-					return;		//do nothing
+					
+					return null;		//do nothing
 				}else{
 					ref = ref[s];
 				}
@@ -851,6 +869,12 @@ declare module '${n}' {
 					// so, currently, dtsgen don't output.
 					break;
 				default:
+					//grammer error name replace
+					if(/[\*\-]/.test(i)){
+						i = `"${i}"`;
+					}
+					
+					
 					//node end
 					if(value instanceof Array){
 						s += this.indent();
@@ -892,6 +916,10 @@ declare module '${n}' {
 					else if(
 						this.isNamespace(value)
 					){
+						s += this.outJSDoc(
+							value[TernDef.DOC],
+							value[TernDef.URL]
+						);
 						s += this.indent();
 						s += this.addDeclare();
 						s += `namespace ${i}{\n`;
@@ -979,16 +1007,21 @@ declare module '${n}' {
 					let t:TSObj = proto[0];
 					
 					//resolve path to object prototype
-					let p = t.class.split(".");
-					if(p[p.length-1]==="prototype"){
-						//output
-						let ext = p.slice(0, p.length-1).join(".");
-						s += ` extends ${ext}`;
+					if(!t.class){
+						console.log("t:"+JSON.stringify(t));
+						//return;
+					}else{
+						let p = t.class.split(".");
+						if(p[p.length-1]==="prototype"){
+							//output
+							let ext = p.slice(0, p.length-1).join(".");
+							s += ` extends ${ext}`;
+						}
+						
+						//delete temp property
+						value[TernDef.PROTO] = undefined;
+						delete value[TernDef.PROTO];
 					}
-					
-					//delete temp property
-					value[TernDef.PROTO] = undefined;
-					delete value[TernDef.PROTO];
 				}
 			}
 			
@@ -1029,17 +1062,29 @@ declare module '${n}' {
 				return false;
 			else if(Object.keys(value).length === 0)
 				return false;
+			else if(this.isInClassOrInterface){
+				return false;
+			}
 			else{
-				let hasNewFunc = false;
+				
 				for(let i in value){
 					if(!value[i])continue;
-					//console.log(`value[${i}]:${value[i]}`);
-					if(value[i][DTSDef.NEW]){
-						hasNewFunc=true;
-						break;
+					
+					if(
+						value[i] instanceof Object && 
+						Object.keys(value[i]).length > 1
+					){
+						return true;
+					}
+					else if(
+						value[i][0] &&
+						value[i][0].type &&
+						value[i][0].type === TSObjType.FUNCTION
+					){
+						return true;
 					}
 				}
-				return hasNewFunc;
+				return false;
 			}
 		}
 		
@@ -1372,6 +1417,7 @@ declare module '${n}' {
 			parentTSObj?:TSObj,
 			isOutName:boolean = true
 		):string{
+			if(!t)return "";
 			let s = "";
 			if(t.name && isOutName) s += t.name + " : ";
 			wrap = wrap && (t.type === TSObjType.FUNCTION);
@@ -1430,12 +1476,17 @@ declare module '${n}' {
 							}
 							
 							let rep:TSObj|TSObj[] = parentTSObj.params[n];
-							//console.log("rep_rep:"+JSON.stringify(rep))
+							//
 							if(rep instanceof Array){
 								s += this.tsObjsToUnionDTS(rep,false,null,false);
 							}else{
 								s += this.tsObjToDTS(<TSObj>rep,false,null,false);
-								if((<TSObj>rep).type===TSObjType.ANY){
+								
+								if(
+									rep &&
+									(<TSObj>rep).type && 
+									(<TSObj>rep).type===TSObjType.ANY
+								){
 									s += ` /* same type param "${(<TSObj>rep).name}" */`;
 									//TODO:generate class/interface
 								}
