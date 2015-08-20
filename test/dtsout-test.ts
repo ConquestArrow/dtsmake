@@ -449,7 +449,7 @@ declare interface passes {
 			const path = "sinon.spy.reset.!ret.named.!ret";
 			
 			const out = dg.resolveNamespace(path.split("."));
-			const ans = "sinon.spy.reset";
+			const ans = "sinon.spy.ResetRet";
 			
 			assert.deepEqual(out, ans);
 			
@@ -461,7 +461,7 @@ declare interface passes {
 			//dg.option.isOutExport = true;
 			//dg.nodeModuleName = "``/node_modules/tern/lib/tern`js";
 			//dg.userDefinedModuleName = "tern";
-			const ans = "``/node_modules/tern/lib/tern`js.Server.prototype.flush";
+			const ans = "``/node_modules/tern/lib/tern`js.Server.prototype";
 			
 			assert.deepEqual(out, ans);
 		})

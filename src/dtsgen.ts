@@ -380,8 +380,17 @@ declare module '${n}' {
 			for(let i=len-1;i>=0;i--){
 				
 				if(reg2.test(p[i]) || reg3.test(p[i])){
-					//i--;
-					if(i>1)nsp = [];//reset
+					
+					if(i===len-1)nsp = [];//reset
+					else if(i>1){
+						
+						let tmpPath = ["!test",p[i-1],p[i]];
+						//console.log("tmpPath:"+tmpPath.join("."))
+						nsp.push(
+							this.resolvePathToDTSName(tmpPath)
+						);
+					}
+					i--;
 					continue;
 				}
 				
