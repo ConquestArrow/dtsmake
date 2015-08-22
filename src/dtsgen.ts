@@ -288,7 +288,7 @@ declare module '${n}' {
 			//other nodes
 			for(let i in modJson[TernDef.DEFINE]){
 				let cNode = modJson[TernDef.DEFINE][i];
-				if(cNode[DTS_NAMESPACE_STR]){
+				if(cNode[DTS_NAMESPACE_STR] &&! /\./.test(cNode[DTS_NAMESPACE_STR]) ){
 					//replace namespace
 					cNode[DTS_NAMESPACE_STR] = this.userDefinedModuleName;
 				}
@@ -395,13 +395,20 @@ declare module '${n}' {
 				}
 				
 				
-				if(isOutRepNS && p[i] === this.nodeModuleName){
+				if(
+					(isOutRepNS && p[i] === this.nodeModuleName) ||
+					(isOutRepNS && /[`\/]/.test(p[i]))
+				){
 					//replace nodejs namespace
-					nsp.push(this.userDefinedModuleName);
+					if(this.userDefinedModuleName){
+						nsp.push(this.userDefinedModuleName);
+					}
+					
+					//console.log(`nodeModule: ${this.nodeModuleName}`);
+					//console.log(`userDifined: ${this.userDefinedModuleName}`);
 				}else{
 					nsp.push(p[i]);
 				}
-				
 				
 			}
 			return nsp.reverse().join(".");
@@ -421,7 +428,11 @@ declare module '${n}' {
 			const len = path.length;
 			
 			
-			
+			if(name=="InitEvent3"){
+				console.trace();
+				console.log("InitEvent3:", path.join("."));
+				console.log("resolveNamespace(path):", this.resolveNamespace(path))
+			}
 			
 			//type check
 			const t = path[len-1];
@@ -483,10 +494,10 @@ declare module '${n}' {
 						
 						//console.log("hasSameClass:", hasSameClass, name);
 						
-						let test = (<Array<TSObj>>param)
+						/*let test = (<Array<TSObj>>param)
 							.some((v,i,a)=>{
 								return v.class && this.resolvePathToDTSName(v.class.split(".")) === name
-							});
+							});*/
 						
 						//console.log("test",test);
 						
@@ -506,7 +517,9 @@ declare module '${n}' {
 						
 						
 					}else{
-						param.class = name;
+						const ns = this.resolveNamespace(path);
+						
+						param.class = (ns!="") ? ns+"."+name : ns;
 						param.type = TSObjType.CLASS;
 					}
 					
@@ -899,8 +912,10 @@ declare module '${n}' {
 						s += this.addDeclare();
 						s += i + " : " + value;
 					}
-					//has "new ()" is class interface
-					else if(value && value[DTSDef.NEW]){
+					//has "new ()" or "!proto" is class interface
+					else if(
+						value && (value[DTSDef.NEW] || value[TernDef.PROTO])
+					){
 						s += this.interfaceDTS(i,value);
 					}
 					//has only {} node end
@@ -1089,7 +1104,11 @@ declare module '${n}' {
 					else if(
 						value[i][0] &&
 						value[i][0].type &&
-						value[i][0].type === TSObjType.FUNCTION
+						(
+							value[i][0].type === TSObjType.FUNCTION ||
+							value[i][0].type === TSObjType.BOOLEAN ||
+							value[i][0].type === TSObjType.ARRAY
+						)
 					){
 						return true;
 					}
@@ -1615,7 +1634,7 @@ declare module '${n}' {
 						break;
 					case TSObjType.ARRAY:
 						//console.log("ARRAY:"+i);
-						let test = i.replace(/^\[/,"").replace(/\]$/,"");
+						//let test = i.replace(/^\[/,"").replace(/\]$/,"");
 						//console.log(`i.replace(/^\[/,"").replace(/\]$/,""):${test}`);
 						ts.arrayType = 
 							this.parseTernDef(

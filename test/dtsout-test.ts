@@ -461,11 +461,43 @@ declare interface passes {
 			//dg.option.isOutExport = true;
 			//dg.nodeModuleName = "``/node_modules/tern/lib/tern`js";
 			//dg.userDefinedModuleName = "tern";
-			const ans = "``/node_modules/tern/lib/tern`js.Server.prototype";
+			const ans = "Server.prototype";
 			
 			assert.deepEqual(out, ans);
-		})
+		});
 		
-	})
+		it("should resolve !node containing path with replacing",()=>{
+			const path = "!node.``/node_modules/tern/lib/tern`js.Server.prototype.flush.!0";
+			
+			dg.option.isOutExport = true;
+			dg["nodeModuleName"] = path.split(".")[1];
+			dg.userDefinedModuleName = "tern";
+			const out = dg.resolveNamespace(path.split("."));
+			const ans = "tern.Server.prototype";
+			
+			//console.log("dg[nodeModuleName]:"+dg["nodeModuleName"]);
+			
+			assert.deepEqual(path.split(".")[1], dg.nodeModuleName);
+			
+			assert.deepEqual(out, ans);
+		});
+		
+		
+		
+	});
+	
+	context("resolvePathToDTSName", ()=>{
+		
+		it("should resolve DTSName", ()=>{
+			const path = "sinon.Event.prototype.initEvent.!3";
+			const out = dg.resolvePathToDTSName(path.split("."));
+			
+			const ans = "InitEvent3";
+			
+			assert.deepEqual(out, ans);
+			
+		});
+		
+	});
 	
 });
