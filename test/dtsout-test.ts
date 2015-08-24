@@ -220,7 +220,78 @@ declare function ${defName}(): number | string;
 			
 		});
 		
-
+		it("should wrap fn() return type", ()=>{
+			const def:dtsgen.TSObj[] = [
+				{
+					type:dtsgen.TSObjType.FUNCTION,
+					ret:[
+						{
+							type:dtsgen.TSObjType.OBJECT,
+							class:"sinon.collection.stub.!ret"
+						},
+						{
+							type:dtsgen.TSObjType.FUNCTION,
+							params:null,
+							ret:[
+								{type:dtsgen.TSObjType.VOID}
+							]
+						},
+					],
+					params:null
+				}
+			];
+			const defName = "example";
+			dg.option.isOutVoidAsAny = false;
+			const out = dg.convertTSObjToString(defName,def);
+			const answer = 
+`
+/**
+ * 
+ * @return  
+ */
+declare function ${defName}(): /* sinon.collection.stub.!ret */ any | (() => void);
+`;
+			
+			assert.deepEqual(out, answer);
+			
+		});
+		
+		
+		it("should wrap fn() return type2", ()=>{
+			const def = [
+				{
+					type:dtsgen.TSObjType.FUNCTION,
+					ret:[
+						{
+							type:dtsgen.TSObjType.OBJECT,
+							class:"!0"
+						}
+					],
+					params:[
+						[
+							{"type":9,"name":"fake","class":"sinon.collection.stub.!ret"},
+							{"type":5,"name":"fake","ret":[{"type":1}],
+			"params":null}
+						]
+					]
+				}
+			];
+			const defName = "add";
+			dg.option.isOutVoidAsAny = false;
+			const out = dg.convertTSObjToString(defName,<any>def);
+			const answer = 
+`
+/**
+ * 
+ * @param fake 
+ * @return  
+ */
+declare function ${defName}(fake : /* sinon.collection.stub.!ret */ any | (() => void)): /* sinon.collection.stub.!ret */ any | (() => void);
+`;
+			
+			assert.deepEqual(out, answer);
+			
+		});
 		
 	});
 	

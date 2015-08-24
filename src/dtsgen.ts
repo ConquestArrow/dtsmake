@@ -1507,7 +1507,9 @@ declare module '${n}' {
 							let rep:TSObj|TSObj[] = parentTSObj.params[n];
 							//
 							if(rep instanceof Array){
-								s += this.tsObjsToUnionDTS(rep,false,null,false);
+								const isWrap = rep
+									.some((v,i,a)=>v.type === TSObjType.FUNCTION);
+								s += this.tsObjsToUnionDTS(rep,isWrap,null,false);
 							}else{
 								s += this.tsObjToDTS(<TSObj>rep,false,null,false);
 								
