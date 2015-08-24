@@ -1469,7 +1469,21 @@ declare module '${n}' {
 						//class instance
 						s += t.class.replace(/^\+/,"");
 						//TODO:check real path
-					}else{
+					}
+					else if(/\./.test(t.class)){
+						const tp = t.class.split(".");
+						const last = tp[tp.length-1];
+						
+						if(/^[A-Z].+([0-9A-Z]|Ret)$/.test(last)){
+							//replaced class name
+							s += t.class;
+						}else{
+							//TODO: check path exist
+							//temporary output
+							s += `/* ${t.class} */ any`;
+						}
+					}
+					else{
 						s += t.class;
 					}
 					
