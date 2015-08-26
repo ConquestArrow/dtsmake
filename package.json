@@ -2,7 +2,8 @@
   "name": "dtsgen",
   "version": "0.0.1",
   "description": "TypeScript d.ts file generator from JavaScript files",
-  "main": "index.js",
+  "main": "lib/dtsgen.js",
+  "bin": "bin/dtsgen",
   "scripts": {
     "test": "mocha --compilers ts:espower-typescript/guess test/*-test.ts",
     "testw": "mocha --compilers ts:espower-typescript/guess -w test/*-test.ts",
