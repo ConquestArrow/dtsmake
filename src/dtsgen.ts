@@ -831,7 +831,7 @@ declare module '${n}' {
 		private isInObjectLiteral = false;
 		private isNeedDeclare = true;
 		
-		parseToDTS(data:{}):string{
+		parseToDTS(data:{}, parent?:{}):string{
 			let s = "";
 			for(let i in data){
 				let value:string|Object[]|Object;
@@ -956,6 +956,15 @@ declare module '${n}' {
 					//grammer error name replace
 					if(/[\*\-]/.test(i)){
 						i = `"${i}"`;
+						
+						/*
+						if(parent){
+							parent[i] = {};
+							parent[i] = clone(value);
+						}
+						break;
+						*/
+						
 					}
 					
 					
@@ -996,6 +1005,7 @@ declare module '${n}' {
 						s += this.convertTSObjToString(i, [<TSObj>{}], value
 							[TernDef.DOC], value[TernDef.URL]);
 					}
+					
 					//has only terndef children
 					else if(
 						value &&
@@ -1005,23 +1015,31 @@ declare module '${n}' {
 						//s += this.outJSDoc();
 						s += this.indent();
 						s += this.convertTSObjToString(i,value[TernDef.TYPE],value[TernDef.DOC], value[TernDef.URL]);
+						
+						//children
+						if(Object.keys(value).length > 1){
+							let v = clone(value);
+							delete v[TernDef.TYPE];
+							delete v[TernDef.DOC];
+							delete v[TernDef.URL];
+							
+							if(this.option.isDebug){
+								console.log("I:"+i, JSON.stringify(v), Object.keys(v).length);
+							}
+							
+							if(Object.keys(v).length>0 && !this.isInClassOrInterface){
+								//s += this.outNamespaceDTS(v, i, parent);
+								s += this.outNamespaceOrInterface(v,i);
+							}
+							//TODO: isInClassOrInterface == true, export namespace
+						}
 					}
 					//has class/interface children is namespace
 					else if(
 						this.isNamespace(value)
 					){
-						s += this.outJSDoc(
-							value[TernDef.DOC],
-							value[TernDef.URL]
-						);
-						s += this.indent();
-						s += this.addDeclare();
-						s += `namespace ${i}{\n`;
-						this.depth++;
-						s += this.parseToDTS(value);
-						this.depth--;
-						s += this.indent();
-						s += `}\n`;
+						s += this.outNamespaceOrInterface(value, i);
+						
 					}
 					//has child
 					else{
@@ -1040,7 +1058,7 @@ declare module '${n}' {
 						this.isInObjectLiteral = true;
 						this.depth++;
 						//s += this.indent();
-						s += this.parseToDTS(value);
+						s += this.parseToDTS(value, parent);
 						this.depth--;
 						this.isInObjectLiteral = false;
 						s += this.indent();
@@ -1059,6 +1077,55 @@ declare module '${n}' {
 			if(flag && flag === true) return DECLARE_STR;
 			else if(this.depth===0) return DECLARE_STR;
 			else return "";
+		}
+		
+		outNamespaceOrInterface(value:any, name:string, path?:string):string{
+			let s = "";
+			
+			let outI = {};
+			let outN = {};
+			
+			for(let i in value){
+				if(!value[i])continue;
+				
+				if(
+					value[i][0] &&
+					value[i][0].type === TSObjType.FUNCTION &&
+					/[\*\-]/.test(i)
+				){
+					//export in interface
+					outI[i] = clone(value[i]);
+				}else{
+					//export in namespace
+					outN[i] = clone(value[i]);
+				}
+			}
+			
+			if(Object.keys(outN).length>0)
+				s += this.outNamespaceDTS(outN, name);
+			if(Object.keys(outI).length>0)
+				s += this.interfaceDTS(name, outI);
+			
+			return s;
+		}
+		
+		outNamespaceDTS(value:any, name:string, parent?:any):string{
+			let s = "";
+			
+			s += this.outJSDoc(
+				value[TernDef.DOC],
+				value[TernDef.URL]
+			);
+			s += this.indent();
+			s += this.addDeclare();
+			s += `namespace ${name}{\n`;
+			this.depth++;
+			s += this.parseToDTS(value, parent);
+			this.depth--;
+			s += this.indent();
+			s += `}\n`;
+			
+			return s;
 		}
 		
 		/**
