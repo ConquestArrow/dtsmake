@@ -55,6 +55,7 @@ program
 	.option("-A, --voidAsAny", "force output `void` to `any`")
 	.option("-i, --interfaceSameNameVar", "export a namespace property same with a interface name", true)
 	.option("-a, --annotateTypeInstance", "annotate interface's constructor type as return type instance", true)
+	.option("-g, --globalObject", `how to export objects that same name with JS Global Object; "remove" or "wrap" or "rename"; DEFAULT:"wrap" `)
 	.option("-N, --NodeJSModule", "nodejs module special replace")
 	.option("-e, --export", "add export statement in a bottom of d.ts file")
 	.option("-S, --exportStyle [value]", `if --outExport true, select export style "es6" or "legacy"`)
@@ -127,10 +128,11 @@ var child = child_process.exec(
 				isAnnotateTypeInstance: (<any>program).annotateTypeInstance,
 				isExportInterfaceSameNameVar: (<any>program).interfaceSameNameVar,
 				isNodeJsModule: (<any>program).NodeJSModule,
-				isOutExport: (<any>program).export
+				isOutExport: (<any>program).export,
 			};
 			if((<any>program).exportStyle) op.exportStyle = (<any>program).exportStyle;
 			if((<any>program).exportModuleName) op.exportModuleName = (<any>program).exportModuleName;
+			if((<any>program).globalObject) op.globalObject = (<any>program).globalObject;
 			
 			dg.main(
 				stdout.toString(),

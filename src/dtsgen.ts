@@ -507,7 +507,7 @@ declare module '${n}' {
 			switch(rt){
 				case ReplaceType.RETURN:
 					if(!ref || !ref[0]){
-						console.log("t:"+t+","+JSON.stringify(ref));
+						if(this.option.isDebug)console.log("t:"+t+","+JSON.stringify(ref));
 						return;
 					}
 					let ret:TSObj[] = ref[0]["ret"];
@@ -648,9 +648,11 @@ declare module '${n}' {
 					
 					//TODO: ref path !n or !ret to searching
 					
+					if(this.option.isDebug){
+						console.warn("current ref path:"+ s);
+						console.warn("no path ref:"+path.join("."));
+					}
 					
-					console.warn("current ref path:"+ s);
-					console.warn("no path ref:"+path.join("."));
 					
 					return undefined;		//do nothing
 				}else{
@@ -1100,7 +1102,8 @@ declare module '${n}' {
 					
 					//resolve path to object prototype
 					if(!t.class){
-						console.log("t:"+JSON.stringify(t));
+						if(this.option.isDebug)
+							console.log("t:"+JSON.stringify(t));
 						//return;
 					}else{
 						let p = t.class.split(".");

@@ -75,6 +75,19 @@ exTest({
 	NodeJSModule:true,
 	extrafiles:"../node_modules/tern/plugin/angular.js,../node_modules/tern/plugin/component.js,../node_modules/tern/plugin/doc_comment.js,../node_modules/tern/plugin/node.js,../node_modules/tern/plugin/requirejs.js"
 });
+//sinon.js
+exTest({
+	src:"../node_modules/sinon/pkg/sinon.js", 
+	dist:"./dist/sinon", 
+	name:"sinon", 
+	//debug:true,
+	//plugin:"node",
+	isExport:true, 
+	exportStyle:"legacy", 
+	exportModuleName:"sinon",
+	//NodeJSModule:true,
+	//extrafiles:"../node_modules/tern/plugin/angular.js,../node_modules/tern/plugin/component.js,../node_modules/tern/plugin/doc_comment.js,../node_modules/tern/plugin/node.js,../node_modules/tern/plugin/requirejs.js"
+});
 /*
 //currently error, class/interface with deep namespace unsupported.
 // typescript >= 1.6 will be not grammer error, because of the "local class" support.
