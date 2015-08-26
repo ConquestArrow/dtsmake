@@ -698,4 +698,98 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		
 	});
 	
+	
+	context("preModifiedJson()", ()=>{
+		let def;
+		
+		beforeEach(()=>{
+			
+			def = {
+				"Math":{
+					"prop":{
+						type:dtsgen.TSObjType.STRING
+					}
+				},
+				"NoGlobal":{}
+			};
+			
+			dg["userDefinedModuleName"] = "MyLib";
+			
+		});
+		
+		
+		it("should remove a object that same name with JS Global Object",()=>{
+			
+			dg.option.globalObject = dtsgen.Option.GlobalObject.REMOVE;
+			let out = dg.preModifiedJson(def);
+			let answer = {
+				"NoGlobal":{}
+			};
+			
+			assert.deepEqual(out, answer);
+			
+		});
+		
+		it("should wrap a object that same name with JS Global Object",()=>{
+			
+			dg.option.globalObject = dtsgen.Option.GlobalObject.WRAP;
+			
+			let out = dg.preModifiedJson(def);
+			let answer = {
+				"MyLib":{
+					"Math":{
+						"prop":{
+							type:dtsgen.TSObjType.STRING
+						},
+						"!!!dtsinterface!!!":"Math"
+					}
+				},
+				"NoGlobal":{}
+			};
+			
+			assert.deepEqual(out, answer);
+			
+		});
+		
+		it("should rename a object that same name with JS Global Object",()=>{
+			
+			dg.option.globalObject = dtsgen.Option.GlobalObject.RENAME;
+			
+			let out = dg.preModifiedJson(def);
+			let answer = {
+				"MyLib$Math":{
+					"prop":{
+						type:dtsgen.TSObjType.STRING
+					}
+				},
+				"NoGlobal":{}
+			};
+			
+			assert.deepEqual(out, answer);
+			
+		});
+		
+		it.skip("should rename & extend a object that same name with JS Global Object",()=>{
+			
+			dg.option.globalObject = dtsgen.Option.GlobalObject.RENAME;
+			
+			let out = dg.preModifiedJson(def);
+			let answer = {
+				"MyLib$Math":{
+					"prop":{
+						type:dtsgen.TSObjType.STRING
+					},
+					"!proto":{
+						type:dtsgen.TSObjType.CLASS,
+						class:"Math.prototype"
+					}
+				},
+				"NoGlobal":{}
+			};
+			
+			assert.deepEqual(out, answer);
+			
+		});
+	});
+	
 });

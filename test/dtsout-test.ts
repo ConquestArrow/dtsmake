@@ -55,6 +55,67 @@ describe("TypeScript d.ts file output tests,", ()=>{
 			
 		});
 		
+		it("should convert JS native global objects",()=>{
+			const g = [
+				"Object",
+				"Function",
+				"Boolean",
+				"Symbol",
+				"Error",
+				"EvalError",
+				"InternalError",
+				"RangeError",
+				"ReferenceError",
+				"SyntaxError",
+				"TypeError",
+				"URIError",
+				"Number",
+				"Math",
+				"Date",
+				"String",
+				"RegExp",
+				"Array",
+				"Int8Array",
+				"Uint8Array",
+				"Uint8ClampedArray",
+				"Int16Array",
+				"Uint16Array",
+				"Int32Array",
+				"Uint32Array",
+				"Float32Array",
+				"Float64Array",
+				"Map",
+				"Set",
+				"WeakMap",
+				"WeakSet",
+				"ArrayBuffer",
+				"DataView",
+				"JSON",
+				"Promise",
+				"Generator",
+				"GeneratorFunction",
+				"Reflect",
+				"Proxy"
+			];
+			
+			let p:dtsgen.TSObj[] = [];
+			let answer:string[] = [];
+			let out:string[] = [];
+			for(let i in g){
+				let o:dtsgen.TSObj = {type:9, name:"a"+i, class:""};
+				o.class = g[i];
+				p.push(o);
+				
+				answer.push(`a${i} : ${g[i]}`);
+				
+				out.push(dg.tsObjToDTS(p[p.length-1]));
+			}
+			
+			assert.deepEqual(out, answer);
+			
+			
+		})
+		
 	});
 	
 	context("paramsToDTS()", ()=>{
