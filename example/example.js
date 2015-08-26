@@ -88,6 +88,19 @@ exTest({
 	//NodeJSModule:true,
 	//extrafiles:"../node_modules/tern/plugin/angular.js,../node_modules/tern/plugin/component.js,../node_modules/tern/plugin/doc_comment.js,../node_modules/tern/plugin/node.js,../node_modules/tern/plugin/requirejs.js"
 });
+//clone.js
+exTest({
+	src:"../node_modules/clone/clone.js",
+	dist:"./dist/clone",
+	name:"clone",
+	//plugin:"node",
+	isDebug:true,
+	//isExport:true,
+	//exportStyle:"legacy",
+	//exportModuleName:"clone"//,
+	//NodeJSModule:true,
+	//extrafiles:"../node_modules/clone/test.js"
+})
 /*
 //currently error, class/interface with deep namespace unsupported.
 // typescript >= 1.6 will be not grammer error, because of the "local class" support.
