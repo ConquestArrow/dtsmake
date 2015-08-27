@@ -94,20 +94,30 @@ exTest({
 	dist:"./dist/clone",
 	name:"clone",
 	//plugin:"node",
-	isDebug:true,
+	//isDebug:true,
 	//isExport:true,
 	//exportStyle:"legacy",
 	//exportModuleName:"clone"//,
 	//NodeJSModule:true,
 	//extrafiles:"../node_modules/clone/test.js"
-})
-/*
-//currently error, class/interface with deep namespace unsupported.
-// typescript >= 1.6 will be not grammer error, because of the "local class" support.
+});
+//deep namespace lib
 exTest({
 	src:"./src/deeplib.js", 
 	dist:"./dist/deeplib", 
 	name:"deeplib",
-	debug:true
+	isDebug:true
 });
-*/
+//gulp-header.js; gulp plugin sample
+exTest({
+	src:"../node_modules/gulp-header/index.js",
+	dist:"./dist/gulp-header",
+	name:"gulp-header",
+	//plugin:"node",
+	//isDebug:true,
+	//isExport:true,
+	//exportStyle:"legacy",
+	//exportModuleName:"clone"//,
+	//NodeJSModule:true,
+	extrafiles:"../node_modules/gulp-header/test/sample.js"
+});
