@@ -5,6 +5,8 @@ tsconfig.json
 tsd.json
 gulpfile.ts
 sample
+example
 test
 .tmp
 .settings
+.travis.yml
