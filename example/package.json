@@ -1,7 +1,7 @@
 {
-  "name": "example-test-dtsgen",
+  "name": "example-test-dtsmake",
   "version": "0.0.0",
-  "description": "example test for dtsgen",
+  "description": "example test for dtsmake",
   "main": "example.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "author": "ConquestArrow",
   "license": "MIT",
   "devDependencies": {
-    "dtsgen": "file:.."
+    "dtsmake": "file:.."
   },
   "private": true
 }

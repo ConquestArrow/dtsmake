@@ -1,11 +1,11 @@
 /// <reference path="../typings/tsd.d.ts" />
 
 import * as assert from 'power-assert';
-import {dtsgen} from '../src/dtsgen';
+import {dtsmake} from '../src/dtsmake';
 import fs = require('fs');
 
 describe("Parsing TernJS definition JSON file(s), ",()=>{
-	let dg = new dtsgen.DTSGen();
+	let dg = new dtsmake.DTSMake();
 	
 	
 	
@@ -42,12 +42,12 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		it("should replace module name when isOutExport ON",()=>{
 			
 			const def = {
-				[dtsgen.TernDef.NAME]:"TEST_NAME",
-				[dtsgen.TernDef.DEFINE]:{
-					[dtsgen.TernDef.NODE]:{
+				[dtsmake.TernDef.NAME]:"TEST_NAME",
+				[dtsmake.TernDef.DEFINE]:{
+					[dtsmake.TernDef.NODE]:{
 						"node_modules/path/to/module`js":{
 							"prop":{
-								type:dtsgen.TSObjType.BOOLEAN
+								type:dtsmake.TSObjType.BOOLEAN
 							}
 						}
 					}
@@ -61,12 +61,12 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			let out = dg.replaceExportNamespace(def);
 			//console.log(JSON.stringify(out))
 			let answer = {
-				[dtsgen.TernDef.NAME]:"TEST_NAME",
-				[dtsgen.TernDef.DEFINE]:{
-					[dtsgen.TernDef.NODE]:{
+				[dtsmake.TernDef.NAME]:"TEST_NAME",
+				[dtsmake.TernDef.DEFINE]:{
+					[dtsmake.TernDef.NODE]:{
 						[dg.userDefinedModuleName]:{
 							"prop":{
-								type:dtsgen.TSObjType.BOOLEAN
+								type:dtsmake.TSObjType.BOOLEAN
 							}
 						}
 					}
@@ -93,26 +93,26 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			let answer = {
 				"Fn":{
 					"!type":[
-						{"type":dtsgen.TSObjType.FUNCTION,
+						{"type":dtsmake.TSObjType.FUNCTION,
 					"params":[
 						{
-						"type":dtsgen.TSObjType.ARRAY,
+						"type":dtsmake.TSObjType.ARRAY,
 						"arrayType": [
-						{"type":dtsgen.TSObjType.STRING}
+						{"type":dtsmake.TSObjType.STRING}
 						],
 						"name":"sParams"
 						},
 						{
-						"type":dtsgen.TSObjType.ARRAY,
+						"type":dtsmake.TSObjType.ARRAY,
 						"arrayType": [
-						{"type":dtsgen.TSObjType.NUMBER}
+						{"type":dtsmake.TSObjType.NUMBER}
 						],
 						"name":"nParams"
 						}
 					],
 					"ret":[
 						{
-						"type":dtsgen.TSObjType.VOID
+						"type":dtsmake.TSObjType.VOID
 						}
 					]
 					}
@@ -156,10 +156,10 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			const def = "[string]";
 			const answer = [
 				{
-					"type":dtsgen.TSObjType.ARRAY,
+					"type":dtsmake.TSObjType.ARRAY,
 					//"name":"test",
 					"arrayType": [
-						{"type":dtsgen.TSObjType.STRING}
+						{"type":dtsmake.TSObjType.STRING}
 					]
 				}
 			];
@@ -177,18 +177,18 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			const answer = 
 			[
 				{
-				"type":dtsgen.TSObjType.FUNCTION,
+				"type":dtsmake.TSObjType.FUNCTION,
 				"ret":[
 					{
-					"type":dtsgen.TSObjType.VOID
+					"type":dtsmake.TSObjType.VOID
 					}
 				],
 				"params":[
 					{
-					"type":dtsgen.TSObjType.ARRAY,
+					"type":dtsmake.TSObjType.ARRAY,
 					"name":"p1",
 					"arrayType": [
-						{"type":dtsgen.TSObjType.STRING}
+						{"type":dtsmake.TSObjType.STRING}
 					]
 				}
 				]
@@ -206,24 +206,24 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		it("should parse double array params fn",()=>{
 			const def = "fn(sParams: [string], nParams: [number])";
 			const answer = [
-					{"type":dtsgen.TSObjType.FUNCTION,
+					{"type":dtsmake.TSObjType.FUNCTION,
 				"ret":[
 					{
-					"type":dtsgen.TSObjType.VOID
+					"type":dtsmake.TSObjType.VOID
 					}
 				],
 				"params":[
 					{
-					"type":dtsgen.TSObjType.ARRAY,
+					"type":dtsmake.TSObjType.ARRAY,
 					"arrayType": [
-						{"type":dtsgen.TSObjType.STRING}
+						{"type":dtsmake.TSObjType.STRING}
 					],
 					"name":"sParams"
 					},
 					{
-					"type":dtsgen.TSObjType.ARRAY,
+					"type":dtsmake.TSObjType.ARRAY,
 					"arrayType": [
-						{"type":dtsgen.TSObjType.NUMBER}
+						{"type":dtsmake.TSObjType.NUMBER}
 					],
 					"name":"nParams"
 					}
@@ -240,21 +240,21 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		it("should parse union params fn",()=>{
 			const def = "fn(a: string|number)";
 			const answer = [
-					{"type":dtsgen.TSObjType.FUNCTION,
+					{"type":dtsmake.TSObjType.FUNCTION,
 				"ret":[
 					{
-					"type":dtsgen.TSObjType.VOID
+					"type":dtsmake.TSObjType.VOID
 					}
 				],
 				"params":[
 					[
 						{
 							"name":"a",
-							"type":dtsgen.TSObjType.STRING
+							"type":dtsmake.TSObjType.STRING
 						},
 						{
 							"name":"a",
-							"type":dtsgen.TSObjType.NUMBER
+							"type":dtsmake.TSObjType.NUMBER
 						}
 					]
 				]
@@ -267,10 +267,10 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		it("should parse fn union params fn",()=>{
 			const def = "fn(a: fn(string)|fn(number))";
 			const answer = [
-					{"type":dtsgen.TSObjType.FUNCTION,
+					{"type":dtsmake.TSObjType.FUNCTION,
 				"ret":[
 					{
-					"type":dtsgen.TSObjType.VOID
+					"type":dtsmake.TSObjType.VOID
 					}
 				],
 				"params":[
@@ -278,21 +278,21 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 						{
 							"name":"a",
 							"params":[{
-							"type":dtsgen.TSObjType.STRING
+							"type":dtsmake.TSObjType.STRING
 							}],
-							"type":dtsgen.TSObjType.FUNCTION,
+							"type":dtsmake.TSObjType.FUNCTION,
 							"ret":[{
-								"type":dtsgen.TSObjType.VOID
+								"type":dtsmake.TSObjType.VOID
 							}]
 						},
 						{
 							"name":"a",
 							"params":[{
-							"type":dtsgen.TSObjType.NUMBER
+							"type":dtsmake.TSObjType.NUMBER
 							}],
-							"type":dtsgen.TSObjType.FUNCTION,
+							"type":dtsmake.TSObjType.FUNCTION,
 							"ret":[{
-								"type":dtsgen.TSObjType.VOID
+								"type":dtsmake.TSObjType.VOID
 							}]
 						}
 					]
@@ -310,16 +310,16 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			const answer =
 			[
 				{
-				"type":dtsgen.TSObjType.ARRAY,
+				"type":dtsmake.TSObjType.ARRAY,
 				"arrayType": [
-					{"type":dtsgen.TSObjType.STRING}
+					{"type":dtsmake.TSObjType.STRING}
 				],
 				"name":"sParams"
 				},
 				{
-				"type":dtsgen.TSObjType.ARRAY,
+				"type":dtsmake.TSObjType.ARRAY,
 				"arrayType": [
-					{"type":dtsgen.TSObjType.NUMBER}
+					{"type":dtsmake.TSObjType.NUMBER}
 				],
 				"name":"nParams"
 				}
@@ -337,21 +337,21 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 						{
 							"name":"a",
 							"params":[{
-							"type":dtsgen.TSObjType.STRING
+							"type":dtsmake.TSObjType.STRING
 							}],
-							"type":dtsgen.TSObjType.FUNCTION,
+							"type":dtsmake.TSObjType.FUNCTION,
 							"ret":[{
-								"type":dtsgen.TSObjType.VOID
+								"type":dtsmake.TSObjType.VOID
 							}]
 						},
 						{
 							"name":"a",
 							"params":[{
-							"type":dtsgen.TSObjType.NUMBER
+							"type":dtsmake.TSObjType.NUMBER
 							}],
-							"type":dtsgen.TSObjType.FUNCTION,
+							"type":dtsmake.TSObjType.FUNCTION,
 							"ret":[{
-								"type":dtsgen.TSObjType.VOID
+								"type":dtsmake.TSObjType.VOID
 							}]
 						}
 					]
@@ -410,30 +410,30 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		
 		const s = 
 		[
-			{type:dtsgen.TSObjType.ANY, str:"?"},
-			{type:dtsgen.TSObjType.ARRAY, str:"[number]"},
-			{type:dtsgen.TSObjType.BOOLEAN, str:"bool"},
-			{type:dtsgen.TSObjType.CLASS, str:"+hoge.fuga.Class"},
-			{type:dtsgen.TSObjType.FUNCTION, str:"fn(?,?)->?"},
-			{type:dtsgen.TSObjType.NUMBER, str:"number"},
-			{type:dtsgen.TSObjType.OBJECT, str:"hoge"},
-			{type:dtsgen.TSObjType.STRING, str:"string"},
-			{type:dtsgen.TSObjType.UNIONS, str:"number|string"}
+			{type:dtsmake.TSObjType.ANY, str:"?"},
+			{type:dtsmake.TSObjType.ARRAY, str:"[number]"},
+			{type:dtsmake.TSObjType.BOOLEAN, str:"bool"},
+			{type:dtsmake.TSObjType.CLASS, str:"+hoge.fuga.Class"},
+			{type:dtsmake.TSObjType.FUNCTION, str:"fn(?,?)->?"},
+			{type:dtsmake.TSObjType.NUMBER, str:"number"},
+			{type:dtsmake.TSObjType.OBJECT, str:"hoge"},
+			{type:dtsmake.TSObjType.STRING, str:"string"},
+			{type:dtsmake.TSObjType.UNIONS, str:"number|string"}
 		];
 		
 		it("basic type check",()=>{
 			for(let i in s){
 				let o = s[i];
-				assert(dg.checkType(o.str) === o.type,`type ${dtsgen.TSObjType[o.type]} check faild.`);
+				assert(dg.checkType(o.str) === o.type,`type ${dtsmake.TSObjType[o.type]} check faild.`);
 			}
 		});
 		
 		const objs = 
 		[
-			{type:dtsgen.TSObjType.OBJECT, str:"!this"},
-			{type:dtsgen.TSObjType.OBJECT, str:"!this.Obj"},
-			{type:dtsgen.TSObjType.OBJECT, str:"some.namespace.to.object"},
-			{type:dtsgen.TSObjType.OBJECT, str:"!ternjs.!internal.!refs.!0.<i>"}
+			{type:dtsmake.TSObjType.OBJECT, str:"!this"},
+			{type:dtsmake.TSObjType.OBJECT, str:"!this.Obj"},
+			{type:dtsmake.TSObjType.OBJECT, str:"some.namespace.to.object"},
+			{type:dtsmake.TSObjType.OBJECT, str:"!ternjs.!internal.!refs.!0.<i>"}
 		];
 		const noObjs =
 		[
@@ -451,27 +451,27 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		it("object type check",()=>{
 			for(let i in objs){
 				let o = objs[i];
-				assert(dg.checkType(o.str) === o.type,`type ${dtsgen.TSObjType[o.type]} check faild.`);
+				assert(dg.checkType(o.str) === o.type,`type ${dtsmake.TSObjType[o.type]} check faild.`);
 			}
 			
 			for(let i in noObjs){
 				let o = noObjs[i];
-				assert(dg.checkType(o) !== dtsgen.TSObjType.OBJECT,`${o} is may object.`);
+				assert(dg.checkType(o) !== dtsmake.TSObjType.OBJECT,`${o} is may object.`);
 			}
 		});
 		
 		
 		/*
 		const mems = [
-			{type:dtsgen.TSObjType.OBJ_MEMBER, str:"!this"},
-			{type:dtsgen.TSObjType.OBJ_MEMBER, str:"!this.member"},
-			{type:dtsgen.TSObjType.OBJ_MEMBER, str:"!this.member.child.child"},
-			{type:dtsgen.TSObjType.OBJ_MEMBER, str:"!this.member.!this.!this.!node"}
+			{type:dtsmake.TSObjType.OBJ_MEMBER, str:"!this"},
+			{type:dtsmake.TSObjType.OBJ_MEMBER, str:"!this.member"},
+			{type:dtsmake.TSObjType.OBJ_MEMBER, str:"!this.member.child.child"},
+			{type:dtsmake.TSObjType.OBJ_MEMBER, str:"!this.member.!this.!this.!node"}
 		];
 		it("this member obj check",()=>{
 			for(let i in mems){
 				let o = mems[i];
-				assert(dg.checkType(o.str) === o.type,`type ${dtsgen.TSObjType[o.type]} check faild.`);
+				assert(dg.checkType(o.str) === o.type,`type ${dtsmake.TSObjType[o.type]} check faild.`);
 			}
 		});
 		*/
@@ -484,7 +484,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			let path = ["Klass", "prototype", "prop", "!ret"];
 			let t = dg.checkReplaceType(path[path.length-1]);
 			
-			assert(t == dtsgen.ReplaceType.RETURN,
+			assert(t == dtsmake.ReplaceType.RETURN,
 				`${path[path.length-1]} is not match ReplaceType.RETURN`
 			);
 		});
@@ -499,7 +499,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			];
 			for(let i in cs){
 				assert(
-					dg.checkReplaceType(cs[i]) === dtsgen.ReplaceType.CLASS,
+					dg.checkReplaceType(cs[i]) === dtsmake.ReplaceType.CLASS,
 					`${cs[i]} may not be Class`
 				);
 			}
@@ -516,7 +516,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			for(let i in cs){
 				let out = dg.checkReplaceType(cs[i]);
 				assert(
-					out === dtsgen.ReplaceType.ARRAY,
+					out === dtsmake.ReplaceType.ARRAY,
 					`${cs[i]} may not be Array`
 				);
 			}
@@ -530,24 +530,24 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			"!define":{
 				"Klass.prop.!ret":[
 					{
-						"type": dtsgen.TSObjType.CLASS,
+						"type": dtsmake.TSObjType.CLASS,
 						"class":"+Klass"
 					}
 				]
 			},
 			"Klass":{
 				"prop":{
-					"type":dtsgen.TSObjType.FUNCTION,
+					"type":dtsmake.TSObjType.FUNCTION,
 					"ret":[
 						{
-							"type": dtsgen.TSObjType.OBJECT,
+							"type": dtsmake.TSObjType.OBJECT,
 							"class": "!this"
 						}
 					],
 					"params": null
 				},
 				"prop2":{
-					"type":dtsgen.TSObjType.NUMBER
+					"type":dtsmake.TSObjType.NUMBER
 				}
 			}
 		};
@@ -557,24 +557,24 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 				"!define":{
 					"Klass.prop.!ret":[
 						{
-							"type": dtsgen.TSObjType.CLASS,
+							"type": dtsmake.TSObjType.CLASS,
 							"class":"+Klass"
 						}
 					]
 				},
 				"Klass":{
 					"prop":{
-						"type":dtsgen.TSObjType.FUNCTION,
+						"type":dtsmake.TSObjType.FUNCTION,
 						"ret":[
 							{
-								"type": dtsgen.TSObjType.OBJECT,
+								"type": dtsmake.TSObjType.OBJECT,
 								"class": "!this"
 							}
 						],
 						"params": null
 					},
 					"prop2":{
-						"type":dtsgen.TSObjType.NUMBER
+						"type":dtsmake.TSObjType.NUMBER
 					}
 				}
 			};
@@ -664,24 +664,24 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 				"scopeAt": {
 					//"!type": "fn(ast: ?, pos: ?, defaultScope: ?) -> !2"
 					"!type":[{
-						"type":dtsgen.TSObjType.FUNCTION,
+						"type":dtsmake.TSObjType.FUNCTION,
 						"params":[
 							{
-								"type":dtsgen.TSObjType.ANY,
+								"type":dtsmake.TSObjType.ANY,
 								"name":"ast"
 							},
 							{
-								"type":dtsgen.TSObjType.ANY,
+								"type":dtsmake.TSObjType.ANY,
 								"name":"pos"
 							},
 							{
-								"type":dtsgen.TSObjType.ANY,
+								"type":dtsmake.TSObjType.ANY,
 								"name":"defaultScope"
 							}
 						],
 						"ret":[
 							{
-								"type":dtsgen.TSObjType.ANY,
+								"type":dtsmake.TSObjType.ANY,
 								"class":"!2"
 							}
 						]
@@ -707,7 +707,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			def = {
 				"Math":{
 					"prop":{
-						type:dtsgen.TSObjType.STRING
+						type:dtsmake.TSObjType.STRING
 					}
 				},
 				"NoGlobal":{}
@@ -720,7 +720,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		
 		it("should remove a object that same name with JS Global Object",()=>{
 			
-			dg.option.globalObject = dtsgen.Option.GlobalObject.REMOVE;
+			dg.option.globalObject = dtsmake.Option.GlobalObject.REMOVE;
 			let out = dg.preModifiedJson(def);
 			let answer = {
 				"NoGlobal":{}
@@ -732,14 +732,14 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		
 		it("should wrap a object that same name with JS Global Object",()=>{
 			
-			dg.option.globalObject = dtsgen.Option.GlobalObject.WRAP;
+			dg.option.globalObject = dtsmake.Option.GlobalObject.WRAP;
 			
 			let out = dg.preModifiedJson(def);
 			let answer = {
 				"MyLib":{
 					"Math":{
 						"prop":{
-							type:dtsgen.TSObjType.STRING
+							type:dtsmake.TSObjType.STRING
 						},
 						"!!!dtsinterface!!!":"Math"
 					}
@@ -753,13 +753,13 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		
 		it("should rename a object that same name with JS Global Object",()=>{
 			
-			dg.option.globalObject = dtsgen.Option.GlobalObject.RENAME;
+			dg.option.globalObject = dtsmake.Option.GlobalObject.RENAME;
 			
 			let out = dg.preModifiedJson(def);
 			let answer = {
 				"MyLib$Math":{
 					"prop":{
-						type:dtsgen.TSObjType.STRING
+						type:dtsmake.TSObjType.STRING
 					}
 				},
 				"NoGlobal":{}
@@ -771,16 +771,16 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 		
 		it.skip("should rename & extend a object that same name with JS Global Object",()=>{
 			
-			dg.option.globalObject = dtsgen.Option.GlobalObject.RENAME;
+			dg.option.globalObject = dtsmake.Option.GlobalObject.RENAME;
 			
 			let out = dg.preModifiedJson(def);
 			let answer = {
 				"MyLib$Math":{
 					"prop":{
-						type:dtsgen.TSObjType.STRING
+						type:dtsmake.TSObjType.STRING
 					},
 					"!proto":{
-						type:dtsgen.TSObjType.CLASS,
+						type:dtsmake.TSObjType.CLASS,
 						class:"Math.prototype"
 					}
 				},

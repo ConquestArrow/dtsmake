@@ -10,7 +10,7 @@
  ){
 	if(!op.src)throw Error();
 	
-	var cmd = "node ./node_modules/dtsgen/bin/dtsgen";
+	var cmd = "node ./node_modules/dtsmake/bin/dtsmake";
 	cmd += " -s "+op.src;
 	cmd += " --dist "+op.dist;
 	cmd += op.plugin ? " -p "+op.plugin : "";
@@ -33,14 +33,14 @@
 				throw Error("example test failed.");
 			}
 			else{
-				console.log("[dtsgen extest] "+op.dist+".d.ts file output complete.")
+				console.log("[dtsmake extest] "+op.dist+".d.ts file output complete.")
 				child_process.exec(
 					"tsc "+op.dist+".d.ts",
 					function(e2,s2,se2){
 						if(e2) throw Error(e2.message);
 						else if(se2) throw Error(se2.toString());
 						else{
-							console.log("[dtsgen extest] "+op.src+ " 's d.ts tsc check complete.");
+							console.log("[dtsmake extest] "+op.src+ " 's d.ts tsc check complete.");
 						}
 					}
 				);

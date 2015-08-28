@@ -2,11 +2,11 @@
 
 
 /**
- * dtsgen command line interface
+ * dtsmake command line interface
  */
  
 import * as program from "commander";
-import {dtsgen} from "./dtsgen";
+import {dtsmake} from "./dtsmake";
 import * as child_process from "child_process";
 var myPackage = require("../package.json");
 
@@ -50,7 +50,7 @@ program
 	.option("-d, --def <paths>","tern.js def files. DEFAULT:'ecma5'", defFiles)
 	.option("-x, --extrafiles <paths>", "sample files for target js lib. help for ternjs type inference.", extraFiles)
 	
-	// dtsgen options
+	// dtsmake options
 	.option("-D, --debug", "debug output mode")
 	.option("-A, --voidAsAny", "force output `void` to `any`")
 	.option("-i, --interfaceSameNameVar", "export a namespace property same with a interface name", true)
@@ -120,8 +120,8 @@ var child = child_process.exec(
 			console.log(stdout.toString("utf8"));
 			
 			//
-			let dg = new dtsgen.DTSGen();
-			let op:dtsgen.Option = 
+			let dg = new dtsmake.DTSMake();
+			let op:dtsmake.Option = 
 			{
 				isDebug: (<any>program).debug,
 				isOutVoidAsAny: (<any>program).voidAsAny,
@@ -136,7 +136,7 @@ var child = child_process.exec(
 			
 			dg.main(
 				stdout.toString(),
-				(<any>program).dist,
+				(<any>program).dist ? (<any>program).dist : (<any>program).src.toString().replace(/\.[a-z0-9]+$/,""),
 				op
 			);
 		}

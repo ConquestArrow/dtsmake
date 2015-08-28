@@ -2,14 +2,14 @@
 
 import * as assert from 'power-assert';
 import * as sinon from 'sinon';
-import {dtsgen} from '../src/dtsgen';
+import {dtsmake} from '../src/dtsmake';
 import * as fs from 'fs';
 
 describe("Example js file tests", ()=>{
 	
-	let dg:dtsgen.DTSGen;
+	let dg:dtsmake.DTSMake;
 	beforeEach(()=>{
-		dg = new dtsgen.DTSGen();
+		dg = new dtsmake.DTSMake();
 	});
 	
 	

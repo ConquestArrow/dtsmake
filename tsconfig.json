@@ -10,7 +10,7 @@
 		"outDir": "lib"
     },
     "files": [
-        "src/dtsgen.ts",
+        "src/dtsmake.ts",
 		"src/index.ts",
 		"gulpfile.ts"
     ]

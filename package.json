@@ -1,9 +1,9 @@
 {
-  "name": "dtsgen",
+  "name": "dtsmake",
   "version": "0.0.1",
   "description": "TypeScript d.ts file generator from JavaScript files",
-  "main": "lib/dtsgen.js",
-  "bin": "bin/dtsgen",
+  "main": "lib/dtsmake.js",
+  "bin": "bin/dtsmake",
   "scripts": {
     "test": "mocha --compilers ts:espower-typescript/guess test/*-test.ts",
     "testw": "mocha --compilers ts:espower-typescript/guess -w test/*-test.ts",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ConquestArrow/dtsgen/"
+    "url": "https://github.com/ConquestArrow/dtsmake/"
   },
   "keywords": [
     "TypeScript"

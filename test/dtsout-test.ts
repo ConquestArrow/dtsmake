@@ -1,12 +1,12 @@
 /// <reference path="../typings/tsd.d.ts" />
 
 import * as assert from 'power-assert';
-import {dtsgen} from '../src/dtsgen';
+import {dtsmake} from '../src/dtsmake';
 import fs = require('fs');
 
 describe("TypeScript d.ts file output tests,", ()=>{
 	
-	let dg = new dtsgen.DTSGen();
+	let dg = new dtsmake.DTSMake();
 	
 	
 	context("tsObjToDTS()", ()=>{
@@ -14,7 +14,7 @@ describe("TypeScript d.ts file output tests,", ()=>{
 		it("shoud be replace ternjs Class instance path",()=>{
 			const p = [
 				{
-					type:dtsgen.TSObjType.CLASS,
+					type:dtsmake.TSObjType.CLASS,
 					name:"param",
 					class:"+Klass"
 				}
@@ -27,10 +27,10 @@ describe("TypeScript d.ts file output tests,", ()=>{
 		
 		it("should be replace ternjs array",()=>{
 			const to = {
-			type:dtsgen.TSObjType.ARRAY,
+			type:dtsmake.TSObjType.ARRAY,
 			arrayType:[
 				{
-					type:dtsgen.TSObjType.ANY
+					type:dtsmake.TSObjType.ANY
 				}
 			]
 			};
@@ -44,7 +44,7 @@ describe("TypeScript d.ts file output tests,", ()=>{
 		it.skip("shoud be replace ternjs !ret",()=>{
 			const p = [
 				{
-					type:dtsgen.TSObjType.OBJECT,
+					type:dtsmake.TSObjType.OBJECT,
 					name:"param",
 					class:"!ret"
 				}
@@ -98,11 +98,11 @@ describe("TypeScript d.ts file output tests,", ()=>{
 				"Proxy"
 			];
 			
-			let p:dtsgen.TSObj[] = [];
+			let p:dtsmake.TSObj[] = [];
 			let answer:string[] = [];
 			let out:string[] = [];
 			for(let i in g){
-				let o:dtsgen.TSObj = {type:9, name:"a"+i, class:""};
+				let o:dtsmake.TSObj = {type:9, name:"a"+i, class:""};
 				o.class = g[i];
 				p.push(o);
 				
@@ -124,7 +124,7 @@ describe("TypeScript d.ts file output tests,", ()=>{
 			
 			const p = [
 				{
-					type:dtsgen.TSObjType.CLASS,
+					type:dtsmake.TSObjType.CLASS,
 					name:"param",
 					class:"+Klass"
 				}
@@ -145,12 +145,12 @@ describe("TypeScript d.ts file output tests,", ()=>{
 		
 		
 		it("should convert simple function", ()=>{
-			const def:dtsgen.TSObj[] = [
+			const def:dtsmake.TSObj[] = [
 				{
-					type:dtsgen.TSObjType.FUNCTION,
+					type:dtsmake.TSObjType.FUNCTION,
 					ret:[
-						{type:dtsgen.TSObjType.NUMBER},
-						{type:dtsgen.TSObjType.STRING},
+						{type:dtsmake.TSObjType.NUMBER},
+						{type:dtsmake.TSObjType.STRING},
 					],
 					params:null
 				}
@@ -172,11 +172,11 @@ declare function ${defName}(): number | string;
 		});
 		
 		it("should convert constructor without return type annotation", ()=>{
-			const def:dtsgen.TSObj[] = [
+			const def:dtsmake.TSObj[] = [
 				{
-					type:dtsgen.TSObjType.FUNCTION,
+					type:dtsmake.TSObjType.FUNCTION,
 					ret:[
-						{type:dtsgen.TSObjType.VOID}
+						{type:dtsmake.TSObjType.VOID}
 					],
 					params:null
 				}
@@ -197,11 +197,11 @@ declare function ${defName}();
 		});
 		
 		it("should convert constructor with return type annotation", ()=>{
-			const def:dtsgen.TSObj[] = [
+			const def:dtsmake.TSObj[] = [
 				{
-					type:dtsgen.TSObjType.FUNCTION,
+					type:dtsmake.TSObjType.FUNCTION,
 					ret:[
-						{type:dtsgen.TSObjType.VOID}
+						{type:dtsmake.TSObjType.VOID}
 					],
 					params:null
 				}
@@ -223,11 +223,11 @@ declare function ${defName}(): void;
 		});
 		
 		it("should convert constructor with return type annotation void as any", ()=>{
-			const def:dtsgen.TSObj[] = [
+			const def:dtsmake.TSObj[] = [
 				{
-					type:dtsgen.TSObjType.FUNCTION,
+					type:dtsmake.TSObjType.FUNCTION,
 					ret:[
-						{type:dtsgen.TSObjType.VOID}
+						{type:dtsmake.TSObjType.VOID}
 					],
 					params:null
 				}
@@ -249,16 +249,16 @@ declare function ${defName}(): /* void */ any;
 		});
 		
 		it("should not output ret name prop", ()=>{
-			const def:dtsgen.TSObj[] = [
+			const def:dtsmake.TSObj[] = [
 				{
-					type:dtsgen.TSObjType.FUNCTION,
+					type:dtsmake.TSObjType.FUNCTION,
 					ret:[
 						{
-							type:dtsgen.TSObjType.NUMBER,
+							type:dtsmake.TSObjType.NUMBER,
 							name:"notOutput"
 						},
 						{
-							type:dtsgen.TSObjType.STRING,
+							type:dtsmake.TSObjType.STRING,
 							name:"notOutput"
 						},
 					],
@@ -282,19 +282,19 @@ declare function ${defName}(): number | string;
 		});
 		
 		it("should wrap fn() return type", ()=>{
-			const def:dtsgen.TSObj[] = [
+			const def:dtsmake.TSObj[] = [
 				{
-					type:dtsgen.TSObjType.FUNCTION,
+					type:dtsmake.TSObjType.FUNCTION,
 					ret:[
 						{
-							type:dtsgen.TSObjType.OBJECT,
+							type:dtsmake.TSObjType.OBJECT,
 							class:"sinon.collection.stub.!ret"
 						},
 						{
-							type:dtsgen.TSObjType.FUNCTION,
+							type:dtsmake.TSObjType.FUNCTION,
 							params:null,
 							ret:[
-								{type:dtsgen.TSObjType.VOID}
+								{type:dtsmake.TSObjType.VOID}
 							]
 						},
 					],
@@ -321,10 +321,10 @@ declare function ${defName}(): /* sinon.collection.stub.!ret */ any | (() => voi
 		it("should wrap fn() return type2", ()=>{
 			const def = [
 				{
-					type:dtsgen.TSObjType.FUNCTION,
+					type:dtsmake.TSObjType.FUNCTION,
 					ret:[
 						{
-							type:dtsgen.TSObjType.OBJECT,
+							type:dtsmake.TSObjType.OBJECT,
 							class:"!0"
 						}
 					],
@@ -522,24 +522,24 @@ declare interface passes {
 		})
 		
 		it("should output simple function jsdoc",()=>{
-			const t:dtsgen.TSObj = {
-				type:dtsgen.TSObjType.FUNCTION,
+			const t:dtsmake.TSObj = {
+				type:dtsmake.TSObjType.FUNCTION,
 				params:[
 					{
-						type:dtsgen.TSObjType.NUMBER,
+						type:dtsmake.TSObjType.NUMBER,
 						name:"hoge"
 					},
 					{
-						type:dtsgen.TSObjType.STRING,
+						type:dtsmake.TSObjType.STRING,
 						name:"fuga"
 					}
 				],
 				ret:[
 					{
-						type:dtsgen.TSObjType.NUMBER
+						type:dtsmake.TSObjType.NUMBER
 					},
 					{
-						type:dtsgen.TSObjType.STRING
+						type:dtsmake.TSObjType.STRING
 					}
 				]
 			};

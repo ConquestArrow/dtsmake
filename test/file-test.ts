@@ -2,11 +2,11 @@
 
 import * as assert from 'power-assert';
 import * as sinon from 'sinon';
-import {dtsgen} from '../src/dtsgen';
+import {dtsmake} from '../src/dtsmake';
 import * as fs from 'fs';
 
 describe("File manipulation tests", ()=>{
-	let dg = new dtsgen.DTSGen();
+	let dg = new dtsmake.DTSMake();
 	
 	context("load a JSON file", ()=>{
 		
