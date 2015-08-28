@@ -19,7 +19,7 @@
   ],
   "author": "ConquestArrow",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "espower-typescript": "^1.0.0",
     "gulp": "^3.9.0",
