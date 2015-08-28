@@ -84,7 +84,7 @@ more examples in [/example/example.js](./example/example.js)
 ## Known Issues
 
  1. JSDoc tag (`@param`, `@return`) duplication when it was already defined in the target  JavaScript code.
- 2. When `-p node` (Ternjs's Nodejs plugin) option is ON, dtsgen sometimes outputs nothing.
+ 2. When `-p node` (Ternjs's Nodejs plugin) option is ON, dtsmake sometimes outputs nothing.
 
 ## TODOs
 
