@@ -21,7 +21,7 @@ describe("File manipulation tests", ()=>{
 		
 	});
 	
-	context("save a JSON file",()=>{
+	context.skip("save a JSON file",()=>{
 		let realFile;
 		beforeEach((done)=>{
 			dg.option.isOutVoidAsAny = false;
