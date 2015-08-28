@@ -117,7 +117,7 @@ var child = child_process.exec(
 			return;
 		}
 		else{
-			console.log(stdout.toString("utf8"));
+			if((<any>program).debug)console.log(stdout.toString("utf8"));
 			
 			//
 			let dg = new dtsmake.DTSMake();
