@@ -1,4 +1,4 @@
-dtsmake
+dtsmake [![Build Status](https://travis-ci.org/ConquestArrow/dtsmake.svg?branch=master)](https://travis-ci.org/ConquestArrow/dtsmake) [![NPM version](https://badge.fury.io/js/dtsmake.svg)](http://badge.fury.io/js/dtsmake)
 ====
 
 [TypeScript](http://www.typescriptlang.org/)'s type definition file (*.d.ts files) generator tool from JavaScript files. 
@@ -99,5 +99,3 @@ MIT
 ConquestArrow
 [Github](https://github.com/ConquestArrow/) | [Qiita](http://qiita.com/ConquestArrow)
 
-
-[TypeScript](http://www.typescriptlang.org/)
