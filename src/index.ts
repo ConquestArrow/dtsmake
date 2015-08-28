@@ -41,12 +41,12 @@ program
 		srcFiles = src;
 		distDir = dist;
 	})*/ 
-	.option("-s, --src <paths>", "[MUST] target javascript files paths", srcFiles)
-	.option("--dist [value]", "outout d.ts file path")
+	.option("-s, --src <path>", "[MUST] target javascript file path", srcFiles)
+	.option("--dist [value]", "outout d.ts file path. no need `.d.ts` file extension.")
 	
 	// ternjs bridge options
 	.option("-n, --n [value]", "module name")
-	.option("-p, --plugin <names>", "tern.js plugin", plugins)
+	.option("-p, --plugin <names>", "tern.js plugin. see tern.js server plugin(http://ternjs.net/doc/manual.html#plugins)", plugins)
 	.option("-d, --def <paths>","tern.js def files. DEFAULT:'ecma5'", defFiles)
 	.option("-x, --extrafiles <paths>", "sample files for target js lib. help for ternjs type inference.", extraFiles)
 	
