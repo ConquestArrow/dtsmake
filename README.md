@@ -1,4 +1,4 @@
-dtsmake [![Build Status](https://travis-ci.org/ConquestArrow/dtsmake.svg?branch=master)](https://travis-ci.org/ConquestArrow/dtsmake) [![NPM version](https://badge.fury.io/js/dtsmake.svg)](http://badge.fury.io/js/dtsmake)
+dtsmake [![Build Status](https://travis-ci.org/ConquestArrow/dtsmake.svg?branch=master)](https://travis-ci.org/ConquestArrow/dtsmake) [![NPM version](https://badge.fury.io/js/dtsmake.svg)](http://badge.fury.io/js/dtsmake) [![Dependency status](https://david-dm.org/ConquestArrow/dtsmake.svg)](https://david-dm.org/ConquestArrow/dtsmake#info=dependencies&view=table) 
 ====
 
 [TypeScript](http://www.typescriptlang.org/)'s type definition file (*.d.ts files) generator tool from JavaScript files. 
@@ -70,7 +70,7 @@ more examples in [/example/example.js](./example/example.js)
  export a namespace property same with a interface name
 #### -a, --annotateTypeInstance    
  annotate interface's constructor type as return type instance
-#### -g, --globalObject            
+#### -g, --globalObject [value]            
  how to export objects that same name with JS Global Object; "remove" or "wrap" or "rename"; DEFAULT:"wrap" 
 #### -N, --NodeJSModule            
  nodejs module special replace
