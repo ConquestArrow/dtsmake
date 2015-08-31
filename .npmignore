@@ -3,6 +3,7 @@ typings
 tmp
 tsconfig.json
 tsd.json
+TODO.md
 gulpfile.ts
 sample
 example
