@@ -8,7 +8,7 @@
     "test": "mocha --compilers ts:espower-typescript/guess test/*-test.ts",
     "testw": "mocha --compilers ts:espower-typescript/guess -w test/*-test.ts",
     "extest": "(cd example && npm install --save-dev ../ && node example.js)",
-    "build": "tsc"
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -16,8 +16,8 @@
   },
   "keywords": [
     "TypeScript",
-	"JavaScript",
-	"generator"
+    "JavaScript",
+    "generator"
   ],
   "author": "ConquestArrow",
   "license": "MIT",
@@ -26,13 +26,13 @@
     "espower-typescript": "^1.0.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
-    "gulp-header": "^1.2.2",
+    "gulp-header": "^1.7.1",
     "gulp-todo": "^3.3.0",
-    "gulp-typescript": "^2.8.0",
-    "mocha": "^2.2.5",
-    "power-assert": "^0.11.0",
-    "sinon": "^1.15.4",
-    "tsd": "^0.6.3",
+    "gulp-typescript": "^2.8.1",
+    "mocha": "^2.3.0",
+    "power-assert": "^1.0.0",
+    "sinon": "^1.16.1",
+    "tsd": "^0.6.4",
     "typescript-require": "^0.2.9-1"
   },
   "dependencies": {
