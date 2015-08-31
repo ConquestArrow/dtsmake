@@ -91,7 +91,7 @@ var genCommand = ()=>{
 	s += " " + (<any>program).src.join(" ");
 	s += " --no-spans";	
 	
-	console.log(program.name());
+	console.log(`${program.name()} started.`);
 	console.log("[CMD]"+s);
 	console.log("[SRC]"+(<any>program).src.join(" "));
 	return s;

@@ -6,6 +6,7 @@ import gts = require("gulp-typescript");
 import concat = require("gulp-concat");
 //var sq = require("streamqueue");
 var header = require('gulp-header');
+var todo = require('gulp-todo');
 
 /*
 gulp.task("cmdbuild", ()=>{
@@ -42,6 +43,15 @@ gulp.task("build", ()=>{
 		.pipe(gulp.dest("./lib/"));
 });
 
+gulp.task("todo",()=>{
+	return gulp
+		.src("./src/*.ts")
+		.pipe(todo({
+			fileName:"TODO.md"
+		}))
+		.pipe(gulp.dest('./'));
+})
+
 gulp.task("watch",()=>{
-	gulp.watch("./src/*.ts", ["build"]);
+	gulp.watch("./src/*.ts", ["build","todo"]);
 })
