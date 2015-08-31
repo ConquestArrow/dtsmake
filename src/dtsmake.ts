@@ -2275,7 +2275,7 @@ export namespace dtsmake.TernDef{
 	export const SPAN = "!span";
 	export const PROTO = "!proto";
 	export const STR_PROTO = "!stdProto";
-	export const NODE = "!node";
+	export const NODE = "!modules";
 	
 	/**
 	 * convert TernDef.CONST:string to EnumTernDef.CONST:number

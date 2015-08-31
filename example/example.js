@@ -68,12 +68,12 @@ exTest({
 	dist:"./dist/tern", 
 	name:"tern", 
 	//debug:true,
-	plugin:"node",
+	plugin:"node,modules",
 	isExport:true, 
 	exportStyle:"legacy", 
 	exportModuleName:"tern/lib/tern",
 	NodeJSModule:true,
-	extrafiles:"../node_modules/tern/plugin/angular.js,../node_modules/tern/plugin/component.js,../node_modules/tern/plugin/doc_comment.js,../node_modules/tern/plugin/node.js,../node_modules/tern/plugin/requirejs.js"
+	extrafiles:"../node_modules/tern/plugin/angular.js,../node_modules/tern/plugin/commonjs.js,../node_modules/tern/plugin/complete_strings.js,../node_modules/tern/plugin/doc_comment.js,../node_modules/tern/plugin/es_modules.js,../node_modules/tern/plugin/modules.js,../node_modules/tern/plugin/node.js,../node_modules/tern/plugin/node_resolve.js,../node_modules/tern/plugin/requirejs.js,../node_modules/tern/bin/tern,../node_modules/tern/lib/condense.js"
 });
 //sinon.js
 exTest({
