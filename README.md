@@ -1,12 +1,15 @@
-dtsmake [![Build Status](https://travis-ci.org/ConquestArrow/dtsmake.svg?branch=master)](https://travis-ci.org/ConquestArrow/dtsmake) [![NPM version](https://badge.fury.io/js/dtsmake.svg)](http://badge.fury.io/js/dtsmake) [![Dependency status](https://david-dm.org/ConquestArrow/dtsmake.svg)](https://david-dm.org/ConquestArrow/dtsmake#info=dependencies&view=table) 
+dtsmake 
 ====
 
 [TypeScript](http://www.typescriptlang.org/)'s type definition file (*.d.ts files) generator tool from JavaScript files. 
 
+[![Build Status](https://travis-ci.org/ConquestArrow/dtsmake.svg?branch=master)](https://travis-ci.org/ConquestArrow/dtsmake) [![NPM version](https://badge.fury.io/js/dtsmake.svg)](http://badge.fury.io/js/dtsmake) [![Dependency status](https://david-dm.org/ConquestArrow/dtsmake.svg)](https://david-dm.org/ConquestArrow/dtsmake#info=dependencies&view=table) 
+
 ## Description
 
-[TypeScript](http://www.typescriptlang.org/)'s type definition file (*.d.ts files) generator tool from JavaScript files. This tool is WIP (Work In Progress).
+[TypeScript](http://www.typescriptlang.org/)'s type definition file (`*.d.ts` files) generator tool from JavaScript files. This tool is **WIP** (Work In Progress).
 
+A Japanese document: [TypeScript型定義ファイルのコツと生成ツール dtsmake](http://qiita.com/ConquestArrow/items/450f961c3d54bc932cf3)
 
 ### Features
 
@@ -53,6 +56,9 @@ more examples in [/example/example.js](./example/example.js)
  __[MUST]__ target javascript file path
 #### --dist [value]                
  outout d.ts file path. no need `.d.ts` file extension.
+
+ex. `--dist /path/to/dist` -> `/path/to/dist.d.ts`
+
 #### -n, --n [value]               
  module name
 #### -p, --plugin `<names>`          
@@ -60,8 +66,12 @@ more examples in [/example/example.js](./example/example.js)
  see tern.js server plugin(http://ternjs.net/doc/manual.html#plugins)
 #### -d, --def `<paths>`             
  tern.js def files. DEFAULT:'ecma5'
+ 
+ see [Tern.js's def json format](http://ternjs.net/doc/manual.html#typedef) and [Tern.js's sample def files](https://github.com/marijnh/tern/tree/master/defs).
 #### -x, --extrafiles `<paths>`      
  sample files for target js lib. help for ternjs type inference.
+ 
+ ex. `-x "./path/to/extrafile1.js,./path/to/extrafile2.js"`
 #### -D, --debug                   
  debug output mode
 #### -A, --voidAsAny               
@@ -72,14 +82,48 @@ more examples in [/example/example.js](./example/example.js)
  annotate interface's constructor type as return type instance
 #### -g, --globalObject [value]            
  how to export objects that same name with JS Global Object; "remove" or "wrap" or "rename"; DEFAULT:"wrap" 
+
+```javascript
+//--globalObject "remove"
+// ※no output
+
+//--globalObject "wrap"
+declare namespace mylib{
+    interface Error{
+        //...
+    }
+}
+
+//--globalObject "rename"
+interface Mylib$Error{
+    //...
+}
+```
+
+
 #### -N, --NodeJSModule            
  nodejs module special replace
 #### -e, --export                  
  add export statement in a bottom of d.ts file
 #### -S, --exportStyle [value]     
  if --outExport true, select export style "es6" or "legacy"
+
+```javascript
+//--exportStyle "legacy"
+declare module 'mylib'{
+    export = mylib;    //legacy ts module export
+}
+//--exportStyle "es6"
+declare module 'mylib'{
+    export defalut mylib;    //es6 style module export 
+}
+```
+ 
 #### -M, --exportModuleName [value]
- exporting module name. ex. "EXAMPLE"; usage `import example = require("EXAMPLE");`
+
+exporting module name. 
+ 
+ex. "EXAMPLE"; usage `import example = require("EXAMPLE");`
 
 ## Known Issues
 
