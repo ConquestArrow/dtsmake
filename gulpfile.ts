@@ -53,5 +53,6 @@ gulp.task("todo",()=>{
 })
 
 gulp.task("watch",()=>{
-	gulp.watch("./src/*.ts", ["build","todo"]);
+	gulp.watch("./src/*.ts", ["build"]);
+	gulp.watch("./src/*.ts", ["todo"]);
 })
