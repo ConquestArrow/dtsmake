@@ -133,6 +133,7 @@ ex. "EXAMPLE"; usage `import example = require("EXAMPLE");`
 
  1. JSDoc tag (`@param`, `@return`) duplication when it was already defined in the target  JavaScript code.
  2. When `-p node` (Ternjs's Nodejs plugin) option is ON, dtsmake sometimes outputs nothing.
+ 3. Only support Tern.js server plugins in [here](https://github.com/marijnh/tern/tree/0.13.0/plugin). 
 
 ## TODOs
 
