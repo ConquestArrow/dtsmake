@@ -36,15 +36,19 @@ Node.js
 ## Usage
 
 simple case:
- `dtsmake -s ./path/to/sourcefile.js`
-
+```
+dtsmake -s ./path/to/sourcefile.js
+```
 other case:
- `dtsmake -s ./path/to/src/target.js --dist ./path/to/dist/mydefinition -n "mydefinition" -p node -e -S "legacy" -M "MyDefinition" -x "./path/to/extrafile1.js,./path/to/extrafile2.js" -N --def ./path/to/def/ecma6 -A -i -a -g`
+```
+dtsmake -s ./path/to/src/target.js --dist ./path/to/dist/mydefinition -n "mydefinition" -p node -e -S "legacy" -M "MyDefinition" -x "./path/to/extrafile1.js,./path/to/extrafile2.js" -N --def ./path/to/def/ecma6 -A -i -a -g
+```
 
 ### Example
 
 
-more examples in [/example/example.js](./example/example.js)
+ * more usage examples -> [/example/example.js](./example/example.js)
+ * generated TS definition files examples -> [/example/dist/](./example/dist/)
 
 ### Options
 
