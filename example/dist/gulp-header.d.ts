@@ -4,8 +4,8 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 /**
- * 
- * @param headerText 
- * @param data 
+ * is stream?
+ * @param obj 
+ * @return  
  */
-declare function headerPlugin(headerText : any, data : any): void;
+declare function isStream(obj : any): boolean;

@@ -48,573 +48,6 @@ declare namespace formatio{
 	// formatio.ascii.!0
 	type Ascii0 = Array<any>;
 }
-declare namespace sinon.Event.prototype{
-	// sinon.Event.prototype.initEvent.!3
-	
-	/**
-	 * 
-	 */
-	interface InitEvent3 {
-				
-		/**
-		 * 
-		 */
-		async : boolean;
-				
-		/**
-		 * 
-		 */
-		errorFlag : boolean;
-				
-		/**
-		 * 
-		 */
-		sendFlag : boolean;
-				
-		/**
-		 * 
-		 */
-		response : string;
-				
-		/**
-		 * 
-		 */
-		aborted : boolean;
-				
-		/**
-		 * 
-		 */
-		responseText : string;
-		
-		/**
-		 * 
-		 */
-		requestHeaders : {
-						
-			/**
-			 * 
-			 */
-			"Content-Type" : string;
-		}
-				
-		/**
-		 * 
-		 */
-		status : number;
-				
-		/**
-		 * 
-		 */
-		uploadProgress : /*no type*/{};
-				
-		/**
-		 * 
-		 */
-		open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
-				
-		/**
-		 * 
-		 */
-		readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
-				
-		/**
-		 * 
-		 */
-		setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
-				
-		/**
-		 * 
-		 */
-		setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
-				
-		/**
-		 * 
-		 */
-		send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
-				
-		/**
-		 * 
-		 */
-		abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
-				
-		/**
-		 * 
-		 */
-		getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
-				
-		/**
-		 * 
-		 */
-		getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
-				
-		/**
-		 * 
-		 */
-		setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
-				
-		/**
-		 * 
-		 */
-		respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
-				
-		/**
-		 * 
-		 */
-		downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
-				
-		/**
-		 * 
-		 */
-		uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
-	}
-}
-declare namespace sinon.Event.prototype.InitEvent3{
-	// sinon.Event.prototype.initEvent.!3.uploadProgress.!0
-	
-	/**
-	 * 
-	 */
-	interface UploadProgress0 {
-				
-		/**
-		 * 
-		 */
-		loaded : number;
-				
-		/**
-		 * 
-		 */
-		total : number;
-	}
-}
-declare namespace sinon.Event.prototype.target{
-	// sinon.Event.prototype.target.uploadProgress.!0
-	
-	/**
-	 * 
-	 */
-	interface UploadProgress0 {
-				
-		/**
-		 * 
-		 */
-		loaded : number;
-				
-		/**
-		 * 
-		 */
-		total : number;
-	}
-}
-declare namespace sinon{
-	// sinon.ProgressEvent.!1
-	
-	/**
-	 * 
-	 */
-	interface ProgressEvent1 {
-				
-		/**
-		 * 
-		 */
-		loaded : number;
-				
-		/**
-		 * 
-		 */
-		total : number;
-	}
-}
-declare namespace sinon{
-	// sinon.CustomEvent.!1
-	
-	/**
-	 * 
-	 */
-	interface CustomEvent1 {
-	}
-}
-declare namespace sinon{
-	// sinon.useFakeXDomainRequest.!ret
-	
-	/**
-	 * 
-	 */
-	interface UseFakeXDomainRequestRet {
-		
-		/**
-		 * 
-		 */
-		prototype : {
-						
-			/**
-			 * Access to this should actually throw an error
-			 */
-			responseText : string;
-						
-			/**
-			 * 
-			 */
-			sendFlag : boolean;
-						
-			/**
-			 * 
-			 */
-			readyState : number;
-						
-			/**
-			 * 
-			 */
-			errorFlag : boolean;
-						
-			/**
-			 * 
-			 */
-			aborted : boolean;
-						
-			/**
-			 * 
-			 */
-			status : number;
-						
-			/**
-			 * 
-			 */
-			isTimeout : boolean;
-						
-			/**
-			 * 
-			 */
-			toString : /* !proto.toString */ any;
-						
-			/**
-			 * 
-			 */
-			addEventListener : /* sinon.EventTarget.addEventListener */ any;
-						
-			/**
-			 * 
-			 */
-			removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
-						
-			/**
-			 * 
-			 */
-			dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
-						
-			/**
-			 * 
-			 */
-			eventListeners : /* sinon.EventTarget.eventListeners */ any;
-						
-			/**
-			 * 
-			 */
-			open : /* sinon.FakeXDomainRequest.prototype.open */ any;
-						
-			/**
-			 * 
-			 */
-			readyStateChange : /* sinon.FakeXDomainRequest.prototype.readyStateChange */ any;
-						
-			/**
-			 * 
-			 */
-			send : /* sinon.FakeXDomainRequest.prototype.send */ any;
-						
-			/**
-			 * 
-			 */
-			abort : /* sinon.FakeXDomainRequest.prototype.abort */ any;
-						
-			/**
-			 * 
-			 */
-			setResponseBody : /* sinon.FakeXDomainRequest.prototype.setResponseBody */ any;
-						
-			/**
-			 * 
-			 */
-			respond : /* sinon.FakeXDomainRequest.prototype.respond */ any;
-						
-			/**
-			 * 
-			 */
-			simulatetimeout : /* sinon.FakeXDomainRequest.prototype.simulatetimeout */ any;
-		}
-				
-		/**
-		 * 
-		 */
-		UNSENT : number;
-				
-		/**
-		 * 
-		 */
-		OPENED : number;
-				
-		/**
-		 * 
-		 */
-		LOADING : number;
-				
-		/**
-		 * 
-		 */
-		DONE : number;
-				
-		/**
-		 * 
-		 */
-		toString : /* !proto.toString */ any;
-				
-		/**
-		 * 
-		 */
-		restore : /* sinon.FakeXDomainRequest.restore */ any;
-				
-		/**
-		 * 
-		 */
-		onCreate : /* sinon.FakeXDomainRequest.onCreate */ any;
-	}
-}
-declare namespace sinon{
-	// sinon.useFakeXMLHttpRequest.!ret
-	
-	/**
-	 * 
-	 */
-	interface UseFakeXMLHttpRequestRet {
-				
-		/**
-		 * 
-		 */
-		useFilters : boolean;
-		
-		/**
-		 * 
-		 */
-		statusCodes : {
-			
-			/**
-			 * 
-			 */
-			FakeXMLHttpRequest : {
-								
-				/**
-				 * 
-				 */
-				statusCodes : string;
-			}
-		}
-		
-		/**
-		 * 
-		 */
-		prototype : {
-						
-			/**
-			 * 
-			 */
-			async : boolean;
-						
-			/**
-			 * 
-			 */
-			errorFlag : boolean;
-						
-			/**
-			 * 
-			 */
-			sendFlag : boolean;
-						
-			/**
-			 * 
-			 */
-			response : string;
-						
-			/**
-			 * 
-			 */
-			aborted : boolean;
-						
-			/**
-			 * 
-			 */
-			responseText : string;
-						
-			/**
-			 * 
-			 */
-			status : number;
-						
-			/**
-			 * 
-			 */
-			toString : /* !proto.toString */ any;
-						
-			/**
-			 * 
-			 */
-			open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
-						
-			/**
-			 * 
-			 */
-			readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
-						
-			/**
-			 * 
-			 */
-			setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
-						
-			/**
-			 * 
-			 */
-			setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
-						
-			/**
-			 * 
-			 */
-			send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
-						
-			/**
-			 * 
-			 */
-			abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
-						
-			/**
-			 * 
-			 */
-			requestHeaders : /* sinon.FakeXMLHttpRequest.prototype.requestHeaders */ any;
-						
-			/**
-			 * 
-			 */
-			responseHeaders : any;
-						
-			/**
-			 * 
-			 */
-			getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
-						
-			/**
-			 * 
-			 */
-			getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
-						
-			/**
-			 * 
-			 */
-			setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
-						
-			/**
-			 * 
-			 */
-			respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
-						
-			/**
-			 * 
-			 */
-			uploadProgress : /* sinon.FakeXMLHttpRequest.prototype.uploadProgress */ any;
-						
-			/**
-			 * 
-			 */
-			downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
-						
-			/**
-			 * 
-			 */
-			uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
-						
-			/**
-			 * 
-			 */
-			addEventListener : /* sinon.EventTarget.addEventListener */ any;
-						
-			/**
-			 * 
-			 */
-			removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
-						
-			/**
-			 * 
-			 */
-			dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
-						
-			/**
-			 * 
-			 */
-			eventListeners : /* sinon.EventTarget.eventListeners */ any;
-		}
-				
-		/**
-		 * 
-		 */
-		UNSENT : number;
-				
-		/**
-		 * 
-		 */
-		OPENED : number;
-				
-		/**
-		 * 
-		 */
-		HEADERS_RECEIVED : number;
-				
-		/**
-		 * 
-		 */
-		LOADING : number;
-				
-		/**
-		 * 
-		 */
-		DONE : number;
-				
-		/**
-		 * 
-		 */
-		toString : /* !proto.toString */ any;
-				
-		/**
-		 * 
-		 */
-		onCreate : /* sinon.FakeXDomainRequest.onCreate */ any;
-				
-		/**
-		 * 
-		 */
-		filters : /* sinon.FakeXMLHttpRequest.filters */ any;
-				
-		/**
-		 * 
-		 */
-		addFilter : /* sinon.FakeXMLHttpRequest.addFilter */ any;
-				
-		/**
-		 * 
-		 */
-		defake : /* sinon.FakeXMLHttpRequest.defake */ any;
-				
-		/**
-		 * 
-		 */
-		parseXML : /* sinon.FakeXMLHttpRequest.parseXML */ any;
-				
-		/**
-		 * 
-		 */
-		restore : /* sinon.FakeXMLHttpRequest.restore */ any;
-	}
-}
-declare namespace sinon.FakeXMLHttpRequest{
-	// sinon.FakeXMLHttpRequest.defake.!1
-	type Defake1 = Array<any>;
-}
 declare namespace sinon{
 	// sinon.wrapMethod.!0
 	
@@ -661,11 +94,17 @@ declare namespace sinon{
 	 * 
 	 */
 	interface WrapMethod2 {
-				
+		
 		/**
 		 * 
 		 */
-		restore(): void;
+		restore : {
+						
+			/**
+			 * 
+			 */
+			sinon : boolean;
+		}
 				
 		/**
 		 * 
@@ -685,6 +124,11 @@ declare namespace sinon{
 		 * 
 		 */
 		mock : /*no type*/{};
+				
+		/**
+		 * 
+		 */
+		inject : /*no type*/{};
 				
 		/**
 		 * 
@@ -725,11 +169,6 @@ declare namespace sinon{
 		 * 
 		 */
 		stub : /*no type*/{};
-				
-		/**
-		 * 
-		 */
-		inject : /* sinon.collection.inject */ any;
 	}
 }
 declare namespace sinon.Create0{
@@ -803,37 +242,6 @@ declare namespace sinon.Create0{
 		/**
 		 * 
 		 */
-		formatters : {
-						
-			/**
-			 * 
-			 */
-			c : /*no type*/{};
-						
-			/**
-			 * 
-			 */
-			n : /* sinon.spy.formatters.n */ any;
-						
-			/**
-			 * 
-			 */
-			C : /* sinon.spy.formatters.C */ any;
-						
-			/**
-			 * 
-			 */
-			t : /* sinon.spy.formatters.t */ any;
-						
-			/**
-			 * 
-			 */
-			"*" : /* sinon.spy.formatters.* */ any;
-		}
-		
-		/**
-		 * 
-		 */
 		behaviors : {
 		}
 				
@@ -895,12 +303,12 @@ declare namespace sinon.Create0{
 		/**
 		 * 
 		 */
-		func : /* sinon.stub.!0 */ any;
+		func : /* sinon.mock.expectations.<i>.<i> */ any;
 				
 		/**
 		 * 
 		 */
-		restore : /* sinon.wrapMethod.!2.restore */ any;
+		restore : /* sinon.mock.expectations.<i>.<i>.restore */ any;
 		
 		/**
 		 * 
@@ -916,17 +324,17 @@ declare namespace sinon.Create0{
 		/**
 		 * 
 		 */
+		firstCall : /* sinon.spy.firstCall */ any;
+				
+		/**
+		 * 
+		 */
 		toString : /* sinon.expectation.toString */ any;
 				
 		/**
 		 * 
 		 */
 		instantiateFake : /* sinon.spy.create */ any;
-				
-		/**
-		 * 
-		 */
-		firstCall : /* sinon.spy.firstCall */ any;
 				
 		/**
 		 * 
@@ -952,6 +360,11 @@ declare namespace sinon.Create0{
 		 * 
 		 */
 		callIds : /* sinon.spy.callIds */ any;
+				
+		/**
+		 * 
+		 */
+		stacks : /* sinon.spy.stacks */ any;
 				
 		/**
 		 * 
@@ -992,6 +405,37 @@ declare namespace sinon.Create0{
 		 * 
 		 */
 		printf : /* sinon.spy.printf */ any;
+		
+		/**
+		 * 
+		 */
+		formatters : {
+						
+			/**
+			 * 
+			 */
+			c : /* sinon.spy.formatters.c */ any;
+						
+			/**
+			 * 
+			 */
+			n : /* sinon.spy.formatters.n */ any;
+						
+			/**
+			 * 
+			 */
+			C : /* sinon.spy.formatters.C */ any;
+						
+			/**
+			 * 
+			 */
+			t : /* sinon.spy.formatters.t */ any;
+						
+			/**
+			 * 
+			 */
+			"*" : /* sinon.spy.formatters.* */ any;
+		}
 				
 		/**
 		 * 
@@ -1146,196 +590,6 @@ declare namespace sinon.Create0.MockRet{
 		 * 
 		 */
 		invoking : boolean;
-		
-		/**
-		 * 
-		 */
-		formatters : {
-						
-			/**
-			 * 
-			 */
-			c : /*no type*/{};
-						
-			/**
-			 * 
-			 */
-			n : /* sinon.spy.formatters.n */ any;
-						
-			/**
-			 * 
-			 */
-			C : /* sinon.spy.formatters.C */ any;
-						
-			/**
-			 * 
-			 */
-			t : /* sinon.spy.formatters.t */ any;
-						
-			/**
-			 * 
-			 */
-			"*" : /* sinon.spy.formatters.* */ any;
-		}
-				
-		/**
-		 * 
-		 */
-		reset : /* sinon.spy.reset */ any;
-				
-		/**
-		 * 
-		 */
-		secondCall : /* sinon.spy.getCall.!ret */ any;
-				
-		/**
-		 * 
-		 */
-		thirdCall : /* sinon.spy.getCall.!ret */ any;
-				
-		/**
-		 * 
-		 */
-		lastCall : /* sinon.spy.getCall.!ret */ any;
-				
-		/**
-		 * 
-		 */
-		args : /* sinon.spy.args */ any;
-				
-		/**
-		 * 
-		 */
-		returnValues : /* sinon.spy.returnValues */ any;
-				
-		/**
-		 * 
-		 */
-		thisValues : /* sinon.spy.thisValues */ any;
-				
-		/**
-		 * 
-		 */
-		exceptions : /* sinon.spy.exceptions */ any;
-				
-		/**
-		 * 
-		 */
-		callIds : /* sinon.spy.callIds */ any;
-				
-		/**
-		 * 
-		 */
-		create : /* sinon.spy.create */ any;
-				
-		/**
-		 * 
-		 */
-		named : /* sinon.spy.named */ any;
-				
-		/**
-		 * 
-		 */
-		getCalls : /*no type*/{};
-				
-		/**
-		 * 
-		 */
-		firstCall : /* sinon.spy.getCall.!ret */ any;
-				
-		/**
-		 * 
-		 */
-		getCall : /* sinon.spy.getCall */ any;
-				
-		/**
-		 * 
-		 */
-		calledBefore : /* sinon.spy.calledBefore */ any;
-				
-		/**
-		 * 
-		 */
-		calledAfter : /* sinon.spy.calledAfter */ any;
-				
-		/**
-		 * 
-		 */
-		fakes : /* sinon.spy.fakes */ any;
-				
-		/**
-		 * 
-		 */
-		matches : /* sinon.spy.matches */ any;
-				
-		/**
-		 * 
-		 */
-		printf : /* sinon.spy.printf */ any;
-				
-		/**
-		 * 
-		 */
-		invoke : /* sinon.spy.invoke */ any;
-				
-		/**
-		 * 
-		 */
-		withArgs : /* sinon.spy.withArgs */ any;
-	}
-}
-declare namespace sinon.Create0.MockRet.NamedRet.formatters{
-	// sinon.create.!0.mock.!ret.named.!ret.formatters.c.!0
-	
-	/**
-	 * 
-	 */
-	interface C0 {
-				
-		/**
-		 * 
-		 */
-		called : boolean;
-				
-		/**
-		 * 
-		 */
-		notCalled : boolean;
-				
-		/**
-		 * 
-		 */
-		calledOnce : boolean;
-				
-		/**
-		 * 
-		 */
-		calledTwice : boolean;
-				
-		/**
-		 * 
-		 */
-		calledThrice : boolean;
-				
-		/**
-		 * 
-		 */
-		callCount : number;
-				
-		/**
-		 * 
-		 */
-		invoking : boolean;
-				
-		/**
-		 * 
-		 */
-		spyCall : /* sinon.spyCall */ any;
-				
-		/**
-		 * 
-		 */
-		toString : /* !proto.toString */ any;
 				
 		/**
 		 * 
@@ -1390,12 +644,12 @@ declare namespace sinon.Create0.MockRet.NamedRet.formatters{
 		/**
 		 * 
 		 */
-		create : /* sinon.spy.create */ any;
+		stacks : /* sinon.spy.stacks */ any;
 				
 		/**
 		 * 
 		 */
-		invoke : /* sinon.spy.invoke */ any;
+		create : /* sinon.spy.create */ any;
 				
 		/**
 		 * 
@@ -1405,12 +659,12 @@ declare namespace sinon.Create0.MockRet.NamedRet.formatters{
 		/**
 		 * 
 		 */
-		getCall : /* sinon.spy.getCall */ any;
+		getCalls : /*no type*/{};
 				
 		/**
 		 * 
 		 */
-		getCalls : /* sinon.spy.getCalls */ any;
+		getCall : /* sinon.spy.getCall */ any;
 				
 		/**
 		 * 
@@ -1421,11 +675,6 @@ declare namespace sinon.Create0.MockRet.NamedRet.formatters{
 		 * 
 		 */
 		calledAfter : /* sinon.spy.calledAfter */ any;
-				
-		/**
-		 * 
-		 */
-		withArgs : /* sinon.spy.withArgs */ any;
 				
 		/**
 		 * 
@@ -1441,11 +690,47 @@ declare namespace sinon.Create0.MockRet.NamedRet.formatters{
 		 * 
 		 */
 		printf : /* sinon.spy.printf */ any;
+		
+		/**
+		 * 
+		 */
+		formatters : {
+						
+			/**
+			 * 
+			 */
+			c : /* sinon.spy.formatters.c */ any;
+						
+			/**
+			 * 
+			 */
+			n : /* sinon.spy.formatters.n */ any;
+						
+			/**
+			 * 
+			 */
+			C : /* sinon.spy.formatters.C */ any;
+						
+			/**
+			 * 
+			 */
+			t : /* sinon.spy.formatters.t */ any;
+						
+			/**
+			 * 
+			 */
+			"*" : /* sinon.spy.formatters.* */ any;
+		}
 				
 		/**
 		 * 
 		 */
-		formatters : /* sinon.spy.formatters */ any;
+		invoke : /* sinon.spy.invoke */ any;
+				
+		/**
+		 * 
+		 */
+		withArgs : /* sinon.spy.withArgs */ any;
 	}
 }
 declare namespace sinon.Create0.MockRet{
@@ -1637,170 +922,6 @@ declare namespace sinon.Create0.MockRet{
 		fail : /* sinon.expectation.fail */ any;
 	}
 }
-declare namespace sinon.Create0.MockRet.formatters{
-	// sinon.create.!0.mock.!ret.formatters.c.!0
-	
-	/**
-	 * 
-	 */
-	interface C0 {
-				
-		/**
-		 * 
-		 */
-		called : boolean;
-				
-		/**
-		 * 
-		 */
-		notCalled : boolean;
-				
-		/**
-		 * 
-		 */
-		calledOnce : boolean;
-				
-		/**
-		 * 
-		 */
-		calledTwice : boolean;
-				
-		/**
-		 * 
-		 */
-		calledThrice : boolean;
-				
-		/**
-		 * 
-		 */
-		callCount : number;
-				
-		/**
-		 * 
-		 */
-		invoking : boolean;
-				
-		/**
-		 * 
-		 */
-		spyCall : /* sinon.spyCall */ any;
-				
-		/**
-		 * 
-		 */
-		toString : /* !proto.toString */ any;
-				
-		/**
-		 * 
-		 */
-		reset : /* sinon.spy.reset */ any;
-				
-		/**
-		 * 
-		 */
-		firstCall : /* sinon.spy.firstCall */ any;
-				
-		/**
-		 * 
-		 */
-		secondCall : /* sinon.spy.firstCall */ any;
-				
-		/**
-		 * 
-		 */
-		thirdCall : /* sinon.spy.firstCall */ any;
-				
-		/**
-		 * 
-		 */
-		lastCall : /* sinon.spy.firstCall */ any;
-				
-		/**
-		 * 
-		 */
-		args : /* sinon.spy.args */ any;
-				
-		/**
-		 * 
-		 */
-		returnValues : /* sinon.spy.returnValues */ any;
-				
-		/**
-		 * 
-		 */
-		thisValues : /* sinon.spy.thisValues */ any;
-				
-		/**
-		 * 
-		 */
-		exceptions : /* sinon.spy.exceptions */ any;
-				
-		/**
-		 * 
-		 */
-		callIds : /* sinon.spy.callIds */ any;
-				
-		/**
-		 * 
-		 */
-		create : /* sinon.spy.create */ any;
-				
-		/**
-		 * 
-		 */
-		invoke : /* sinon.spy.invoke */ any;
-				
-		/**
-		 * 
-		 */
-		named : /* sinon.spy.named */ any;
-				
-		/**
-		 * 
-		 */
-		getCall : /* sinon.spy.getCall */ any;
-				
-		/**
-		 * 
-		 */
-		getCalls : /* sinon.spy.getCalls */ any;
-				
-		/**
-		 * 
-		 */
-		calledBefore : /* sinon.spy.calledBefore */ any;
-				
-		/**
-		 * 
-		 */
-		calledAfter : /* sinon.spy.calledAfter */ any;
-				
-		/**
-		 * 
-		 */
-		withArgs : /* sinon.spy.withArgs */ any;
-				
-		/**
-		 * 
-		 */
-		fakes : /* sinon.spy.fakes */ any;
-				
-		/**
-		 * 
-		 */
-		matches : /* sinon.spy.matches */ any;
-				
-		/**
-		 * 
-		 */
-		printf : /* sinon.spy.printf */ any;
-				
-		/**
-		 * 
-		 */
-		formatters : /* sinon.spy.formatters */ any;
-	}
-}
 declare namespace sinon.Create0.MockRet.BehaviorsI{
 	// sinon.create.!0.mock.!ret.behaviors.<i>.callsArg.!ret
 	
@@ -1945,6 +1066,489 @@ declare namespace sinon.Create0.MockRet.BehaviorsI{
 		returnsThis : /* sinon.behavior.returnsThis */ any;
 	}
 }
+declare namespace sinon.Create0{
+	// sinon.create.!0.inject.!0
+	
+	/**
+	 * 
+	 */
+	interface Inject0 {
+		
+		/**
+		 * 
+		 */
+		serverPrototype : {
+			
+			/**
+			 * 
+			 */
+			xhr : {
+								
+				/**
+				 * 
+				 */
+				useFilters : boolean;
+				
+				/**
+				 * 
+				 */
+				statusCodes : {
+					
+					/**
+					 * 
+					 */
+					FakeXMLHttpRequest : {
+												
+						/**
+						 * 
+						 */
+						statusCodes : string;
+					}
+				}
+				
+				/**
+				 * 
+				 */
+				prototype : {
+										
+					/**
+					 * 
+					 */
+					async : boolean;
+										
+					/**
+					 * 
+					 */
+					errorFlag : boolean;
+										
+					/**
+					 * 
+					 */
+					sendFlag : boolean;
+										
+					/**
+					 * 
+					 */
+					response : string;
+										
+					/**
+					 * 
+					 */
+					aborted : boolean;
+										
+					/**
+					 * 
+					 */
+					responseText : string;
+					
+					/**
+					 * 
+					 */
+					requestHeaders : {
+												
+						/**
+						 * 
+						 */
+						"Content-Type" : string;
+					}
+										
+					/**
+					 * 
+					 */
+					status : number;
+										
+					/**
+					 * 
+					 */
+					uploadProgress : /*no type*/{};
+										
+					/**
+					 * 
+					 */
+					toString : /* !proto.toString */ any;
+										
+					/**
+					 * 
+					 */
+					open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
+										
+					/**
+					 * 
+					 */
+					readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
+										
+					/**
+					 * 
+					 */
+					setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
+										
+					/**
+					 * 
+					 */
+					setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
+										
+					/**
+					 * 
+					 */
+					send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
+										
+					/**
+					 * 
+					 */
+					abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
+										
+					/**
+					 * 
+					 */
+					getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
+										
+					/**
+					 * 
+					 */
+					getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
+										
+					/**
+					 * 
+					 */
+					setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
+										
+					/**
+					 * 
+					 */
+					respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
+										
+					/**
+					 * 
+					 */
+					downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
+										
+					/**
+					 * 
+					 */
+					uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
+										
+					/**
+					 * 
+					 */
+					addEventListener : /* sinon.EventTarget.addEventListener */ any;
+										
+					/**
+					 * 
+					 */
+					removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
+										
+					/**
+					 * 
+					 */
+					dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
+					
+					/**
+					 * 
+					 */
+					eventListeners : {
+					}
+				}
+								
+				/**
+				 * 
+				 */
+				UNSENT : number;
+								
+				/**
+				 * 
+				 */
+				OPENED : number;
+								
+				/**
+				 * 
+				 */
+				HEADERS_RECEIVED : number;
+								
+				/**
+				 * 
+				 */
+				LOADING : number;
+								
+				/**
+				 * 
+				 */
+				DONE : number;
+								
+				/**
+				 * 
+				 */
+				toString : /* !proto.toString */ any;
+								
+				/**
+				 * 
+				 */
+				filters : /* sinon.FakeXMLHttpRequest.filters */ any;
+								
+				/**
+				 * 
+				 */
+				addFilter : /* sinon.FakeXMLHttpRequest.addFilter */ any;
+								
+				/**
+				 * 
+				 */
+				defake : /* sinon.FakeXMLHttpRequest.defake */ any;
+								
+				/**
+				 * 
+				 */
+				parseXML : /* sinon.FakeXMLHttpRequest.parseXML */ any;
+								
+				/**
+				 * 
+				 */
+				restore : /* sinon.FakeXMLHttpRequest.restore */ any;
+								
+				/**
+				 * 
+				 */
+				onCreate : /* sinon.FakeXDomainRequest.onCreate */ any;
+			}
+						
+			/**
+			 * 
+			 */
+			responding : boolean;
+						
+			/**
+			 * 
+			 */
+			create : /* sinon.fakeServer.create */ any;
+						
+			/**
+			 * 
+			 */
+			configure : /* sinon.fakeServer.configure */ any;
+			
+			/**
+			 * 
+			 */
+			queue : {
+			}
+						
+			/**
+			 * 
+			 */
+			addRequest : /* sinon.fakeServer.addRequest */ any;
+						
+			/**
+			 * 
+			 */
+			getHTTPMethod : /* sinon.fakeServer.getHTTPMethod */ any;
+						
+			/**
+			 * 
+			 */
+			handleRequest : /* sinon.fakeServer.handleRequest */ any;
+						
+			/**
+			 * 
+			 */
+			log : /* sinon.fakeServer.log */ any;
+			
+			/**
+			 * 
+			 */
+			responses : {
+			}
+						
+			/**
+			 * 
+			 */
+			respondWith : /* sinon.fakeServer.respondWith */ any;
+						
+			/**
+			 * 
+			 */
+			response : /* sinon.fakeServer.response */ any;
+						
+			/**
+			 * 
+			 */
+			respond : /* sinon.fakeServer.respond */ any;
+						
+			/**
+			 * 
+			 */
+			processRequest : /* sinon.fakeServer.processRequest */ any;
+						
+			/**
+			 * 
+			 */
+			restore : /* sinon.fakeServer.restore */ any;
+		}
+				
+		/**
+		 * 
+		 */
+		fakes : /* sinon.collection.fakes */ any;
+				
+		/**
+		 * 
+		 */
+		toString : /* !proto.toString */ any;
+		
+		/**
+		 * 
+		 */
+		match : {
+						
+			/**
+			 * 
+			 */
+			defined : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			truthy : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			falsy : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			hasOwn : /* sinon.match.has */ any;
+						
+			/**
+			 * 
+			 */
+			bool : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			number : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			string : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			object : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			func : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			array : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			regexp : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			date : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			isMatcher : /* sinon.match.isMatcher */ any;
+						
+			/**
+			 * 
+			 */
+			any : /* sinon.match.any */ any;
+						
+			/**
+			 * 
+			 */
+			same : /* sinon.match.same */ any;
+						
+			/**
+			 * 
+			 */
+			typeOf : /* sinon.match.typeOf */ any;
+						
+			/**
+			 * 
+			 */
+			instanceOf : /* sinon.match.instanceOf */ any;
+						
+			/**
+			 * 
+			 */
+			has : /* sinon.match.has */ any;
+		}
+				
+		/**
+		 * 
+		 */
+		useFakeTimers : /* sinon.sandbox.useFakeTimers */ any;
+				
+		/**
+		 * 
+		 */
+		useFakeServer : /* sinon.sandbox.useFakeServer */ any;
+				
+		/**
+		 * 
+		 */
+		server : /* sinon.sandbox.server */ any;
+				
+		/**
+		 * 
+		 */
+		inject : /* sinon.sandbox.inject */ any;
+				
+		/**
+		 * 
+		 */
+		restore : /* sinon.sandbox.restore */ any;
+				
+		/**
+		 * 
+		 */
+		restoreContext : /* sinon.sandbox.restoreContext */ any;
+				
+		/**
+		 * 
+		 */
+		injectedKeys : /* sinon.sandbox.injectedKeys */ any;
+				
+		/**
+		 * 
+		 */
+		create : /* sinon.sandbox.create */ any;
+	}
+}
+declare namespace sinon.Create0.Inject0.serverPrototype.xhr.prototype{
+	// sinon.create.!0.inject.!0.serverPrototype.xhr.prototype.uploadProgress.!0
+	
+	/**
+	 * 
+	 */
+	interface UploadProgress0 {
+				
+		/**
+		 * 
+		 */
+		loaded : number;
+				
+		/**
+		 * 
+		 */
+		total : number;
+	}
+}
 declare namespace sinon{
 	// sinon.objectKeys.!ret
 	type ObjectKeysRet = Array<any>;
@@ -1961,15 +1565,6 @@ declare namespace sinon{
 declare namespace sinon{
 	// sinon.calledInOrder.!0
 	type CalledInOrder0 = Array<any>;
-}
-declare namespace sinon{
-	// sinon.spyCall.!ret
-	
-	/**
-	 * 
-	 */
-	interface SpyCallRet {
-	}
 }
 declare namespace sinon.spy{
 	// sinon.spy.reset.!ret
@@ -2093,6 +1688,11 @@ declare namespace sinon.spy{
 		/**
 		 * 
 		 */
+		firstCall : /* sinon.spy.firstCall */ any;
+				
+		/**
+		 * 
+		 */
 		secondCall : /* sinon.spy.firstCall */ any;
 				
 		/**
@@ -2113,17 +1713,12 @@ declare namespace sinon.spy{
 		/**
 		 * 
 		 */
-		func : /* sinon.stub.!0 */ any;
+		func : /* sinon.mock.expectations.<i>.<i> */ any;
 				
 		/**
 		 * 
 		 */
-		restore : /* sinon.wrapMethod.!2.restore */ any;
-				
-		/**
-		 * 
-		 */
-		firstCall : /* sinon.spy.firstCall */ any;
+		restore : /* sinon.mock.expectations.<i>.<i>.restore */ any;
 				
 		/**
 		 * 
@@ -2149,6 +1744,11 @@ declare namespace sinon.spy{
 		 * 
 		 */
 		callIds : /* sinon.spy.callIds */ any;
+				
+		/**
+		 * 
+		 */
+		stacks : /* sinon.spy.stacks */ any;
 				
 		/**
 		 * 
@@ -2388,17 +1988,22 @@ declare namespace sinon.spy.ResetRet{
 		/**
 		 * 
 		 */
-		secondCall : /* sinon.spy.getCall.!ret */ any;
+		firstCall : /* sinon.spy.firstCall */ any;
 				
 		/**
 		 * 
 		 */
-		thirdCall : /* sinon.spy.getCall.!ret */ any;
+		secondCall : /* sinon.spy.firstCall */ any;
 				
 		/**
 		 * 
 		 */
-		lastCall : /* sinon.spy.getCall.!ret */ any;
+		thirdCall : /* sinon.spy.firstCall */ any;
+				
+		/**
+		 * 
+		 */
+		lastCall : /* sinon.spy.firstCall */ any;
 				
 		/**
 		 * 
@@ -2424,6 +2029,11 @@ declare namespace sinon.spy.ResetRet{
 		 * 
 		 */
 		callIds : /* sinon.spy.callIds */ any;
+				
+		/**
+		 * 
+		 */
+		stacks : /* sinon.spy.stacks */ any;
 				
 		/**
 		 * 
@@ -2474,11 +2084,6 @@ declare namespace sinon.spy.ResetRet{
 		 * 
 		 */
 		formatters : /* sinon.spy.formatters */ any;
-				
-		/**
-		 * 
-		 */
-		firstCall : /* sinon.spy.getCall.!ret */ any;
 				
 		/**
 		 * 
@@ -2879,17 +2484,22 @@ declare namespace sinon.spy{
 		/**
 		 * 
 		 */
-		secondCall : /* sinon.spy.getCall.!ret */ any;
+		firstCall : /* sinon.spy.firstCall */ any;
 				
 		/**
 		 * 
 		 */
-		thirdCall : /* sinon.spy.getCall.!ret */ any;
+		secondCall : /* sinon.spy.firstCall */ any;
 				
 		/**
 		 * 
 		 */
-		lastCall : /* sinon.spy.getCall.!ret */ any;
+		thirdCall : /* sinon.spy.firstCall */ any;
+				
+		/**
+		 * 
+		 */
+		lastCall : /* sinon.spy.firstCall */ any;
 				
 		/**
 		 * 
@@ -2915,6 +2525,11 @@ declare namespace sinon.spy{
 		 * 
 		 */
 		callIds : /* sinon.spy.callIds */ any;
+				
+		/**
+		 * 
+		 */
+		stacks : /* sinon.spy.stacks */ any;
 				
 		/**
 		 * 
@@ -2974,21 +2589,7 @@ declare namespace sinon.spy{
 		/**
 		 * 
 		 */
-		firstCall : /* sinon.spy.getCall.!ret */ any;
-				
-		/**
-		 * 
-		 */
 		withArgs : /* sinon.spy.withArgs */ any;
-	}
-}
-declare namespace sinon.spy{
-	// sinon.spy.getCall.!ret
-	
-	/**
-	 * 
-	 */
-	interface GetCallRet {
 	}
 }
 declare namespace sinon.spy{
@@ -3301,7 +2902,7 @@ declare namespace sinon{
 	// sinon.stub.!0
 	
 	/**
-	 * Retain the function length:
+	 * 
 	 */
 	interface Stub0 {
 				
@@ -3398,7 +2999,247 @@ declare namespace sinon{
 		/**
 		 * 
 		 */
-		(): void;
+		instantiateFake : /* sinon.spy.create */ any;
+				
+		/**
+		 * 
+		 */
+		spyCall : /* sinon.spyCall */ any;
+				
+		/**
+		 * 
+		 */
+		reset : /* sinon.spy.reset */ any;
+				
+		/**
+		 * 
+		 */
+		firstCall : /* sinon.spy.firstCall */ any;
+				
+		/**
+		 * 
+		 */
+		secondCall : /* sinon.spy.firstCall */ any;
+				
+		/**
+		 * 
+		 */
+		thirdCall : /* sinon.spy.firstCall */ any;
+				
+		/**
+		 * 
+		 */
+		lastCall : /* sinon.spy.firstCall */ any;
+				
+		/**
+		 * 
+		 */
+		args : /* sinon.spy.args */ any;
+				
+		/**
+		 * 
+		 */
+		returnValues : /* sinon.spy.returnValues */ any;
+				
+		/**
+		 * 
+		 */
+		thisValues : /* sinon.spy.thisValues */ any;
+				
+		/**
+		 * 
+		 */
+		exceptions : /* sinon.spy.exceptions */ any;
+				
+		/**
+		 * 
+		 */
+		callIds : /* sinon.spy.callIds */ any;
+				
+		/**
+		 * 
+		 */
+		stacks : /* sinon.spy.stacks */ any;
+				
+		/**
+		 * 
+		 */
+		named : /* sinon.spy.named */ any;
+				
+		/**
+		 * 
+		 */
+		getCall : /* sinon.spy.getCall */ any;
+				
+		/**
+		 * 
+		 */
+		getCalls : /* sinon.spy.getCalls */ any;
+				
+		/**
+		 * 
+		 */
+		calledBefore : /* sinon.spy.calledBefore */ any;
+				
+		/**
+		 * 
+		 */
+		calledAfter : /* sinon.spy.calledAfter */ any;
+				
+		/**
+		 * 
+		 */
+		fakes : /* sinon.spy.fakes */ any;
+				
+		/**
+		 * 
+		 */
+		matches : /* sinon.spy.matches */ any;
+				
+		/**
+		 * 
+		 */
+		printf : /* sinon.spy.printf */ any;
+				
+		/**
+		 * 
+		 */
+		formatters : /* sinon.spy.formatters */ any;
+				
+		/**
+		 * 
+		 */
+		func : /* sinon.mock.expectations.<i>.<i> */ any;
+				
+		/**
+		 * 
+		 */
+		behaviors : /* sinon.stub.behaviors */ any;
+				
+		/**
+		 * 
+		 */
+		restore : /* sinon.mock.expectations.<i>.<i>.restore */ any;
+				
+		/**
+		 * 
+		 */
+		resetBehavior : /* sinon.stub.resetBehavior */ any;
+				
+		/**
+		 * 
+		 */
+		onCall : /* sinon.stub.onCall */ any;
+				
+		/**
+		 * 
+		 */
+		onFirstCall : /* sinon.stub.onFirstCall */ any;
+				
+		/**
+		 * 
+		 */
+		onSecondCall : /* sinon.stub.onSecondCall */ any;
+				
+		/**
+		 * 
+		 */
+		onThirdCall : /* sinon.stub.onThirdCall */ any;
+				
+		/**
+		 * 
+		 */
+		create : /* sinon.expectation.create */ any;
+				
+		/**
+		 * 
+		 */
+		invoke : /* sinon.expectation.invoke */ any;
+				
+		/**
+		 * 
+		 */
+		atLeast : /* sinon.expectation.atLeast */ any;
+				
+		/**
+		 * 
+		 */
+		atMost : /* sinon.expectation.atMost */ any;
+				
+		/**
+		 * 
+		 */
+		never : /* sinon.expectation.never */ any;
+				
+		/**
+		 * 
+		 */
+		once : /* sinon.expectation.once */ any;
+				
+		/**
+		 * 
+		 */
+		twice : /* sinon.expectation.twice */ any;
+				
+		/**
+		 * 
+		 */
+		thrice : /* sinon.expectation.thrice */ any;
+				
+		/**
+		 * 
+		 */
+		exactly : /* sinon.expectation.exactly */ any;
+				
+		/**
+		 * 
+		 */
+		met : /* sinon.expectation.met */ any;
+				
+		/**
+		 * 
+		 */
+		verifyCallAllowed : /* sinon.expectation.verifyCallAllowed */ any;
+				
+		/**
+		 * 
+		 */
+		allowsCall : /* sinon.expectation.allowsCall */ any;
+				
+		/**
+		 * 
+		 */
+		expectedArguments : /* sinon.expectation.expectedArguments */ any;
+				
+		/**
+		 * 
+		 */
+		withExactArgs : /* sinon.expectation.withExactArgs */ any;
+				
+		/**
+		 * 
+		 */
+		on : /* sinon.expectation.on */ any;
+				
+		/**
+		 * 
+		 */
+		toString : /* sinon.expectation.toString */ any;
+				
+		/**
+		 * 
+		 */
+		verify : /* sinon.expectation.verify */ any;
+				
+		/**
+		 * 
+		 */
+		pass : /* sinon.expectation.pass */ any;
+				
+		/**
+		 * 
+		 */
+		fail : /* sinon.expectation.fail */ any;
 	}
 }
 declare namespace sinon.Stub0{
@@ -3643,6 +3484,110 @@ declare namespace sinon.mock{
 		invokeMethod : /* sinon.mock.invokeMethod */ any;
 	}
 }
+declare namespace sinon.mock.expectations{
+	// sinon.mock.expectations.<i>.<i>
+	
+	/**
+	 * Retain the function length:
+	 */
+	interface ExpectationsII {
+				
+		/**
+		 * 
+		 */
+		isSinonProxy : boolean;
+				
+		/**
+		 * 
+		 */
+		displayName : string;
+				
+		/**
+		 * 
+		 */
+		id : string;
+				
+		/**
+		 * 
+		 */
+		called : boolean;
+				
+		/**
+		 * 
+		 */
+		notCalled : boolean;
+				
+		/**
+		 * 
+		 */
+		calledOnce : boolean;
+				
+		/**
+		 * 
+		 */
+		calledTwice : boolean;
+				
+		/**
+		 * 
+		 */
+		calledThrice : boolean;
+				
+		/**
+		 * 
+		 */
+		callCount : number;
+				
+		/**
+		 * 
+		 */
+		invoking : boolean;
+				
+		/**
+		 * 
+		 */
+		restore(): void;
+				
+		/**
+		 * 
+		 */
+		returnThis : boolean;
+				
+		/**
+		 * 
+		 */
+		method : string;
+				
+		/**
+		 * 
+		 */
+		minCalls : number;
+				
+		/**
+		 * 
+		 */
+		maxCalls : number;
+				
+		/**
+		 * 
+		 */
+		limitsSet : boolean;
+				
+		/**
+		 * 
+		 */
+		failed : boolean;
+				
+		/**
+		 * 
+		 */
+		expectsExactArgCount : boolean;
+				
+		/**
+		 * 
+		 */
+		(): void;
+	}
+}
 declare namespace sinon.mock{
 	// sinon.mock.invokeMethod.!2
 	type InvokeMethod2 = Array<any>;
@@ -3661,9 +3606,982 @@ declare namespace sinon.collection{
 		restore(): void;
 	}
 }
+declare namespace sinon.collection{
+	// sinon.collection.inject.!0
+	
+	/**
+	 * 
+	 */
+	interface Inject0 {
+		
+		/**
+		 * 
+		 */
+		serverPrototype : {
+			
+			/**
+			 * 
+			 */
+			xhr : {
+								
+				/**
+				 * 
+				 */
+				useFilters : boolean;
+				
+				/**
+				 * 
+				 */
+				statusCodes : {
+					
+					/**
+					 * 
+					 */
+					FakeXMLHttpRequest : {
+												
+						/**
+						 * 
+						 */
+						statusCodes : string;
+					}
+				}
+				
+				/**
+				 * 
+				 */
+				prototype : {
+										
+					/**
+					 * 
+					 */
+					async : boolean;
+										
+					/**
+					 * 
+					 */
+					errorFlag : boolean;
+										
+					/**
+					 * 
+					 */
+					sendFlag : boolean;
+										
+					/**
+					 * 
+					 */
+					response : string;
+										
+					/**
+					 * 
+					 */
+					aborted : boolean;
+										
+					/**
+					 * 
+					 */
+					responseText : string;
+					
+					/**
+					 * 
+					 */
+					requestHeaders : {
+												
+						/**
+						 * 
+						 */
+						"Content-Type" : string;
+					}
+										
+					/**
+					 * 
+					 */
+					status : number;
+										
+					/**
+					 * 
+					 */
+					uploadProgress : /*no type*/{};
+										
+					/**
+					 * 
+					 */
+					toString : /* !proto.toString */ any;
+										
+					/**
+					 * 
+					 */
+					open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
+										
+					/**
+					 * 
+					 */
+					readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
+										
+					/**
+					 * 
+					 */
+					setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
+										
+					/**
+					 * 
+					 */
+					setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
+										
+					/**
+					 * 
+					 */
+					send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
+										
+					/**
+					 * 
+					 */
+					abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
+										
+					/**
+					 * 
+					 */
+					getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
+										
+					/**
+					 * 
+					 */
+					getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
+										
+					/**
+					 * 
+					 */
+					setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
+										
+					/**
+					 * 
+					 */
+					respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
+										
+					/**
+					 * 
+					 */
+					downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
+										
+					/**
+					 * 
+					 */
+					uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
+										
+					/**
+					 * 
+					 */
+					addEventListener : /* sinon.EventTarget.addEventListener */ any;
+										
+					/**
+					 * 
+					 */
+					removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
+										
+					/**
+					 * 
+					 */
+					dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
+					
+					/**
+					 * 
+					 */
+					eventListeners : {
+					}
+				}
+								
+				/**
+				 * 
+				 */
+				UNSENT : number;
+								
+				/**
+				 * 
+				 */
+				OPENED : number;
+								
+				/**
+				 * 
+				 */
+				HEADERS_RECEIVED : number;
+								
+				/**
+				 * 
+				 */
+				LOADING : number;
+								
+				/**
+				 * 
+				 */
+				DONE : number;
+								
+				/**
+				 * 
+				 */
+				toString : /* !proto.toString */ any;
+								
+				/**
+				 * 
+				 */
+				onCreate : /* sinon.FakeXDomainRequest.onCreate */ any;
+								
+				/**
+				 * 
+				 */
+				filters : /* sinon.FakeXMLHttpRequest.filters */ any;
+								
+				/**
+				 * 
+				 */
+				addFilter : /* sinon.FakeXMLHttpRequest.addFilter */ any;
+								
+				/**
+				 * 
+				 */
+				defake : /* sinon.FakeXMLHttpRequest.defake */ any;
+								
+				/**
+				 * 
+				 */
+				parseXML : /* sinon.FakeXMLHttpRequest.parseXML */ any;
+								
+				/**
+				 * 
+				 */
+				restore : /* sinon.FakeXMLHttpRequest.restore */ any;
+			}
+						
+			/**
+			 * 
+			 */
+			responding : boolean;
+			
+			/**
+			 * 
+			 */
+			queue : {
+			}
+						
+			/**
+			 * 
+			 */
+			create : /* sinon.fakeServer.create */ any;
+						
+			/**
+			 * 
+			 */
+			configure : /* sinon.fakeServer.configure */ any;
+						
+			/**
+			 * 
+			 */
+			addRequest : /* sinon.fakeServer.addRequest */ any;
+						
+			/**
+			 * 
+			 */
+			getHTTPMethod : /* sinon.fakeServer.getHTTPMethod */ any;
+						
+			/**
+			 * 
+			 */
+			handleRequest : /* sinon.fakeServer.handleRequest */ any;
+						
+			/**
+			 * 
+			 */
+			log : /* sinon.fakeServer.log */ any;
+			
+			/**
+			 * 
+			 */
+			responses : {
+			}
+						
+			/**
+			 * 
+			 */
+			respondWith : /* sinon.fakeServer.respondWith */ any;
+						
+			/**
+			 * 
+			 */
+			response : /* sinon.fakeServer.response */ any;
+						
+			/**
+			 * 
+			 */
+			respond : /* sinon.fakeServer.respond */ any;
+						
+			/**
+			 * 
+			 */
+			processRequest : /* sinon.fakeServer.processRequest */ any;
+						
+			/**
+			 * 
+			 */
+			restore : /* sinon.fakeServer.restore */ any;
+		}
+				
+		/**
+		 * 
+		 */
+		fakes : /* sinon.collection.fakes */ any;
+				
+		/**
+		 * 
+		 */
+		toString : /* !proto.toString */ any;
+				
+		/**
+		 * 
+		 */
+		match : /* sinon.match */ any;
+				
+		/**
+		 * 
+		 */
+		server : /* sinon.sandbox.server */ any;
+				
+		/**
+		 * 
+		 */
+		useFakeTimers : /* sinon.sandbox.useFakeTimers */ any;
+				
+		/**
+		 * 
+		 */
+		useFakeServer : /* sinon.sandbox.useFakeServer */ any;
+				
+		/**
+		 * 
+		 */
+		inject : /* sinon.sandbox.inject */ any;
+				
+		/**
+		 * 
+		 */
+		restore : /* sinon.sandbox.restore */ any;
+				
+		/**
+		 * 
+		 */
+		restoreContext : /* sinon.sandbox.restoreContext */ any;
+				
+		/**
+		 * 
+		 */
+		injectedKeys : /* sinon.sandbox.injectedKeys */ any;
+				
+		/**
+		 * 
+		 */
+		create : /* sinon.sandbox.create */ any;
+	}
+}
+declare namespace sinon.collection.Inject0.serverPrototype.xhr.prototype{
+	// sinon.collection.inject.!0.serverPrototype.xhr.prototype.uploadProgress.!0
+	
+	/**
+	 * 
+	 */
+	interface UploadProgress0 {
+				
+		/**
+		 * 
+		 */
+		loaded : number;
+				
+		/**
+		 * 
+		 */
+		total : number;
+	}
+}
+declare namespace sinon.Event.prototype{
+	// sinon.Event.prototype.initEvent.!3
+	
+	/**
+	 * 
+	 */
+	interface InitEvent3 {
+				
+		/**
+		 * 
+		 */
+		async : boolean;
+				
+		/**
+		 * 
+		 */
+		errorFlag : boolean;
+				
+		/**
+		 * 
+		 */
+		sendFlag : boolean;
+				
+		/**
+		 * 
+		 */
+		response : string;
+				
+		/**
+		 * 
+		 */
+		aborted : boolean;
+				
+		/**
+		 * 
+		 */
+		responseText : string;
+		
+		/**
+		 * 
+		 */
+		requestHeaders : {
+						
+			/**
+			 * 
+			 */
+			"Content-Type" : string;
+		}
+				
+		/**
+		 * 
+		 */
+		status : number;
+				
+		/**
+		 * 
+		 */
+		uploadProgress : /*no type*/{};
+				
+		/**
+		 * 
+		 */
+		open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
+				
+		/**
+		 * 
+		 */
+		readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
+				
+		/**
+		 * 
+		 */
+		setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
+				
+		/**
+		 * 
+		 */
+		setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
+				
+		/**
+		 * 
+		 */
+		send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
+				
+		/**
+		 * 
+		 */
+		abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
+				
+		/**
+		 * 
+		 */
+		getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
+				
+		/**
+		 * 
+		 */
+		getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
+				
+		/**
+		 * 
+		 */
+		setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
+				
+		/**
+		 * 
+		 */
+		respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
+				
+		/**
+		 * 
+		 */
+		downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
+				
+		/**
+		 * 
+		 */
+		uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
+	}
+}
+declare namespace sinon.Event.prototype.InitEvent3{
+	// sinon.Event.prototype.initEvent.!3.uploadProgress.!0
+	
+	/**
+	 * 
+	 */
+	interface UploadProgress0 {
+				
+		/**
+		 * 
+		 */
+		loaded : number;
+				
+		/**
+		 * 
+		 */
+		total : number;
+	}
+}
+declare namespace sinon.Event.prototype.target{
+	// sinon.Event.prototype.target.uploadProgress.!0
+	
+	/**
+	 * 
+	 */
+	interface UploadProgress0 {
+				
+		/**
+		 * 
+		 */
+		loaded : number;
+				
+		/**
+		 * 
+		 */
+		total : number;
+	}
+}
+declare namespace sinon{
+	// sinon.ProgressEvent.!1
+	
+	/**
+	 * 
+	 */
+	interface ProgressEvent1 {
+				
+		/**
+		 * 
+		 */
+		loaded : number;
+				
+		/**
+		 * 
+		 */
+		total : number;
+	}
+}
+declare namespace sinon{
+	// sinon.CustomEvent.!1
+	
+	/**
+	 * 
+	 */
+	interface CustomEvent1 {
+	}
+}
 declare namespace sinon.logError{
 	// sinon.logError.setTimeout.!0
 	type SetTimeout0 = (() => void);
+}
+declare namespace sinon{
+	// sinon.useFakeXDomainRequest.!ret
+	
+	/**
+	 * 
+	 */
+	interface UseFakeXDomainRequestRet {
+		
+		/**
+		 * 
+		 */
+		prototype : {
+						
+			/**
+			 * Access to this should actually throw an error
+			 */
+			responseText : string;
+						
+			/**
+			 * 
+			 */
+			sendFlag : boolean;
+						
+			/**
+			 * 
+			 */
+			readyState : number;
+						
+			/**
+			 * 
+			 */
+			errorFlag : boolean;
+						
+			/**
+			 * 
+			 */
+			aborted : boolean;
+						
+			/**
+			 * 
+			 */
+			status : number;
+						
+			/**
+			 * 
+			 */
+			isTimeout : boolean;
+						
+			/**
+			 * 
+			 */
+			toString : /* !proto.toString */ any;
+						
+			/**
+			 * 
+			 */
+			addEventListener : /* sinon.EventTarget.addEventListener */ any;
+						
+			/**
+			 * 
+			 */
+			removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
+						
+			/**
+			 * 
+			 */
+			dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
+						
+			/**
+			 * 
+			 */
+			eventListeners : /* sinon.EventTarget.eventListeners */ any;
+						
+			/**
+			 * 
+			 */
+			open : /* sinon.FakeXDomainRequest.prototype.open */ any;
+						
+			/**
+			 * 
+			 */
+			readyStateChange : /* sinon.FakeXDomainRequest.prototype.readyStateChange */ any;
+						
+			/**
+			 * 
+			 */
+			send : /* sinon.FakeXDomainRequest.prototype.send */ any;
+						
+			/**
+			 * 
+			 */
+			abort : /* sinon.FakeXDomainRequest.prototype.abort */ any;
+						
+			/**
+			 * 
+			 */
+			setResponseBody : /* sinon.FakeXDomainRequest.prototype.setResponseBody */ any;
+						
+			/**
+			 * 
+			 */
+			respond : /* sinon.FakeXDomainRequest.prototype.respond */ any;
+						
+			/**
+			 * 
+			 */
+			simulatetimeout : /* sinon.FakeXDomainRequest.prototype.simulatetimeout */ any;
+		}
+				
+		/**
+		 * 
+		 */
+		UNSENT : number;
+				
+		/**
+		 * 
+		 */
+		OPENED : number;
+				
+		/**
+		 * 
+		 */
+		LOADING : number;
+				
+		/**
+		 * 
+		 */
+		DONE : number;
+				
+		/**
+		 * 
+		 */
+		toString : /* !proto.toString */ any;
+				
+		/**
+		 * 
+		 */
+		restore : /* sinon.FakeXDomainRequest.restore */ any;
+				
+		/**
+		 * 
+		 */
+		onCreate : /* sinon.FakeXDomainRequest.onCreate */ any;
+	}
+}
+declare namespace sinon{
+	// sinon.useFakeXMLHttpRequest.!ret
+	
+	/**
+	 * 
+	 */
+	interface UseFakeXMLHttpRequestRet {
+				
+		/**
+		 * 
+		 */
+		useFilters : boolean;
+		
+		/**
+		 * 
+		 */
+		statusCodes : {
+			
+			/**
+			 * 
+			 */
+			FakeXMLHttpRequest : {
+								
+				/**
+				 * 
+				 */
+				statusCodes : string;
+			}
+		}
+		
+		/**
+		 * 
+		 */
+		prototype : {
+						
+			/**
+			 * 
+			 */
+			async : boolean;
+						
+			/**
+			 * 
+			 */
+			errorFlag : boolean;
+						
+			/**
+			 * 
+			 */
+			sendFlag : boolean;
+						
+			/**
+			 * 
+			 */
+			response : string;
+						
+			/**
+			 * 
+			 */
+			aborted : boolean;
+						
+			/**
+			 * 
+			 */
+			responseText : string;
+						
+			/**
+			 * 
+			 */
+			status : number;
+						
+			/**
+			 * 
+			 */
+			toString : /* !proto.toString */ any;
+						
+			/**
+			 * 
+			 */
+			open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
+						
+			/**
+			 * 
+			 */
+			readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
+						
+			/**
+			 * 
+			 */
+			setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
+						
+			/**
+			 * 
+			 */
+			setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
+						
+			/**
+			 * 
+			 */
+			send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
+						
+			/**
+			 * 
+			 */
+			abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
+						
+			/**
+			 * 
+			 */
+			requestHeaders : /* sinon.FakeXMLHttpRequest.prototype.requestHeaders */ any;
+						
+			/**
+			 * 
+			 */
+			responseHeaders : any;
+						
+			/**
+			 * 
+			 */
+			getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
+						
+			/**
+			 * 
+			 */
+			getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
+						
+			/**
+			 * 
+			 */
+			setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
+						
+			/**
+			 * 
+			 */
+			respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
+						
+			/**
+			 * 
+			 */
+			uploadProgress : /* sinon.FakeXMLHttpRequest.prototype.uploadProgress */ any;
+						
+			/**
+			 * 
+			 */
+			downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
+						
+			/**
+			 * 
+			 */
+			uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
+						
+			/**
+			 * 
+			 */
+			addEventListener : /* sinon.EventTarget.addEventListener */ any;
+						
+			/**
+			 * 
+			 */
+			removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
+						
+			/**
+			 * 
+			 */
+			dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
+						
+			/**
+			 * 
+			 */
+			eventListeners : /* sinon.EventTarget.eventListeners */ any;
+		}
+				
+		/**
+		 * 
+		 */
+		UNSENT : number;
+				
+		/**
+		 * 
+		 */
+		OPENED : number;
+				
+		/**
+		 * 
+		 */
+		HEADERS_RECEIVED : number;
+				
+		/**
+		 * 
+		 */
+		LOADING : number;
+				
+		/**
+		 * 
+		 */
+		DONE : number;
+				
+		/**
+		 * 
+		 */
+		toString : /* !proto.toString */ any;
+				
+		/**
+		 * 
+		 */
+		onCreate : /* sinon.FakeXDomainRequest.onCreate */ any;
+				
+		/**
+		 * 
+		 */
+		filters : /* sinon.FakeXMLHttpRequest.filters */ any;
+				
+		/**
+		 * 
+		 */
+		addFilter : /* sinon.FakeXMLHttpRequest.addFilter */ any;
+				
+		/**
+		 * 
+		 */
+		defake : /* sinon.FakeXMLHttpRequest.defake */ any;
+				
+		/**
+		 * 
+		 */
+		parseXML : /* sinon.FakeXMLHttpRequest.parseXML */ any;
+				
+		/**
+		 * 
+		 */
+		restore : /* sinon.FakeXMLHttpRequest.restore */ any;
+	}
+}
+declare namespace sinon.FakeXMLHttpRequest{
+	// sinon.FakeXMLHttpRequest.defake.!1
+	type Defake1 = Array<any>;
+}
+declare namespace sinon.fakeServer{
+	// sinon.fakeServer.responses.<i>
+	
+	/**
+	 * 
+	 */
+	interface ResponsesI {
+				
+		/**
+		 * 
+		 */
+		response : Array<any>;
+	}
 }
 declare namespace sinon.sandbox{
 	// sinon.sandbox.create.!0
@@ -3681,20 +4599,6 @@ declare namespace sinon{
 declare namespace sinon{
 	// sinon.test.!ret
 	type TestRet = (() => void);
-}
-declare namespace sinon.sandbox.server{
-	// sinon.sandbox.server.responses.<i>
-	
-	/**
-	 * 
-	 */
-	interface ResponsesI {
-				
-		/**
-		 * 
-		 */
-		response : Array<any>;
-	}
 }
 declare namespace sinon.Create0.MockRet.NamedRet{
 	// sinon.create.!0.mock.!ret.named.!ret.getCalls.!ret
@@ -3883,911 +4787,9 @@ declare namespace formatio{
 }
 
 /**
- * Sinon core utilities. For internal use only.
- * 
- * @author Christian Johansen (christian@cjohansen.no)
- * @license BSD
- * 
- * Copyright (c) 2010-2013 Christian Johansen
+ * eslint-disable-line no-unused-vars
  */
 declare namespace sinon{
-		
-	/**
-	 * 
-	 */
-	function useFakeTimers(): void;
-	
-	/**
-	 * 
-	 */
-	namespace clock{
-				
-		/**
-		 * 
-		 * @param now 
-		 */
-		function create(now : any): void;
-	}
-	
-	/**
-	 * 
-	 */
-	var timers : {
-				
-		/**
-		 * 
-		 */
-		Date : Date;
-	}
-	
-	/**
-	 * 
-	 */
-	interface Event {
-				
-		/**
-		 * 
-		 * @param type 
-		 * @param bubbles 
-		 * @param cancelable 
-		 * @param target 
-		 */
-		new (type : string, bubbles : boolean, cancelable : boolean, target : /* sinon.ProgressEvent.target */ any);
-				
-		/**
-		 * 
-		 * @param type 
-		 * @param bubbles 
-		 * @param cancelable 
-		 * @param target 
-		 */
-		initEvent(type : string, bubbles : boolean, cancelable : boolean, target : sinon.Event.prototype.InitEvent3): void;
-				
-		/**
-		 * 
-		 */
-		stopPropagation(): void;
-				
-		/**
-		 * 
-		 */
-		preventDefault(): void;
-				
-		/**
-		 * 
-		 */
-		type : string;
-				
-		/**
-		 * 
-		 */
-		bubbles : boolean;
-				
-		/**
-		 * 
-		 */
-		cancelable : boolean;
-		
-		/**
-		 * 
-		 */
-		target : {
-						
-			/**
-			 * 
-			 */
-			async : boolean;
-						
-			/**
-			 * 
-			 */
-			errorFlag : boolean;
-						
-			/**
-			 * 
-			 */
-			sendFlag : boolean;
-						
-			/**
-			 * 
-			 */
-			response : string;
-						
-			/**
-			 * 
-			 */
-			aborted : boolean;
-						
-			/**
-			 * 
-			 */
-			responseText : string;
-			
-			/**
-			 * 
-			 */
-			requestHeaders : {
-								
-				/**
-				 * 
-				 */
-				"Content-Type" : string;
-			}
-						
-			/**
-			 * 
-			 */
-			status : number;
-						
-			/**
-			 * 
-			 */
-			uploadProgress : /*no type*/{};
-						
-			/**
-			 * 
-			 */
-			open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
-						
-			/**
-			 * 
-			 */
-			readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
-						
-			/**
-			 * 
-			 */
-			setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
-						
-			/**
-			 * 
-			 */
-			setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
-						
-			/**
-			 * 
-			 */
-			send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
-						
-			/**
-			 * 
-			 */
-			abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
-						
-			/**
-			 * 
-			 */
-			getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
-						
-			/**
-			 * 
-			 */
-			getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
-						
-			/**
-			 * 
-			 */
-			setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
-						
-			/**
-			 * 
-			 */
-			respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
-						
-			/**
-			 * 
-			 */
-			downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
-						
-			/**
-			 * 
-			 */
-			uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
-		}
-				
-		/**
-		 * 
-		 */
-		defaultPrevented : boolean;
-	}
-	
-	/**
-	 * 
-	 */
-	interface ProgressEvent extends sinon.Event {
-				
-		/**
-		 * 
-		 * @param type 
-		 * @param progressEventRaw 
-		 * @param target 
-		 */
-		new (type : string, progressEventRaw : any, target : any);
-				
-		/**
-		 * 
-		 */
-		type : string;
-				
-		/**
-		 * 
-		 */
-		bubbles : boolean;
-				
-		/**
-		 * 
-		 */
-		cancelable : boolean;
-				
-		/**
-		 * 
-		 */
-		defaultPrevented : boolean;
-		
-		/**
-		 * 
-		 */
-		target : {
-						
-			/**
-			 * 
-			 */
-			async : boolean;
-						
-			/**
-			 * 
-			 */
-			errorFlag : boolean;
-						
-			/**
-			 * 
-			 */
-			sendFlag : boolean;
-						
-			/**
-			 * 
-			 */
-			response : string;
-						
-			/**
-			 * 
-			 */
-			aborted : boolean;
-						
-			/**
-			 * 
-			 */
-			responseText : string;
-						
-			/**
-			 * 
-			 */
-			status : number;
-						
-			/**
-			 * 
-			 */
-			open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
-						
-			/**
-			 * 
-			 */
-			readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
-						
-			/**
-			 * 
-			 */
-			setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
-						
-			/**
-			 * 
-			 */
-			setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
-						
-			/**
-			 * 
-			 */
-			send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
-						
-			/**
-			 * 
-			 */
-			abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
-						
-			/**
-			 * 
-			 */
-			requestHeaders : /* sinon.FakeXMLHttpRequest.prototype.requestHeaders */ any;
-						
-			/**
-			 * 
-			 */
-			responseHeaders : any;
-						
-			/**
-			 * 
-			 */
-			getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
-						
-			/**
-			 * 
-			 */
-			getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
-						
-			/**
-			 * 
-			 */
-			setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
-						
-			/**
-			 * 
-			 */
-			respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
-						
-			/**
-			 * 
-			 */
-			uploadProgress : /* sinon.FakeXMLHttpRequest.prototype.uploadProgress */ any;
-						
-			/**
-			 * 
-			 */
-			downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
-						
-			/**
-			 * 
-			 */
-			uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
-		}
-				
-		/**
-		 * 
-		 */
-		loaded : number;
-				
-		/**
-		 * 
-		 */
-		total : number;
-				
-		/**
-		 * 
-		 */
-		lengthComputable : boolean;
-	}
-		
-	/**
-	 * 
-	 */
-	interface CustomEvent {
-				
-		/**
-		 * 
-		 * @param type 
-		 * @param customData 
-		 * @param target 
-		 * @return  
-		 */
-		new (type : string, customData : sinon.CustomEvent1, target : any): CustomEvent;
-	}
-
-	
-	/**
-	 * 
-	 */
-	namespace EventTarget{
-				
-		/**
-		 * 
-		 * @param event 
-		 * @param listener 
-		 */
-		function addEventListener(event : any, listener : any): void;
-				
-		/**
-		 * 
-		 * @param event 
-		 * @param listener 
-		 */
-		function removeEventListener(event : any, listener : any): void;
-				
-		/**
-		 * 
-		 * @param event 
-		 * @return  
-		 */
-		function dispatchEvent(event : /* sinon.EventTarget.ProgressEvent */ any): boolean;
-		
-		/**
-		 * 
-		 */
-		namespace eventListeners{
-		}
-	}
-	
-	/**
-	 * 
-	 */
-	namespace xdr{
-				
-		/**
-		 * 
-		 */
-		export var supportsXDR : boolean;
-				
-		/**
-		 * 
-		 */
-		export var workingXDR : boolean;
-	}
-		
-	/**
-	 * 
-	 * @return  
-	 */
-	function useFakeXDomainRequest(): UseFakeXDomainRequestRet;
-	
-	/**
-	 * 
-	 */
-	interface FakeXDomainRequest {
-				
-		/**
-		 * 
-		 */
-		new ();
-				
-		/**
-		 * 
-		 * @param method 
-		 * @param url 
-		 */
-		open(method : any, url : any): void;
-				
-		/**
-		 * Access to this should actually throw an error
-		 */
-		responseText : string;
-				
-		/**
-		 * 
-		 */
-		sendFlag : boolean;
-				
-		/**
-		 * 
-		 * @param state 
-		 */
-		readyStateChange(state : number): void;
-				
-		/**
-		 * 
-		 */
-		readyState : number;
-				
-		/**
-		 * 
-		 * @param data 
-		 */
-		send(data : any): void;
-				
-		/**
-		 * 
-		 */
-		errorFlag : boolean;
-				
-		/**
-		 * 
-		 */
-		abort(): void;
-				
-		/**
-		 * 
-		 */
-		aborted : boolean;
-				
-		/**
-		 * 
-		 * @param body 
-		 */
-		setResponseBody(body : string): void;
-				
-		/**
-		 * 
-		 * @param status 
-		 * @param contentType 
-		 * @param body 
-		 */
-		respond(status : any, contentType : any, body : any): void;
-				
-		/**
-		 * 
-		 */
-		status : number;
-				
-		/**
-		 * 
-		 */
-		simulatetimeout(): void;
-				
-		/**
-		 * 
-		 */
-		isTimeout : boolean;
-				
-		/**
-		 * 
-		 */
-		addEventListener : /* sinon.EventTarget.addEventListener */ any;
-				
-		/**
-		 * 
-		 */
-		removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
-				
-		/**
-		 * 
-		 */
-		dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
-				
-		/**
-		 * 
-		 */
-		eventListeners : /* sinon.EventTarget.eventListeners */ any;
-				
-		/**
-		 * 
-		 * @param keepOnCreate 
-		 */
-		restore(keepOnCreate : any): void;
-				
-		/**
-		 * 
-		 */
-		UNSENT : number;
-				
-		/**
-		 * 
-		 */
-		OPENED : number;
-				
-		/**
-		 * 
-		 */
-		LOADING : number;
-				
-		/**
-		 * 
-		 */
-		DONE : number;
-				
-		/**
-		 * 
-		 * @param xhrObj 
-		 */
-		onCreate(xhrObj : {} | sinon.FakeXMLHttpRequest): void;
-	}
-	
-	/**
-	 * 
-	 */
-	namespace xhr{
-				
-		/**
-		 * 
-		 */
-		export var supportsActiveX : boolean;
-				
-		/**
-		 * 
-		 */
-		export var supportsXHR : boolean;
-				
-		/**
-		 * 
-		 */
-		export var supportsCORS : boolean;
-	}
-		
-	/**
-	 * 
-	 * @return  
-	 */
-	function useFakeXMLHttpRequest(): UseFakeXMLHttpRequestRet;
-	
-	/**
-	 * Note that for FakeXMLHttpRequest to work pre ES5
-	 * we lose some of the alignment with the spec.
-	 * To ensure as close a match as possible,
-	 * set responseType before calling open, send or respond;
-	 */
-	interface FakeXMLHttpRequest {
-				
-		/**
-		 * 
-		 */
-		new ();
-				
-		/**
-		 * 
-		 */
-		async : boolean;
-				
-		/**
-		 * 
-		 * @param method 
-		 * @param url 
-		 * @param async 
-		 * @param username 
-		 * @param password 
-		 */
-		open(method : any, url : any, async : any, username : any, password : any): void;
-				
-		/**
-		 * 
-		 * @param state 
-		 */
-		readyStateChange(state : any): void;
-				
-		/**
-		 * 
-		 * @param header 
-		 * @param value 
-		 */
-		setRequestHeader(header : any, value : any): void;
-				
-		/**
-		 * Helps testing
-		 * @param headers 
-		 */
-		setResponseHeaders(headers : any): void;
-				
-		/**
-		 * Currently treats ALL data as a DOMString (i.e. no Document)
-		 * @param data 
-		 */
-		send(data : any): void;
-				
-		/**
-		 * 
-		 */
-		errorFlag : boolean;
-				
-		/**
-		 * 
-		 */
-		sendFlag : boolean;
-				
-		/**
-		 * 
-		 */
-		response : string;
-				
-		/**
-		 * 
-		 */
-		abort(): void;
-				
-		/**
-		 * 
-		 */
-		aborted : boolean;
-				
-		/**
-		 * 
-		 */
-		responseText : string;
-		
-		/**
-		 * 
-		 */
-		requestHeaders : {
-						
-			/**
-			 * 
-			 */
-			"Content-Type" : string;
-		}
-				
-		/**
-		 * 
-		 * @param header 
-		 * @return  
-		 */
-		getResponseHeader(header : string): /* !this.responseHeaders.<i> */ any;
-				
-		/**
-		 * 
-		 * @return  
-		 */
-		getAllResponseHeaders(): string;
-				
-		/**
-		 * 
-		 * @param body 
-		 */
-		setResponseBody(body : string): void;
-				
-		/**
-		 * 
-		 * @param status 
-		 * @param headers 
-		 * @param body 
-		 */
-		respond(status : any, headers : any, body : any): void;
-				
-		/**
-		 * 
-		 */
-		status : number;
-				
-		/**
-		 * 
-		 * @param progressEventRaw 
-		 */
-		uploadProgress(progressEventRaw : any): void;
-				
-		/**
-		 * 
-		 * @param progressEventRaw 
-		 */
-		downloadProgress(progressEventRaw : any): void;
-				
-		/**
-		 * 
-		 * @param error 
-		 */
-		uploadError(error : any): void;
-				
-		/**
-		 * 
-		 */
-		addEventListener : /* sinon.EventTarget.addEventListener */ any;
-				
-		/**
-		 * 
-		 */
-		removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
-				
-		/**
-		 * 
-		 */
-		dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
-				
-		/**
-		 * 
-		 */
-		eventListeners : /* sinon.EventTarget.eventListeners */ any;
-				
-		/**
-		 * 
-		 */
-		filters : Array<any>;
-				
-		/**
-		 * 
-		 * @param fn 
-		 */
-		addFilter(fn : any): void;
-				
-		/**
-		 * 
-		 * @param fakeXhr 
-		 * @param xhrArgs 
-		 */
-		defake(fakeXhr : any, xhrArgs : sinon.FakeXMLHttpRequest.Defake1): void;
-				
-		/**
-		 * 
-		 */
-		useFilters : boolean;
-				
-		/**
-		 * 
-		 * @param text 
-		 */
-		parseXML(text : string): void;
-		
-		/**
-		 * 
-		 */
-		statusCodes : {
-			
-			/**
-			 * 
-			 */
-			FakeXMLHttpRequest : {
-								
-				/**
-				 * 
-				 */
-				statusCodes : string;
-			}
-		}
-				
-		/**
-		 * 
-		 * @param keepOnCreate 
-		 */
-		restore(keepOnCreate : any): void;
-				
-		/**
-		 * 
-		 */
-		UNSENT : number;
-				
-		/**
-		 * 
-		 */
-		OPENED : number;
-				
-		/**
-		 * 
-		 */
-		HEADERS_RECEIVED : number;
-				
-		/**
-		 * 
-		 */
-		LOADING : number;
-				
-		/**
-		 * 
-		 */
-		DONE : number;
-				
-		/**
-		 * 
-		 */
-		statusText : string;
-		
-		/**
-		 * 
-		 */
-		upload : {
-			
-			/**
-			 * 
-			 */
-			eventListeners : {
-								
-				/**
-				 * 
-				 */
-				progress : Array<any>;
-								
-				/**
-				 * 
-				 */
-				load : Array<any>;
-								
-				/**
-				 * 
-				 */
-				abort : Array<any>;
-								
-				/**
-				 * 
-				 */
-				error : Array<any>;
-			}
-		}
-				
-		/**
-		 * 
-		 */
-		responseType : string;
-				
-		/**
-		 * 
-		 */
-		withCredentials : boolean;
-				
-		/**
-		 * 
-		 */
-		onSend(): void;
-	}
 		
 	/**
 	 * 
@@ -4810,7 +4812,7 @@ declare namespace sinon{
 	 * @param b 
 	 * @return  
 	 */
-	function deepEqual(a : any, b : any): boolean;
+	function deepEqual(a : (() => boolean) | ((actual : any) => boolean), b : any): boolean;
 		
 	/**
 	 * 
@@ -4923,7 +4925,7 @@ declare namespace sinon{
 	 * @param message 
 	 * @return  
 	 */
-	function match(expectation : (() => boolean) | ((actual : any) => boolean), message : string): any;
+	function match(expectation : (() => boolean) | ((actual : any) => boolean), message : string): /* sinon.match.any */ any;
 	
 	/**
 	 * 
@@ -4935,7 +4937,7 @@ declare namespace sinon{
 		 * @param object 
 		 * @return  
 		 */
-		function isMatcher(object : any): boolean;
+		function isMatcher(object : (() => boolean) | ((actual : any) => boolean)): boolean;
 		
 		/**
 		 * 
@@ -4960,21 +4962,21 @@ declare namespace sinon{
 		 * @param expectation 
 		 * @return  
 		 */
-		function same(expectation : any): any;
+		function same(expectation : any): /* sinon.match.any */ any;
 				
 		/**
 		 * 
 		 * @param type 
 		 * @return  
 		 */
-		function typeOf(type : string): any;
+		function typeOf(type : string): /* sinon.match.any */ any;
 				
 		/**
 		 * 
 		 * @param type 
 		 * @return  
 		 */
-		function instanceOf(type : any): any;
+		function instanceOf(type : any): /* sinon.match.any */ any;
 				
 		/**
 		 * 
@@ -4982,7 +4984,7 @@ declare namespace sinon{
 		 * @param value 
 		 * @return  
 		 */
-		function has(property : any, value : any): any;
+		function has(property : any, value : any): /* sinon.match.any */ any;
 	}
 		
 	/**
@@ -5000,9 +5002,10 @@ declare namespace sinon{
 	 * @param returnValue 
 	 * @param exception 
 	 * @param id 
+	 * @param stack 
 	 * @return  
 	 */
-	function spyCall(spy : /* sinon.spy.named.!ret */ any | (() => void), thisValue : any, args : any, returnValue : any, exception : any, id : any): SpyCallRet;
+	function spyCall(spy : /* sinon.spy.named.!ret */ any | (() => void), thisValue : any, args : any, returnValue : any, exception : any, id : any, stack : any): /* sinon.spy.firstCall */ any;
 	
 	/**
 	 * 
@@ -5097,6 +5100,11 @@ declare namespace sinon{
 				
 		/**
 		 * 
+		 */
+		export var stacks : Array<any>;
+				
+		/**
+		 * 
 		 * @param func 
 		 * @param spyLength 
 		 * @return  
@@ -5129,7 +5137,7 @@ declare namespace sinon{
 		 * @param i 
 		 * @return  
 		 */
-		function getCall(i : number): GetCallRet;
+		function getCall(i : number): /* sinon.spy.firstCall */ any;
 				
 		/**
 		 * 
@@ -5183,10 +5191,10 @@ declare namespace sinon{
 						
 			/**
 			 * 
-			 * @param spy 
+			 * @param spyInstance 
 			 * @return  
 			 */
-			function c(spy : any): boolean			
+			function c(spyInstance : any): boolean			
 			/**
 			 * 
 			 */
@@ -5194,9 +5202,9 @@ declare namespace sinon{
 						
 			/**
 			 * 
-			 * @param spy 
+			 * @param spyInstance 
 			 */
-			function n(spy : any): void;
+			function n(spyInstance : any): void;
 						
 			/**
 			 * 
@@ -5205,19 +5213,19 @@ declare namespace sinon{
 								
 				/**
 				 * 
-				 * @param spy 
+				 * @param spyInstance 
 				 * @return  
 				 */
-				new (spy : any): string;
+				new (spyInstance : any): string;
 			}
 
 						
 			/**
 			 * 
-			 * @param spy 
+			 * @param spyInstance 
 			 * @return  
 			 */
-			function t(spy : any): string;
+			function t(spyInstance : any): string;
 		}
 		
 		/**
@@ -5227,11 +5235,11 @@ declare namespace sinon{
 						
 			/**
 			 * 
-			 * @param spy 
+			 * @param spyInstance 
 			 * @param args 
 			 * @return  
 			 */
-			"*"(spy : any, args : any): string;
+			"*"(spyInstance : any, args : any): string;
 		}
 	}
 	
@@ -5806,8 +5814,436 @@ declare namespace sinon{
 		 * @param obj 
 		 * @return  
 		 */
-		function inject(obj : any): any;
+		function inject(obj : sinon.collection.Inject0): sinon.collection.Inject0;
 	}
+		
+	/**
+	 * 
+	 */
+	function useFakeTimers(): void;
+	
+	/**
+	 * 
+	 */
+	namespace clock{
+				
+		/**
+		 * 
+		 * @param now 
+		 */
+		function create(now : any): void;
+	}
+	
+	/**
+	 * 
+	 */
+	var timers : {
+				
+		/**
+		 * 
+		 */
+		Date : Date;
+	}
+	
+	/**
+	 * 
+	 */
+	interface Event {
+				
+		/**
+		 * 
+		 * @param type 
+		 * @param bubbles 
+		 * @param cancelable 
+		 * @param target 
+		 */
+		new (type : string, bubbles : boolean, cancelable : boolean, target : /* sinon.ProgressEvent.target */ any);
+				
+		/**
+		 * 
+		 * @param type 
+		 * @param bubbles 
+		 * @param cancelable 
+		 * @param target 
+		 */
+		initEvent(type : string, bubbles : boolean, cancelable : boolean, target : sinon.Event.prototype.InitEvent3): void;
+				
+		/**
+		 * 
+		 */
+		stopPropagation(): void;
+				
+		/**
+		 * 
+		 */
+		preventDefault(): void;
+				
+		/**
+		 * 
+		 */
+		type : string;
+				
+		/**
+		 * 
+		 */
+		bubbles : boolean;
+				
+		/**
+		 * 
+		 */
+		cancelable : boolean;
+		
+		/**
+		 * 
+		 */
+		target : {
+						
+			/**
+			 * 
+			 */
+			async : boolean;
+						
+			/**
+			 * 
+			 */
+			errorFlag : boolean;
+						
+			/**
+			 * 
+			 */
+			sendFlag : boolean;
+						
+			/**
+			 * 
+			 */
+			response : string;
+						
+			/**
+			 * 
+			 */
+			aborted : boolean;
+						
+			/**
+			 * 
+			 */
+			responseText : string;
+			
+			/**
+			 * 
+			 */
+			requestHeaders : {
+								
+				/**
+				 * 
+				 */
+				"Content-Type" : string;
+			}
+						
+			/**
+			 * 
+			 */
+			status : number;
+						
+			/**
+			 * 
+			 */
+			uploadProgress : /*no type*/{};
+						
+			/**
+			 * 
+			 */
+			open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
+						
+			/**
+			 * 
+			 */
+			readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
+						
+			/**
+			 * 
+			 */
+			setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
+						
+			/**
+			 * 
+			 */
+			setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
+						
+			/**
+			 * 
+			 */
+			send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
+						
+			/**
+			 * 
+			 */
+			abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
+						
+			/**
+			 * 
+			 */
+			getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
+						
+			/**
+			 * 
+			 */
+			getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
+						
+			/**
+			 * 
+			 */
+			setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
+						
+			/**
+			 * 
+			 */
+			respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
+						
+			/**
+			 * 
+			 */
+			downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
+						
+			/**
+			 * 
+			 */
+			uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
+		}
+				
+		/**
+		 * 
+		 */
+		defaultPrevented : boolean;
+	}
+	
+	/**
+	 * 
+	 */
+	interface ProgressEvent extends sinon.Event {
+				
+		/**
+		 * 
+		 * @param type 
+		 * @param progressEventRaw 
+		 * @param target 
+		 */
+		new (type : string, progressEventRaw : any, target : any);
+				
+		/**
+		 * 
+		 */
+		type : string;
+				
+		/**
+		 * 
+		 */
+		bubbles : boolean;
+				
+		/**
+		 * 
+		 */
+		cancelable : boolean;
+				
+		/**
+		 * 
+		 */
+		defaultPrevented : boolean;
+		
+		/**
+		 * 
+		 */
+		target : {
+						
+			/**
+			 * 
+			 */
+			async : boolean;
+						
+			/**
+			 * 
+			 */
+			errorFlag : boolean;
+						
+			/**
+			 * 
+			 */
+			sendFlag : boolean;
+						
+			/**
+			 * 
+			 */
+			response : string;
+						
+			/**
+			 * 
+			 */
+			aborted : boolean;
+						
+			/**
+			 * 
+			 */
+			responseText : string;
+						
+			/**
+			 * 
+			 */
+			status : number;
+						
+			/**
+			 * 
+			 */
+			open : /* sinon.FakeXMLHttpRequest.prototype.open */ any;
+						
+			/**
+			 * 
+			 */
+			readyStateChange : /* sinon.FakeXMLHttpRequest.prototype.readyStateChange */ any;
+						
+			/**
+			 * 
+			 */
+			setRequestHeader : /* sinon.FakeXMLHttpRequest.prototype.setRequestHeader */ any;
+						
+			/**
+			 * 
+			 */
+			setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
+						
+			/**
+			 * 
+			 */
+			send : /* sinon.FakeXMLHttpRequest.prototype.send */ any;
+						
+			/**
+			 * 
+			 */
+			abort : /* sinon.FakeXMLHttpRequest.prototype.abort */ any;
+						
+			/**
+			 * 
+			 */
+			requestHeaders : /* sinon.FakeXMLHttpRequest.prototype.requestHeaders */ any;
+						
+			/**
+			 * 
+			 */
+			responseHeaders : any;
+						
+			/**
+			 * 
+			 */
+			getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
+						
+			/**
+			 * 
+			 */
+			getAllResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.getAllResponseHeaders */ any;
+						
+			/**
+			 * 
+			 */
+			setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
+						
+			/**
+			 * 
+			 */
+			respond : /* sinon.FakeXMLHttpRequest.prototype.respond */ any;
+						
+			/**
+			 * 
+			 */
+			uploadProgress : /* sinon.FakeXMLHttpRequest.prototype.uploadProgress */ any;
+						
+			/**
+			 * 
+			 */
+			downloadProgress : /* sinon.FakeXMLHttpRequest.prototype.downloadProgress */ any;
+						
+			/**
+			 * 
+			 */
+			uploadError : /* sinon.FakeXMLHttpRequest.prototype.uploadError */ any;
+		}
+				
+		/**
+		 * 
+		 */
+		loaded : number;
+				
+		/**
+		 * 
+		 */
+		total : number;
+				
+		/**
+		 * 
+		 */
+		lengthComputable : boolean;
+	}
+		
+	/**
+	 * 
+	 */
+	interface CustomEvent {
+				
+		/**
+		 * 
+		 * @param type 
+		 * @param customData 
+		 * @param target 
+		 * @return  
+		 */
+		new (type : string, customData : sinon.CustomEvent1, target : any): CustomEvent;
+	}
+
+	
+	/**
+	 * 
+	 */
+	namespace EventTarget{
+				
+		/**
+		 * 
+		 * @param event 
+		 * @param listener 
+		 */
+		function addEventListener(event : any, listener : any): void;
+				
+		/**
+		 * 
+		 * @param event 
+		 * @param listener 
+		 */
+		function removeEventListener(event : any, listener : any): void;
+				
+		/**
+		 * 
+		 * @param event 
+		 * @return  
+		 */
+		function dispatchEvent(event : /* sinon.EventTarget.ProgressEvent */ any): boolean;
+		
+		/**
+		 * 
+		 */
+		namespace eventListeners{
+		}
+	}
+		
+	/**
+	 * 
+	 */
+	export var loaded : number;
+		
+	/**
+	 * 
+	 */
+	export var total : number;
+		
+	/**
+	 * 
+	 */
+	export var lengthComputable : boolean;
 		
 	/**
 	 * 
@@ -5837,19 +6273,515 @@ declare namespace sinon{
 	/**
 	 * 
 	 */
-	namespace fakeServer{
+	namespace xdr{
 				
 		/**
 		 * 
-		 * @return  
 		 */
-		function create(): any;
+		export var supportsXDR : boolean;
+				
+		/**
+		 * 
+		 */
+		export var workingXDR : boolean;
+	}
+		
+	/**
+	 * 
+	 * @return  
+	 */
+	function useFakeXDomainRequest(): UseFakeXDomainRequestRet;
+	
+	/**
+	 * 
+	 */
+	interface FakeXDomainRequest {
+				
+		/**
+		 * 
+		 */
+		new ();
+				
+		/**
+		 * 
+		 * @param method 
+		 * @param url 
+		 */
+		open(method : any, url : any): void;
+				
+		/**
+		 * Access to this should actually throw an error
+		 */
+		responseText : string;
+				
+		/**
+		 * 
+		 */
+		sendFlag : boolean;
+				
+		/**
+		 * 
+		 * @param state 
+		 */
+		readyStateChange(state : number): void;
+				
+		/**
+		 * 
+		 */
+		readyState : number;
+				
+		/**
+		 * 
+		 * @param data 
+		 */
+		send(data : any): void;
+				
+		/**
+		 * 
+		 */
+		errorFlag : boolean;
+				
+		/**
+		 * 
+		 */
+		abort(): void;
+				
+		/**
+		 * 
+		 */
+		aborted : boolean;
+				
+		/**
+		 * 
+		 * @param body 
+		 */
+		setResponseBody(body : string): void;
+				
+		/**
+		 * 
+		 * @param status 
+		 * @param contentType 
+		 * @param body 
+		 */
+		respond(status : any, contentType : any, body : any): void;
+				
+		/**
+		 * 
+		 */
+		status : number;
+				
+		/**
+		 * 
+		 */
+		simulatetimeout(): void;
+				
+		/**
+		 * 
+		 */
+		isTimeout : boolean;
+				
+		/**
+		 * 
+		 */
+		addEventListener : /* sinon.EventTarget.addEventListener */ any;
+				
+		/**
+		 * 
+		 */
+		removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
+				
+		/**
+		 * 
+		 */
+		dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
+				
+		/**
+		 * 
+		 */
+		eventListeners : /* sinon.EventTarget.eventListeners */ any;
+				
+		/**
+		 * 
+		 * @param keepOnCreate 
+		 */
+		restore(keepOnCreate : any): void;
+				
+		/**
+		 * 
+		 */
+		UNSENT : number;
+				
+		/**
+		 * 
+		 */
+		OPENED : number;
+				
+		/**
+		 * 
+		 */
+		LOADING : number;
+				
+		/**
+		 * 
+		 */
+		DONE : number;
 				
 		/**
 		 * 
 		 * @param xhrObj 
 		 */
-		function addRequest(xhrObj : {} | sinon.FakeXMLHttpRequest): void;
+		onCreate(xhrObj : /* sinon.sandbox.server */ any): void;
+	}
+	
+	/**
+	 * 
+	 */
+	namespace xhr{
+				
+		/**
+		 * 
+		 */
+		export var supportsActiveX : boolean;
+				
+		/**
+		 * 
+		 */
+		export var supportsXHR : boolean;
+				
+		/**
+		 * 
+		 */
+		export var supportsCORS : boolean;
+	}
+		
+	/**
+	 * 
+	 * @return  
+	 */
+	function useFakeXMLHttpRequest(): UseFakeXMLHttpRequestRet;
+	
+	/**
+	 * Note that for FakeXMLHttpRequest to work pre ES5
+	 * we lose some of the alignment with the spec.
+	 * To ensure as close a match as possible,
+	 * set responseType before calling open, send or respond;
+	 */
+	interface FakeXMLHttpRequest {
+				
+		/**
+		 * 
+		 */
+		new ();
+				
+		/**
+		 * 
+		 */
+		async : boolean;
+				
+		/**
+		 * 
+		 * @param method 
+		 * @param url 
+		 * @param async 
+		 * @param username 
+		 * @param password 
+		 */
+		open(method : any, url : any, async : any, username : any, password : any): void;
+				
+		/**
+		 * 
+		 * @param state 
+		 */
+		readyStateChange(state : any): void;
+				
+		/**
+		 * 
+		 * @param header 
+		 * @param value 
+		 */
+		setRequestHeader(header : any, value : any): void;
+				
+		/**
+		 * Helps testing
+		 * @param headers 
+		 */
+		setResponseHeaders(headers : any): void;
+				
+		/**
+		 * Currently treats ALL data as a DOMString (i.e. no Document)
+		 * @param data 
+		 */
+		send(data : any): void;
+				
+		/**
+		 * 
+		 */
+		errorFlag : boolean;
+				
+		/**
+		 * 
+		 */
+		sendFlag : boolean;
+				
+		/**
+		 * 
+		 */
+		response : string;
+				
+		/**
+		 * 
+		 */
+		abort(): void;
+				
+		/**
+		 * 
+		 */
+		aborted : boolean;
+				
+		/**
+		 * 
+		 */
+		responseText : string;
+		
+		/**
+		 * 
+		 */
+		requestHeaders : {
+						
+			/**
+			 * 
+			 */
+			"Content-Type" : string;
+		}
+				
+		/**
+		 * 
+		 * @param header 
+		 * @return  
+		 */
+		getResponseHeader(header : string): /* !this.responseHeaders.<i> */ any;
+				
+		/**
+		 * 
+		 * @return  
+		 */
+		getAllResponseHeaders(): string;
+				
+		/**
+		 * 
+		 * @param body 
+		 */
+		setResponseBody(body : string): void;
+				
+		/**
+		 * 
+		 * @param status 
+		 * @param headers 
+		 * @param body 
+		 */
+		respond(status : any, headers : any, body : any): void;
+				
+		/**
+		 * 
+		 */
+		status : number;
+				
+		/**
+		 * 
+		 * @param progressEventRaw 
+		 */
+		uploadProgress(progressEventRaw : any): void;
+				
+		/**
+		 * 
+		 * @param progressEventRaw 
+		 */
+		downloadProgress(progressEventRaw : any): void;
+				
+		/**
+		 * 
+		 * @param error 
+		 */
+		uploadError(error : any): void;
+				
+		/**
+		 * 
+		 */
+		addEventListener : /* sinon.EventTarget.addEventListener */ any;
+				
+		/**
+		 * 
+		 */
+		removeEventListener : /* sinon.EventTarget.removeEventListener */ any;
+				
+		/**
+		 * 
+		 */
+		dispatchEvent : /* sinon.EventTarget.dispatchEvent */ any;
+				
+		/**
+		 * 
+		 */
+		eventListeners : /* sinon.EventTarget.eventListeners */ any;
+				
+		/**
+		 * 
+		 */
+		filters : Array<any>;
+				
+		/**
+		 * 
+		 * @param fn 
+		 */
+		addFilter(fn : any): void;
+				
+		/**
+		 * 
+		 * @param fakeXhr 
+		 * @param xhrArgs 
+		 */
+		defake(fakeXhr : any, xhrArgs : sinon.FakeXMLHttpRequest.Defake1): void;
+				
+		/**
+		 * 
+		 */
+		useFilters : boolean;
+				
+		/**
+		 * 
+		 * @param text 
+		 */
+		parseXML(text : string): void;
+		
+		/**
+		 * 
+		 */
+		statusCodes : {
+			
+			/**
+			 * 
+			 */
+			FakeXMLHttpRequest : {
+								
+				/**
+				 * 
+				 */
+				statusCodes : string;
+			}
+		}
+				
+		/**
+		 * 
+		 * @param keepOnCreate 
+		 */
+		restore(keepOnCreate : any): void;
+				
+		/**
+		 * 
+		 */
+		UNSENT : number;
+				
+		/**
+		 * 
+		 */
+		OPENED : number;
+				
+		/**
+		 * 
+		 */
+		HEADERS_RECEIVED : number;
+				
+		/**
+		 * 
+		 */
+		LOADING : number;
+				
+		/**
+		 * 
+		 */
+		DONE : number;
+				
+		/**
+		 * 
+		 */
+		statusText : string;
+		
+		/**
+		 * 
+		 */
+		upload : {
+			
+			/**
+			 * 
+			 */
+			eventListeners : {
+								
+				/**
+				 * 
+				 */
+				progress : Array<any>;
+								
+				/**
+				 * 
+				 */
+				load : Array<any>;
+								
+				/**
+				 * 
+				 */
+				abort : Array<any>;
+								
+				/**
+				 * 
+				 */
+				error : Array<any>;
+			}
+		}
+				
+		/**
+		 * 
+		 */
+		responseType : string;
+				
+		/**
+		 * 
+		 */
+		withCredentials : boolean;
+				
+		/**
+		 * 
+		 */
+		onSend(): void;
+	}
+	
+	/**
+	 * 
+	 */
+	namespace fakeServer{
+				
+		/**
+		 * 
+		 * @param config 
+		 * @return  
+		 */
+		function create(config : any): /* sinon.sandbox.server */ any;
+				
+		/**
+		 * 
+		 * @param config 
+		 */
+		function configure(config : any): void;
+				
+		/**
+		 * 
+		 * @param xhrObj 
+		 */
+		function addRequest(xhrObj : /* sinon.sandbox.server */ any): void;
+				
+		/**
+		 * 
+		 */
+		export var responding : boolean;
 				
 		/**
 		 * 
@@ -5866,6 +6798,11 @@ declare namespace sinon{
 				
 		/**
 		 * 
+		 */
+		export var queue : Array</* sinon.fakeServer.FakeXMLHttpRequest */ any>;
+				
+		/**
+		 * 
 		 * @param response 
 		 * @param request 
 		 */
@@ -5878,6 +6815,16 @@ declare namespace sinon{
 		 * @param body 
 		 */
 		function respondWith(method : any, url : any, body : any): void;
+				
+		/**
+		 * 
+		 */
+		export var response : Array<any>;
+				
+		/**
+		 * 
+		 */
+		export var responses : Array<sinon.fakeServer.ResponsesI>;
 				
 		/**
 		 * 
@@ -5958,7 +6905,7 @@ declare namespace sinon{
 			/**
 			 * 
 			 */
-			requests : Array</* sinon.sandbox.server.FakeXMLHttpRequest */ any>;
+			status : number;
 						
 			/**
 			 * 
@@ -5968,22 +6915,17 @@ declare namespace sinon{
 			/**
 			 * 
 			 */
-			queue : Array<any>;
+			requests : Array<any>;
 						
 			/**
 			 * 
 			 */
-			response : Array<any>;
+			xhr : /* sinon.FakeXMLHttpRequest */ any;
 						
 			/**
 			 * 
 			 */
-			responses : Array<sinon.sandbox.server.ResponsesI>;
-						
-			/**
-			 * 
-			 */
-			status : number;
+			queue : /* sinon.fakeServer.queue */ any;
 						
 			/**
 			 * 
@@ -6022,6 +6964,11 @@ declare namespace sinon{
 		/**
 		 * 
 		 */
+		fakes : /* sinon.collection.fakes */ any;
+				
+		/**
+		 * 
+		 */
 		toString : /* !proto.toString */ any;
 				
 		/**
@@ -6033,11 +6980,6 @@ declare namespace sinon{
 		 * 
 		 */
 		match : /* sinon.match */ any;
-				
-		/**
-		 * 
-		 */
-		fakes : /* sinon.collection.fakes */ any;
 	}
 		
 	/**
@@ -6109,9 +7051,8 @@ declare namespace sinon{
 				
 		/**
 		 * 
-		 * @param assertion 
 		 */
-		function pass(assertion : string): void;
+		function pass(): void;
 				
 		/**
 		 * 
