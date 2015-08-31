@@ -15,7 +15,9 @@
     "url": "https://github.com/ConquestArrow/dtsmake/"
   },
   "keywords": [
-    "TypeScript"
+    "TypeScript",
+	"JavaScript",
+	"generator"
   ],
   "author": "ConquestArrow",
   "license": "MIT",
