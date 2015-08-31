@@ -85,8 +85,18 @@ var genCommand = ()=>{
 	var s = "";
 	s = `node "${__dirname}/../node_modules/tern/bin/condense"`;
 	s += (<any>program).n ? ` --name ${(<any>program).n}` : "";
-	s += (<any>program).plugin ? ` --plugin ${(<any>program).plugin.join(" ")}` : "";
-	s += (<any>program).def ? ` --def ${(<any>program).def.join(" ")}` : "";
+	//s += (<any>program).plugin ? ` --plugin ${(<any>program).plugin.join(" ")}` : "";
+	if((<any>program).plugin){
+		for(let i in (<any>program).plugin){
+			s += ` --plugin ${(<any>program).plugin[i]}`;
+		}
+	}
+	//s += (<any>program).def ? ` --def ${(<any>program).def.join(" ")}` : "";
+	if((<any>program).def){
+		for(let i in (<any>program).def){
+			s += ` --def ${(<any>program).def[i]}`;
+		}
+	}
 	s += (<any>program).extrafiles ? ` +${(<any>program).extrafiles.join(" +")}` : "";
 	s += " " + (<any>program).src.join(" ");
 	s += " --no-spans";	
