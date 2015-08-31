@@ -80,7 +80,7 @@ exTest({
 	src:"../node_modules/sinon/pkg/sinon.js", 
 	dist:"./dist/sinon", 
 	name:"sinon", 
-	//debug:true,
+	debug:false,
 	//plugin:"node",
 	isExport:true, 
 	exportStyle:"legacy", 
@@ -119,5 +119,5 @@ exTest({
 	//exportStyle:"legacy",
 	//exportModuleName:"clone"//,
 	//NodeJSModule:true,
-	extrafiles:"../node_modules/gulp-header/test/sample.js"
+	extrafiles:"../node_modules/gulp-header/test/main.js"
 });

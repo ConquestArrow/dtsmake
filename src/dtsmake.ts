@@ -947,6 +947,8 @@ declare module '${n}' {
 						);
 					}
 					break;
+				case TernDef.PROTO:
+					break;
 				case "<i>":
 					//TODO:research ternjs def's `<i>` mean & what to do
 					// Maybe ternjs cannot get prop name.
@@ -984,7 +986,7 @@ declare module '${n}' {
 					}
 					//has "new ()" or "!proto" is class interface
 					else if(
-						value && (value[DTSDef.NEW] || value[TernDef.PROTO]|| value[DTS_INTERFACE_STR])
+						value && (value[DTSDef.NEW] || value[TernDef.PROTO]|| value[DTS_INTERFACE_STR]) && !this.isInClassOrInterface
 					){
 						if(
 							this.option.globalObject === Option.GlobalObject.WRAP &&
@@ -1087,17 +1089,37 @@ declare module '${n}' {
 			
 			for(let i in value){
 				if(!value[i])continue;
+				const v = value[i];
 				
 				if(
-					value[i][0] &&
-					value[i][0].type === TSObjType.FUNCTION &&
+					v[0] &&
+					v[0].type === TSObjType.FUNCTION &&
 					/[\*\-]/.test(i)
 				){
 					//export in interface
-					outI[i] = clone(value[i]);
-				}else{
+					outI[i] = clone(v);
+				}
+				/*else if(
+					this.isNamespace(v) ||
+					(v[0] && this.isNamespace(v[0]))
+				){
+					//namespace is only child in namespace
 					//export in namespace
-					outN[i] = clone(value[i]);
+					outN[i] = clone(v);
+				}
+				else if(
+					(v && v[DTSDef.NEW]) ||
+					(v[0] && v[0][DTSDef.NEW]) ||
+					(v && v[TernDef.PROTO]) ||
+					(v[0] && v[0][TernDef.PROTO])
+				){
+					//class/interface is in namespace
+					outN[i] = clone(v);
+				}*/
+				else{
+					//export in interface
+					//outI[i] = clone(v);
+					outN[i] = clone(v);
 				}
 			}
 			
