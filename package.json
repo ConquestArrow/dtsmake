@@ -27,6 +27,7 @@
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-header": "^1.7.1",
+    "gulp-release-tasks": "0.0.3",
     "gulp-todo": "^3.3.0",
     "gulp-typescript": "^2.8.1",
     "mocha": "^2.3.0",

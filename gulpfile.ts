@@ -8,6 +8,8 @@ import concat = require("gulp-concat");
 var header = require('gulp-header');
 var todo = require('gulp-todo');
 
+require('gulp-release-tasks')(gulp);
+
 /*
 gulp.task("cmdbuild", ()=>{
 	let result = gulp
