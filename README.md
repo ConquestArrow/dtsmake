@@ -67,7 +67,12 @@ ex. `--dist /path/to/dist` -> `/path/to/dist.d.ts`
  module name
 #### -p, --plugin `<names>`          
  tern.js plugin.
- see tern.js server plugin(http://ternjs.net/doc/manual.html#plugins)
+ 
+  * see [tern.js server plugin](http://ternjs.net/doc/manual.html#plugins)
+  * [currently support plugins](https://github.com/marijnh/tern/tree/0.14.0/plugin)
+
+ex. `-p "node,module,commonjs"`
+
 #### -d, --def `<paths>`             
  tern.js def files. DEFAULT:'ecma5'
  
@@ -133,9 +138,12 @@ ex. "EXAMPLE"; usage `import example = require("EXAMPLE");`
 
  1. JSDoc tag (`@param`, `@return`) duplication when it was already defined in the target  JavaScript code.
  2. When `-p node` (Ternjs's Nodejs plugin) option is ON, dtsmake sometimes outputs nothing.
- 3. Only support Tern.js server plugins in [here](https://github.com/marijnh/tern/tree/0.13.0/plugin). 
+ 3. Only support Tern.js server plugins in [here](https://github.com/marijnh/tern/tree/0.14.0/plugin). 
 
 ## TODOs
+
+ * Tern.js's server plugin without default support.
+  * tern/condense cmd cannot load 3rd party plugins (ex. [tern-gulp](https://github.com/angelozerr/tern-gulp) ), so, replace or patches it.
 
 see [TODO.md](./TODO.md)
 
