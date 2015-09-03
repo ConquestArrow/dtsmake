@@ -218,7 +218,11 @@ declare namespace tern{
 	 * @param wide 
 	 * @return  
 	 */
-	function findQueryExpr(file : any, query : any, wide : boolean): FindQueryExprRet;
+	function findQueryExpr(file : any, query : any, wide : boolean): any	
+	/**
+	 * 
+	 */
+	function findQueryExpr();
 		
 	/**
 	 * 
@@ -338,26 +342,6 @@ declare namespace tern{
 	type AddCompletion1 = Array<any>;
 }
 declare namespace tern{
-	// !modules.``/node_modules/tern/lib/tern`js.findQueryExpr.!ret
-	
-	/**
-	 * 
-	 */
-	interface FindQueryExprRet {
-		
-		/**
-		 * 
-		 */
-		node : {
-						
-			/**
-			 * 
-			 */
-			type : string;
-		}
-	}
-}
-declare namespace tern{
 	// !modules.``/node_modules/tern/lib/tern`js.getSpan.!ret
 	
 	/**
@@ -378,6 +362,23 @@ declare namespace tern{
 		 * 
 		 */
 		contextOffset : number;
+	}
+}
+
+/**
+ * 
+ */
+declare namespace tern{
+	
+	/**
+	 * 
+	 */
+	interface Error {
+				
+		/**
+		 * 
+		 */
+		name : string;
 	}
 }
 

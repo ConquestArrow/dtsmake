@@ -39,6 +39,6 @@
   "dependencies": {
     "clone": "^1.0.2",
     "commander": "^2.8.1",
-    "tern": "^0.14.0"
+    "tern": "^0.15.0"
   }
 }

@@ -89,17 +89,6 @@ declare namespace sinon{
 			 * 
 			 */
 			statusCodes : {
-				
-				/**
-				 * 
-				 */
-				FakeXMLHttpRequest : {
-										
-					/**
-					 * 
-					 */
-					statusCodes : string;
-				}
 			}
 			
 			/**
@@ -163,6 +152,11 @@ declare namespace sinon{
 				 * 
 				 */
 				status : number;
+								
+				/**
+				 * 
+				 */
+				statusText : string;
 								
 				/**
 				 * 
@@ -684,6 +678,11 @@ declare namespace sinon{
 		/**
 		 * 
 		 */
+		statusText : string;
+				
+		/**
+		 * 
+		 */
 		uploadProgress : /*no type*/{};
 				
 		/**
@@ -700,17 +699,6 @@ declare namespace sinon{
 		 * 
 		 */
 		statusCodes : {
-			
-			/**
-			 * 
-			 */
-			FakeXMLHttpRequest : {
-								
-				/**
-				 * 
-				 */
-				statusCodes : string;
-			}
 		}
 				
 		/**
@@ -3942,6 +3930,67 @@ declare namespace sinon.collection{
 	 * 
 	 */
 	interface Inject0 {
+		
+		/**
+		 * 
+		 */
+		clock : {
+						
+			/**
+			 * 
+			 */
+			duringTick : boolean;
+						
+			/**
+			 * 
+			 */
+			restore : /* sinon.fakeServerWithClock.clock.uninstall */ any;
+						
+			/**
+			 * 
+			 */
+			setTimeout : /* sinon.fakeServerWithClock.clock.setTimeout */ any;
+						
+			/**
+			 * 
+			 */
+			clearTimeout : /* sinon.fakeServerWithClock.clock.clearTimeout */ any;
+						
+			/**
+			 * 
+			 */
+			setInterval : /* sinon.fakeServerWithClock.clock.setInterval */ any;
+						
+			/**
+			 * 
+			 */
+			clearInterval : /* sinon.fakeServerWithClock.clock.clearInterval */ any;
+						
+			/**
+			 * 
+			 */
+			setImmediate : /* sinon.fakeServerWithClock.clock.setImmediate */ any;
+						
+			/**
+			 * 
+			 */
+			clearImmediate : /* sinon.fakeServerWithClock.clock.clearImmediate */ any;
+						
+			/**
+			 * 
+			 */
+			tick : /* sinon.fakeServerWithClock.clock.tick */ any;
+						
+			/**
+			 * 
+			 */
+			reset : /* sinon.fakeServerWithClock.clock.reset */ any;
+						
+			/**
+			 * 
+			 */
+			uninstall : /* sinon.fakeServerWithClock.clock.uninstall */ any;
+		}
 				
 		/**
 		 * 
@@ -3986,22 +4035,70 @@ declare namespace sinon.collection{
 		 * 
 		 */
 		match : /* sinon.match */ any;
-		
+	}
+}
+declare namespace sinon{
+	// sinon.useFakeTimers.!ret
+	
+	/**
+	 * 
+	 */
+	interface UseFakeTimersRet {
+				
 		/**
 		 * 
 		 */
-		clock : {
-						
-			/**
-			 * 
-			 */
-			setTimeout : /* sinon.fakeServerWithClock.clock.setTimeout */ any;
-						
-			/**
-			 * 
-			 */
-			setInterval : /* sinon.fakeServerWithClock.clock.setInterval */ any;
-		}
+		duringTick : boolean;
+				
+		/**
+		 * 
+		 */
+		restore : /* sinon.fakeServerWithClock.clock.uninstall */ any;
+				
+		/**
+		 * 
+		 */
+		setTimeout : /* sinon.fakeServerWithClock.clock.setTimeout */ any;
+				
+		/**
+		 * 
+		 */
+		clearTimeout : /* sinon.fakeServerWithClock.clock.clearTimeout */ any;
+				
+		/**
+		 * 
+		 */
+		setInterval : /* sinon.fakeServerWithClock.clock.setInterval */ any;
+				
+		/**
+		 * 
+		 */
+		clearInterval : /* sinon.fakeServerWithClock.clock.clearInterval */ any;
+				
+		/**
+		 * 
+		 */
+		setImmediate : /* sinon.fakeServerWithClock.clock.setImmediate */ any;
+				
+		/**
+		 * 
+		 */
+		clearImmediate : /* sinon.fakeServerWithClock.clock.clearImmediate */ any;
+				
+		/**
+		 * 
+		 */
+		tick : /* sinon.fakeServerWithClock.clock.tick */ any;
+				
+		/**
+		 * 
+		 */
+		reset : /* sinon.fakeServerWithClock.clock.reset */ any;
+				
+		/**
+		 * 
+		 */
+		uninstall : /* sinon.fakeServerWithClock.clock.uninstall */ any;
 	}
 }
 declare namespace sinon.Event.prototype{
@@ -4046,6 +4143,11 @@ declare namespace sinon.Event.prototype{
 		 * 
 		 */
 		status : number;
+				
+		/**
+		 * 
+		 */
+		statusText : string;
 				
 		/**
 		 * 
@@ -4338,25 +4440,6 @@ declare namespace sinon.fakeServer{
 		 * 
 		 */
 		onSend : /* sinon.FakeXMLHttpRequest.onSend */ any;
-	}
-}
-declare namespace sinon{
-	// sinon.useFakeTimers.!ret
-	
-	/**
-	 * 
-	 */
-	interface UseFakeTimersRet {
-				
-		/**
-		 * 
-		 */
-		setTimeout : /* sinon.fakeServerWithClock.clock.setTimeout */ any;
-				
-		/**
-		 * 
-		 */
-		setInterval : /* sinon.fakeServerWithClock.clock.setInterval */ any;
 	}
 }
 
@@ -5506,8 +5589,9 @@ declare namespace sinon{
 		/**
 		 * 
 		 * @param now 
+		 * @return  
 		 */
-		function create(now : any): void;
+		function create(now : any): /* sinon.fakeServerWithClock.clock */ any;
 	}
 	
 	/**
@@ -5630,6 +5714,11 @@ declare namespace sinon{
 			 * 
 			 */
 			status : number;
+						
+			/**
+			 * 
+			 */
+			statusText : string;
 						
 			/**
 			 * 
@@ -5775,6 +5864,11 @@ declare namespace sinon{
 			 * 
 			 */
 			status : number;
+						
+			/**
+			 * 
+			 */
+			statusText : string;
 						
 			/**
 			 * 
@@ -6266,17 +6360,6 @@ declare namespace sinon{
 			 * 
 			 */
 			var statusCodes : {
-				
-				/**
-				 * 
-				 */
-				FakeXMLHttpRequest : {
-										
-					/**
-					 * 
-					 */
-					statusCodes : string;
-				}
 			}
 			
 			/**
@@ -6318,6 +6401,11 @@ declare namespace sinon{
 				 * 
 				 */
 				export var status : number;
+								
+				/**
+				 * 
+				 */
+				export var statusText : string;
 								
 				/**
 				 * 
@@ -6671,6 +6759,11 @@ declare namespace sinon{
 				
 		/**
 		 * 
+		 */
+		statusText : string;
+				
+		/**
+		 * 
 		 * @param progressEventRaw 
 		 */
 		uploadProgress(progressEventRaw : any): void;
@@ -6741,17 +6834,6 @@ declare namespace sinon{
 		 * 
 		 */
 		statusCodes : {
-			
-			/**
-			 * 
-			 */
-			FakeXMLHttpRequest : {
-								
-				/**
-				 * 
-				 */
-				statusCodes : string;
-			}
 		}
 				
 		/**
@@ -6784,11 +6866,6 @@ declare namespace sinon{
 		 * 
 		 */
 		DONE : number;
-				
-		/**
-		 * 
-		 */
-		statusText : string;
 		
 		/**
 		 * 
@@ -6969,17 +7046,71 @@ declare namespace sinon{
 						
 			/**
 			 * 
-			 * @param fn 
+			 * @param func 
 			 * @param timeout 
+			 * @return  
 			 */
-			setTimeout(fn : any, timeout : any): void;
+			setTimeout(func : any, timeout : any): number;
 						
 			/**
 			 * 
-			 * @param fn 
-			 * @param timeout 
+			 * @param timerId 
 			 */
-			setInterval(fn : any, timeout : any): void;
+			clearTimeout(timerId : any): void;
+						
+			/**
+			 * 
+			 * @param func 
+			 * @param timeout 
+			 * @return  
+			 */
+			setInterval(func : any, timeout : any): number;
+						
+			/**
+			 * 
+			 * @param timerId 
+			 */
+			clearInterval(timerId : any): void;
+						
+			/**
+			 * 
+			 * @param func 
+			 * @return  
+			 */
+			setImmediate(func : any): number;
+						
+			/**
+			 * 
+			 * @param timerId 
+			 */
+			clearImmediate(timerId : any): void;
+						
+			/**
+			 * 
+			 */
+			duringTick : boolean;
+						
+			/**
+			 * 
+			 * @param ms 
+			 * @return  
+			 */
+			tick(ms : number): any;
+						
+			/**
+			 * 
+			 */
+			reset(): void;
+						
+			/**
+			 * 
+			 */
+			uninstall(): void;
+						
+			/**
+			 * 
+			 */
+			restore : /* sinon.fakeServerWithClock.clock.uninstall */ any;
 		}
 				
 		/**
