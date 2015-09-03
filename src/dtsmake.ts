@@ -177,6 +177,17 @@ export namespace dtsmake{
 			
 			let s = this.parseToDTS(d);
 			
+			//add referrence paths to d.ts
+			if(this.option.lib){
+				let refs = this.option.lib
+				.map((v,i,a)=>{
+					return `/// <reference path="${v}" />`;
+				})
+				.join("\n");
+				s = refs +"\n"+ s;
+			}
+			
+			
 			//add header
 			s = 
 `// Type definitions for ${this.userDefinedModuleName}
@@ -261,7 +272,10 @@ declare module '${n}' {
 					
 					
 					//namespace
-					modJson[TernDef.DEFINE][i][DTS_NAMESPACE_STR] = this.resolveNamespace(p);
+					const ns = this.resolveNamespace(p);
+					if(ns!==""){
+						modJson[TernDef.DEFINE][i][DTS_NAMESPACE_STR] = ns;
+					}
 					
 					
 				}
@@ -2183,7 +2197,8 @@ declare module '${n}' {
 		isOutExport?:boolean,
 		globalObject?:string,
 		exportStyle?:string,
-		exportModuleName?:string
+		exportModuleName?:string,
+		lib?:string[]
 	}
 	
 	/**

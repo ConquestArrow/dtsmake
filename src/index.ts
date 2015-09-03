@@ -26,6 +26,10 @@ var extraFiles = function(val:string):string[]{
 	return val.split(",");
 }
 
+var libDTSs = (val:string):string[]=>{
+	return val.split(",");
+}
+
 
 program
 	.version(myPackage.version, "-v, --version")
@@ -60,6 +64,7 @@ program
 	.option("-e, --export", "add export statement in a bottom of d.ts file")
 	.option("-S, --exportStyle [value]", `if --outExport true, select export style "es6" or "legacy"`)
 	.option("-M, --exportModuleName [value]", 'exporting module name. ex. "EXAMPLE"; usage `import example = require("EXAMPLE");`')
+	.option("-l, --lib <paths>", "add referrece path d.ts files. ex. `--lib path/to/ex1.d.ts,path/to/ex2.d.ts`", libDTSs)
 	
 	.parse(process.argv);
 
@@ -143,6 +148,7 @@ var child = child_process.exec(
 			if((<any>program).exportStyle) op.exportStyle = (<any>program).exportStyle;
 			if((<any>program).exportModuleName) op.exportModuleName = (<any>program).exportModuleName;
 			if((<any>program).globalObject) op.globalObject = (<any>program).globalObject;
+			if((<any>program).lib) op.lib = (<any>program).lib;
 			
 			dg.main(
 				stdout.toString(),
