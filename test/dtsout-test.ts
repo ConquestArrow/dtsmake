@@ -456,7 +456,76 @@ declare interface passes {
 			
 		});
 		
-	})
+		it("should convert node.js node correctly",()=>{
+			let def = {
+				"!define": {
+				"!modules": {
+					"gulpHeader": {
+						"!type": [
+							{
+								"type": 5,
+								"ret": [
+									{
+										"type": 0
+									}
+								],
+								"params": [
+									{
+										"name": "headerText",
+										"type": 4
+									},
+									{
+										"name": "data",
+										"type": 7,
+										"class": ""
+									}
+								]
+							},
+							{
+								"type": 5,
+								"ret": [
+									{
+										"type": 0
+									}
+								],
+								"params": [
+									{
+										"name": "override",
+										"type": 0
+									}
+								]
+							}
+						],
+						"!doc": "gulp-header plugin"
+					}
+				}
+				}
+			};
+			
+		dg.option.isOutVoidAsAny = false;
+		const out = dg.parseToDTS(def);
+		const ans = 
+`/**
+ * gulp-header plugin
+ * @param headerText 
+ * @param data 
+ * @return
+ */
+declare function gulpHeader(headerText : string, data : any): any;
+/**
+ * gulp-header plugin
+ * @param override 
+ * @return
+ */
+declare function gulpHeader(override : any): any;
+`;
+		assert.deepEqual(out, ans);
+		
+		});
+		
+		
+		
+	});
 	
 	
 	context("outJSDoc()", ()=>{
@@ -625,6 +694,16 @@ declare interface passes {
 			const out = dg.resolvePathToDTSName(path.split("."));
 			
 			const ans = "InitEvent3";
+			
+			assert.deepEqual(out, ans);
+			
+		});
+		
+		it("should resolve tern def node only path DTSName",()=>{
+			
+			const path = "!modules.node_modules/gulp-header/index`js.!1";
+			const out = dg.resolvePathToDTSName(path.split("."));
+			const ans = "GulpHeader1";
 			
 			assert.deepEqual(out, ans);
 			
