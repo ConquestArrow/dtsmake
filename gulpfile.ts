@@ -1,11 +1,11 @@
 /// <reference path="./typings/tsd.d.ts" />
-
+/// <reference path="./typings/gulp-header.d.ts" />
 
 import gulp = require("gulp");
 import gts = require("gulp-typescript");
 import concat = require("gulp-concat");
 //var sq = require("streamqueue");
-var header = require('gulp-header');
+import header = require('gulp-header');
 var todo = require('gulp-todo');
 
 require('gulp-release-tasks')(gulp);
