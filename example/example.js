@@ -21,6 +21,7 @@
 	cmd += op.debug ? " -D " : "";
 	cmd += op.extrafiles ? " -x "+op.extrafiles : "";
 	cmd += op.NodeJSModule ? " -N " : "";
+	cmd += op.lib ? " -l "+op.lib : ""; 
 	
 	child_process.exec(
 		//cmd
@@ -112,12 +113,13 @@ exTest({
 exTest({
 	src:"../node_modules/gulp-header/index.js",
 	dist:"./dist/gulp-header",
-	name:"gulp-header",
-	//plugin:"node",
-	//isDebug:true,
-	//isExport:true,
+	name:"gulpHeader",
+	plugin:"node",
+	isDebug:true,
+	isExport:true,
 	//exportStyle:"legacy",
-	//exportModuleName:"clone"//,
-	//NodeJSModule:true,
-	extrafiles:"../node_modules/gulp-header/test/main.js"
+	exportModuleName:"gulp-header",
+	NodeJSModule:true,
+	lib:"../test/fixture/node.d.ts"
+	//extrafiles:"../node_modules/gulp-header/test/main.js"
 });
