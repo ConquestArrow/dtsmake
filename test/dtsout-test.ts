@@ -477,7 +477,7 @@ declare interface passes {
 									{
 										"name": "data",
 										"type": 7,
-										"class": ""
+										"class": "GulpHeader1"
 									}
 								]
 							},
@@ -505,17 +505,18 @@ declare interface passes {
 		dg.option.isOutVoidAsAny = false;
 		const out = dg.parseToDTS(def);
 		const ans = 
-`/**
+`
+/**
  * gulp-header plugin
  * @param headerText 
  * @param data 
- * @return
+ * @return  
  */
-declare function gulpHeader(headerText : string, data : any): any;
+declare function gulpHeader(headerText : string, data : GulpHeader1): any
 /**
  * gulp-header plugin
  * @param override 
- * @return
+ * @return  
  */
 declare function gulpHeader(override : any): any;
 `;
@@ -702,6 +703,10 @@ declare function gulpHeader(override : any): any;
 		it("should resolve tern def node only path DTSName",()=>{
 			
 			const path = "!modules.node_modules/gulp-header/index`js.!1";
+			dg.nodeModuleName = "node_modules/gulp-header/index`js";
+			dg.option.isOutExport = true;
+			dg.option.exportModuleName = "gulp-header";
+			dg.userDefinedModuleName = "gulpHeader";
 			const out = dg.resolvePathToDTSName(path.split("."));
 			const ans = "GulpHeader1";
 			

@@ -407,7 +407,14 @@ declare module '${n}' {
 					s = tmp + s;
 				}
 				else if(/\//.test(paths[j])){
+					if(paths[j] === this.nodeModuleName){
+						s = this.userDefinedModuleName
+							.replace(/^[a-z]/,(val)=>val.toUpperCase())
+						 + s;
+					}
+					//console.log("DTSNAME:"+s);
 					break;
+						
 				}
 				else{
 					//create defined name
@@ -441,13 +448,14 @@ declare module '${n}' {
 				if(reg2.test(p[i]) || reg3.test(p[i])){
 					
 					if(i===len-1)nsp = [];//reset
-					else if(i>1){
+					else if(i>=1){
 						
 						let tmpPath = ["!test",p[i-1],p[i]];
 						//console.log("tmpPath:"+tmpPath.join("."))
 						nsp.push(
 							this.resolvePathToDTSName(tmpPath)
 						);
+
 					}
 					i--;
 					continue;
@@ -487,11 +495,6 @@ declare module '${n}' {
 			const len = path.length;
 			
 			
-			/*if(name=="InitEvent3"){
-				console.trace();
-				console.log("InitEvent3:", path.join("."));
-				console.log("resolveNamespace(path):", this.resolveNamespace(path))
-			}}*/
 			
 			//type check
 			const t = path[len-1];
@@ -502,6 +505,14 @@ declare module '${n}' {
 			let ref = this.searchRef(data, path, isCheckDefine);
 			if(!ref || !ref[0])return;	//no path
 			
+			
+			/*if(name=="GulpHeader1"){
+				//console.trace();
+				console.log("GulpHeader1:", path.join("."));
+				//console.log("ref:"+JSON.stringify(this.searchRef(data, path, isCheckDefine)));
+				console.log("rt:"+rt);
+				//console.log("resolveNamespace(path):", this.resolveNamespace(path))
+			};*/
 			
 			//replace
 			switch(rt){
@@ -536,7 +547,7 @@ declare module '${n}' {
 					
 					//console.log(`ref:${JSON.stringify(ref)}`);
 					//console.log(`ref[0]:${JSON.stringify(ref[0])}`);
-					//console.log(`ref[0]["params"]:${ref[0]["params"]}`);
+					//console.log(`ref[0]["params"]:${JSON.stringify(ref[0]["params"])}`);
 					
 					let param = ref[0]["params"][n];
 					if(param instanceof Array){
@@ -578,7 +589,9 @@ declare module '${n}' {
 					}else{
 						const ns = this.resolveNamespace(path);
 						
-						param.class = (ns!="") ? ns+"."+name : ns;
+						//console.log("ns!:"+ns)
+						
+						param.class = (ns!="") ? ns+"."+name : name;
 						param.type = TSObjType.CLASS;
 					}
 					
@@ -744,9 +757,14 @@ declare module '${n}' {
 						
 						break;
 					case TernDef.NODE:
-						if(typeof value === "string"){
+						/*if(typeof value === "string"){
 							this.option.isNodeJsModule = true;
 							this.nodeModuleName = value;
+						}else */
+						if(typeof i === "string"){
+							if(Object.keys(value).length === 1){
+								this.nodeModuleName = Object.keys(value)[0];
+							}
 						}
 						o[i] = this.parseJsonNodeDTS(value);
 						break;
