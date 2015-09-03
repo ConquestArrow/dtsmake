@@ -853,7 +853,27 @@ declare module '${n}' {
 						if(j === TernDef.NODE){
 							this.isNodeJsModule = true;
 							
-							s = this.wrapNamespace(value[TernDef.NODE], s, TernDef.NODE);
+							let dont:TSObj[] = []
+							let wrap:TSObj[] = [];
+							for(let k in value[TernDef.NODE]){
+								const v = value[TernDef.NODE][k];
+								if(v[TernDef.TYPE]){
+									dont[k] = <TSObj>{};
+									dont[k] = clone(v);
+								}
+								else{
+									wrap[k] = <TSObj>{};
+									wrap[k] = clone(v);
+								}
+							}
+							
+							
+							//dont wrap
+							s += this.parseToDTS(dont);
+								
+							
+							//wrap
+							s += this.wrapNamespace(wrap, TernDef.NODE);
 							
 							this.isNodeJsModule = false;
 						}
@@ -1787,7 +1807,8 @@ declare module '${n}' {
 		/**
 		 * 
 		 */
-		wrapNamespace(value:string|Object, s:string, nodeName:string):string{
+		wrapNamespace(value:string|Object, nodeName:string):string{
+			let s = "";
 			if(typeof value === "string"){
 				throw Error(nodeName +" node value must not to be string.");
 			}else{
