@@ -115,7 +115,7 @@ exTest({
 	dist:"./dist/gulp-header",
 	name:"gulpHeader",
 	plugin:"node",
-	isDebug:true,
+	//isDebug:true,
 	isExport:true,
 	//exportStyle:"legacy",
 	exportModuleName:"gulp-header",
