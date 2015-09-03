@@ -50,6 +50,30 @@ dtsmake -s ./path/to/src/target.js --dist ./path/to/dist/mydefinition -n "mydefi
  * more usage examples -> [/example/example.js](./example/example.js)
  * generated TS definition files examples -> [/example/dist/](./example/dist/)
 
+### Best Practice
+
+#### Generating Gulp.js plugin definition files
+
+`dtsmake -s /path/to/gulp/any/plugin.js -n "canalCasePluginName" -p node -e -M "gulp-*" -N -l "/path/to/node.d.ts"`
+
+ * `-n "canalCasePluginName"`
+  * gulp.js plugins has a name as `gulp-*`.
+  * but, this is a invalid namespace name in TS.
+  * so, naming canal case.
+   * ex. `gulp-header` -> `gulpHeader`
+   * or valid namespace name.
+ * `-M "gulp-*"`
+  * no need to name canal case. 
+ * `-p node`
+  * use nodejs plugin of tern server. 
+ * `-N`
+  * set nodejs module option ON
+ * `-e`
+  * set export option ON
+ * `-l "/path/to/node.d.ts"`
+  * add referrece path to node.d.ts definition file
+  
+
 ### Options
 
 #### -h, --help                    
@@ -133,6 +157,20 @@ declare module 'mylib'{
 exporting module name. 
  
 ex. "EXAMPLE"; usage `import example = require("EXAMPLE");`
+
+#### -l, --lib `<paths>`
+
+add referrece path d.ts files. 
+
+ex. `--lib path/to/ex1.d.ts,path/to/ex2.d.ts`
+
+=>
+
+```javascript
+/// <reference path="path/to/ex1.d.ts" />
+/// <reference path="path/to/ex2.d.ts" />
+```
+
 
 ## Known Issues
 
