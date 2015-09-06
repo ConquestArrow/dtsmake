@@ -512,7 +512,7 @@ declare interface passes {
  * @param data 
  * @return  
  */
-declare function gulpHeader(headerText : string, data : GulpHeader1): any
+declare function gulpHeader(headerText : string, data : GulpHeader1): any;
 /**
  * gulp-header plugin
  * @param override 
