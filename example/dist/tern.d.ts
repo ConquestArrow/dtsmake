@@ -218,7 +218,7 @@ declare namespace tern{
 	 * @param wide 
 	 * @return  
 	 */
-	function findQueryExpr(file : any, query : any, wide : boolean): any	
+	function findQueryExpr(file : any, query : any, wide : boolean): any;	
 	/**
 	 * 
 	 */

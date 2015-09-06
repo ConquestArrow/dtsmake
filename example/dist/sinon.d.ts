@@ -4013,7 +4013,7 @@ declare namespace sinon.collection{
 		 * 
 		 * @return  
 		 */
-		mock(): any		
+		mock(): any;		
 		/**
 		 * 
 		 */
@@ -4681,7 +4681,7 @@ declare namespace sinon{
 	 * @param count 
 	 * @return  
 	 */
-	function timesInWords(count : number): boolean	
+	function timesInWords(count : number): boolean;	
 	/**
 	 * 
 	 */
@@ -4989,7 +4989,7 @@ declare namespace sinon{
 			 * @param spyInstance 
 			 * @return  
 			 */
-			function c(spyInstance : any): boolean			
+			function c(spyInstance : any): boolean;			
 			/**
 			 * 
 			 */
@@ -5048,7 +5048,7 @@ declare namespace sinon{
 		 * @param stub 
 		 * @return  
 		 */
-		function create(stub : any): CreateRet		
+		function create(stub : any): CreateRet;		
 		/**
 		 * 
 		 */
@@ -5237,7 +5237,7 @@ declare namespace sinon{
 		 * @param methodName 
 		 * @return  
 		 */
-		function create(methodName : string): CreateRet		
+		function create(methodName : string): CreateRet;		
 		/**
 		 * 
 		 */
@@ -5441,7 +5441,7 @@ declare namespace sinon{
 	 * @param object 
 	 * @return  
 	 */
-	function mock(object : any): any	
+	function mock(object : any): any;	
 	/**
 	 * 
 	 */
@@ -5457,7 +5457,7 @@ declare namespace sinon{
 		 * @param object 
 		 * @return  
 		 */
-		function create(object : any): CreateRet		
+		function create(object : any): CreateRet;		
 		/**
 		 * 
 		 */
@@ -5468,7 +5468,7 @@ declare namespace sinon{
 		 * @param method 
 		 * @return  
 		 */
-		function expects(method : any): any		
+		function expects(method : any): any;		
 		/**
 		 * 
 		 */
@@ -5561,7 +5561,7 @@ declare namespace sinon{
 		 * 
 		 * @return  
 		 */
-		function mock(): any		
+		function mock(): any;		
 		/**
 		 * 
 		 */

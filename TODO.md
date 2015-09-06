@@ -12,11 +12,11 @@
 | dtsmake.ts | 1416 | return info
 | dtsmake.ts | 1465 | option class or interface (default)
 | dtsmake.ts | 1475 | overloads support
-| dtsmake.ts | 1682 | check real path
-| dtsmake.ts | 1692 | check path exist
-| dtsmake.ts | 1724 | replace
-| dtsmake.ts | 1747 | generate class/interface
-| dtsmake.ts | 1754 | replace
-| dtsmake.ts | 1758 | replace
-| dtsmake.ts | 1852 | use namespace keyword option
-| dtsmake.ts | 2245 | compat to TypeScript AST
+| dtsmake.ts | 1687 | check real path
+| dtsmake.ts | 1697 | check path exist
+| dtsmake.ts | 1729 | replace
+| dtsmake.ts | 1752 | generate class/interface
+| dtsmake.ts | 1759 | replace
+| dtsmake.ts | 1763 | replace
+| dtsmake.ts | 1857 | use namespace keyword option
+| dtsmake.ts | 2250 | compat to TypeScript AST

@@ -1505,6 +1505,11 @@ declare module '${n}' {
 					else if(t.ret){
 						s += `: ${this.tsObjsToUnionDTS(t.ret, (t.ret.length>1) ? true : false, t, false)}`;
 					}
+					
+					if(i!==ol-1){
+						//overload function
+						s += ";";
+					}
 				}
 				
 				

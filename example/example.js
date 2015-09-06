@@ -123,3 +123,18 @@ exTest({
 	lib:"../test/fixture/node.d.ts"
 	//extrafiles:"../node_modules/gulp-header/test/main.js"
 });
+//gulp-concat.js; gulp plugin sample
+exTest({
+	src:"../node_modules/gulp-concat/index.js",
+	dist:"./dist/gulp-concat",
+	name:"gulpConcat",
+	plugin:"node",
+	//isDebug:true,
+	isExport:true,
+	//exportStyle:"legacy",
+	exportModuleName:"gulp-concat",
+	NodeJSModule:true,
+	lib:"../test/fixture/node.d.ts",
+	def:"../example/test/fixture/gulp.def.json",
+	extrafiles:"../example/test/fixture/gulp-concat-sample.js"
+});
