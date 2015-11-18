@@ -203,6 +203,37 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			);
 		});
 		
+		it("should parse optional param fn",()=>{
+			const def = "fn(p1?: [string])";
+			const answer = 
+			[
+				{
+				"type":dtsmake.TSObjType.FUNCTION,
+				"ret":[
+					{
+					"type":dtsmake.TSObjType.VOID
+					}
+				],
+				"params":[
+					{
+					"type":dtsmake.TSObjType.ARRAY,
+					"name":"p1?",
+					"arrayType": [
+						{"type":dtsmake.TSObjType.STRING}
+					]
+				}
+				]
+				}
+			];
+			
+			let out = dg.parseTernDef(def);
+			assert.deepEqual(
+				out, answer,
+				`out ${JSON.stringify(out)},\n`+
+				`ans ${JSON.stringify(answer)}`
+			);
+		});
+		
 		it("should parse double array params fn",()=>{
 			const def = "fn(sParams: [string], nParams: [number])";
 			const answer = [
