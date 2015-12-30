@@ -86,9 +86,25 @@ else if((<any>program).exportModuleName && !(<any>program).export){
  * 
  * `tern/bin/condense [--name name] [--plugin name]* [--def name]* [+extrafile.js]* [file.js]+`
  */
-var genCommand = ()=>{
+var genCommand = (version:string, path:string)=>{
 	var s = "";
-	s = `node "${__dirname}/../node_modules/tern/bin/condense"`;
+	const major = Number(version.split(".")[0]);
+	console.log(`genCommand`)
+	//const px = `"${__dirname}"`
+	console.log(`p:${path}`)
+		
+	if(major >= 3){
+		
+		//for npm >= v3.0
+		//const p = require("tern/bin/condense").resolve()
+		//console.log(`p:${p}`)
+		//throw Error(`hi`)
+		s = `node "${path}/tern/bin/condense"`
+	}else{
+		//for npm < v3.x
+		s = `node "${__dirname}/../node_modules/tern/bin/condense"`;
+	}
+	
 	s += (<any>program).n ? ` --name ${(<any>program).n}` : "";
 	//s += (<any>program).plugin ? ` --plugin ${(<any>program).plugin.join(" ")}` : "";
 	if((<any>program).plugin){
@@ -112,13 +128,40 @@ var genCommand = ()=>{
 	return s;
 }
 
+function npmVersion(cb:(v:string,e:Error)=>void){
+	child_process.exec(
+		"npm -v",
+		{encoding:"utf8",maxBuffer:2048},
+		(e:Error, stdout:Buffer, stderr:Buffer)=>{
+			//if(e)throw e;
+			cb(stdout.toString(), e);
+		}
+	)
+}
+function getDirNodeModules(cb:(p:string,e:Error)=>void){
+	child_process.exec(
+		"npm root",
+		{encoding:"utf8",maxBuffer:2048},
+		(e:Error, stdout:Buffer, stderr:Buffer)=>{
+			//if(e)throw e;
+			cb(stdout.toString().replace(/[\r\n]/g,""), e);
+		}
+	)
+}
+
+getDirNodeModules((path:string, e:Error)=>{
+	npmVersion((version:string, e2:Error)=>{
+		console.log(`v:${version}`)
+		exec(version,path);
+	})
+})
 
 /**
  * exec tern/bin/condense
  */ 
-
+function exec(version:string,path:string){
 var child = child_process.exec(
-	genCommand(),
+	genCommand(version,path),
 	{maxBuffer: 1000000*2048},
 	(err:Error, stdout:Buffer, stderr:Buffer)=>{
 		if(err){
@@ -158,4 +201,5 @@ var child = child_process.exec(
 		}
 	}
 );
+}
 
