@@ -28,7 +28,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-header": "^1.7.1",
     "gulp-release-tasks": "0.0.3",
-    "gulp-todo": "^3.3.0",
+    "gulp-todo": "^4.0.0",
     "gulp-typescript": "^2.8.1",
     "mocha": "^2.3.0",
     "power-assert": "^1.0.0",
@@ -39,6 +39,7 @@
   "dependencies": {
     "clone": "^1.0.2",
     "commander": "^2.8.1",
-    "tern": "^0.15.0"
+    "npm-version": "^1.1.0",
+    "tern": "^0.16.0"
   }
 }

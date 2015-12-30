@@ -6,12 +6,12 @@
         "removeComments": false,
         "preserveConstEnums": false,
 		"noEmitOnError": true,
-		"target": "ES5",
-		"outDir": "lib"
+		"target": "es5",
+		"outDir": "lib",
+		"rootDir": "src"
     },
     "files": [
         "src/dtsmake.ts",
-		"src/index.ts",
-		"gulpfile.ts"
+		"src/index.ts"
     ]
 }
