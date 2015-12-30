@@ -89,9 +89,9 @@ else if((<any>program).exportModuleName && !(<any>program).export){
 var genCommand = (version:string, path:string)=>{
 	var s = "";
 	const major = Number(version.split(".")[0]);
-	console.log(`genCommand`)
+	//console.log(`genCommand`)
 	//const px = `"${__dirname}"`
-	console.log(`p:${path}`)
+	//console.log(`p:${path}`)
 		
 	if(major >= 3){
 		
