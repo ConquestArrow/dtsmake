@@ -40,7 +40,7 @@ export namespace dtsmake{
 			// annotate interface constructor type as return type instance
 			isAnnotateTypeInstance:true,
 			// node module special replace
-			isNodeJSModule:false,
+			isNodeJsModule:false,
 			// add export statement in a bottom of d.ts file
 			isOutExport:true,
 			// how to export objects that has same name with JS global object
@@ -112,7 +112,7 @@ export namespace dtsmake{
 		 * @param pathStr path/to/file/example.json, must be strings
 		 */
 		loadTernJson(pathStr:string, cb:(data:JSON)=>void){
-			fs.readFile(pathStr,{encoding:"UTF-8"}, (err:NodeJS.ErrnoException, data:Buffer)=>{
+			fs.readFile(pathStr,"UTF-8", (err:NodeJS.ErrnoException, data:Buffer)=>{
 				if(err)throw Error(err.name+" "+err.code+" "+err.message+" "+err.path);
 				
 				this.ternjsData = JSON.parse(data.toString());
@@ -866,7 +866,7 @@ declare module '${n}' {
 		parseToDTS(data:{}, parent?:{}):string{
 			let s = "";
 			for(let i in data){
-				let value:string|Object[]|Object;
+				let value:string|Object[]|Object|TSObj[];
 				value = data[i];
 				
 				switch (i) {
@@ -1025,7 +1025,7 @@ declare module '${n}' {
 					//node end
 					if(value instanceof Array){
 						s += this.indent();
-						s += this.convertTSObjToString(i, value, value[TernDef.DOC], value[TernDef.URL]);
+						s += this.convertTSObjToString(i, <TSObj[]>value, value[TernDef.DOC], value[TernDef.URL]);
 					}
 					else if(typeof value === "string"){
 						s += this.outJSDoc(
