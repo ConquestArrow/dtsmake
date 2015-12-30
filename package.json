@@ -1,6 +1,6 @@
 {
   "name": "dtsmake",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "TypeScript d.ts file generator from JavaScript files",
   "main": "lib/dtsmake.js",
   "bin": "bin/dtsmake",
@@ -14,11 +14,11 @@
     "type": "git",
     "url": "https://github.com/ConquestArrow/dtsmake/"
   },
-  "bugs":{
-	  "url":"https://github.com/ConquestArrow/dtsmake/issues"
+  "bugs": {
+    "url": "https://github.com/ConquestArrow/dtsmake/issues"
   },
-  "engines" : {
-	  "npm" : "2.x.x - 3.x.x"
+  "engines": {
+    "npm": "2.x.x - 3.x.x"
   },
   "keywords": [
     "TypeScript",
