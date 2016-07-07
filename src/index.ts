@@ -88,11 +88,12 @@ else if((<any>program).exportModuleName && !(<any>program).export){
  */
 var genCommand = (version:string, path:string)=>{
 	var s = "";
-	const major = Number(version.split(".")[0]);
+	//const major = Number(version.split(".")[0]);
 	//console.log(`genCommand`)
 	//const px = `"${__dirname}"`
 	//console.log(`p:${path}`)
 		
+	/*
 	if(major >= 3){
 		
 		//for npm >= v3.0
@@ -102,8 +103,11 @@ var genCommand = (version:string, path:string)=>{
 		s = `node "${path}/tern/bin/condense"`
 	}else{
 		//for npm < v3.x
-		s = `node "${__dirname}/../node_modules/tern/bin/condense"`;
-	}
+		//s = `node "${__dirname}/../node_modules/tern/bin/condense"`;
+		
+	}*/
+
+	s = `node "${path}/tern/bin/condense"`;
 	
 	s += (<any>program).n ? ` --name ${(<any>program).n}` : "";
 	//s += (<any>program).plugin ? ` --plugin ${(<any>program).plugin.join(" ")}` : "";
@@ -128,6 +132,25 @@ var genCommand = (version:string, path:string)=>{
 	return s;
 }
 
+function checkTernInstalled(){
+	let tern:any;
+	try{
+		tern = require("tern");
+	}catch(e){
+		switch(e.code){
+			case "MODULE_NOT_FOUND":{
+				console.warn("[TERN] Tern.js not found. Please try `npm i dtsmake -g` again.")
+				break;
+			}
+			default:{
+				console.error(e);
+				break;
+			}
+		}
+		return;
+	}
+}
+
 function npmVersion(cb:(v:string,e:Error)=>void){
 	child_process.exec(
 		"npm -v",
@@ -144,6 +167,8 @@ function getDirNodeModules(cb:(p:string,e:Error)=>void){
 		{encoding:"utf8",maxBuffer:2048},
 		(e:Error, stdout:Buffer, stderr:Buffer)=>{
 			//if(e)throw e;
+			checkTernInstalled();
+
 			cb(stdout.toString().replace(/[\r\n]/g,""), e);
 		}
 	)
