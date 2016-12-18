@@ -40,7 +40,7 @@
     "@types/power-assert": "^1.4.29",
     "@types/power-assert-formatter": "^1.4.28",
     "@types/sinon": "^1.16.33",
-    "espower-typescript": "^5.0.1",
+    "espower-typescript": "^7.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-header": "^1.8.7",
