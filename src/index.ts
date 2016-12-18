@@ -1,5 +1,3 @@
-/// <reference path="../typings/tsd.d.ts" />
-
 
 /**
  * dtsmake command line interface
@@ -163,7 +161,7 @@ function exec(version:string,path:string){
 var child = child_process.exec(
 	genCommand(version,path),
 	{maxBuffer: 1000000*2048},
-	(err:Error, stdout:Buffer, stderr:Buffer)=>{
+	(err:Error, stdout:string, stderr:string)=>{
 		if(err){
 			console.warn("[INFO] tern/condense error");
 			console.error(err.toString());
@@ -175,7 +173,7 @@ var child = child_process.exec(
 			return;
 		}
 		else{
-			if((<any>program).debug)console.log(stdout.toString("utf8"));
+			if((<any>program).debug)console.log(stdout.toString());
 			
 			//
 			let dg = new dtsmake.DTSMake();
