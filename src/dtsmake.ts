@@ -135,7 +135,7 @@ export namespace dtsmake{
 			});
 			}catch(e){
 				throw Error(e);
-				return false;
+				//return false;
 			}
 			
 			return true;
@@ -592,7 +592,7 @@ declare module '${n}' {
 									v.class = name;
 								});
 						}else{
-							<Array<TSObj>>param.push(o);
+							(<Array<TSObj>>param).push(o);
 						}
 						
 						
@@ -1540,6 +1540,7 @@ declare module '${n}' {
 				}
 				s += this.interfaceDTS(symbolName, nt);
 				
+				/*
 				if(false){
 					//class open
 					s += this.outJSDoc(docData,urlData);
@@ -1566,6 +1567,7 @@ declare module '${n}' {
 					s += this.indent();
 					s += "}";
 				}
+				*/
 			}
 			else{
 				s += this.outJSDoc(
@@ -1779,7 +1781,7 @@ declare module '${n}' {
 					break;
 				case TSObjType.UNIONS:
 					throw Error("unions? "+ JSON.stringify(t));
-					break;
+					//break;
 				case TSObjType.VOID:
 					if(this.option.isOutVoidAsAny) s += "/* void */ any";
 					else s += "void";
@@ -1911,7 +1913,7 @@ declare module '${n}' {
 					case TSObjType.UNIONS:
 						ret.push(this.parseTernDef(i));
 						continue;
-						break;
+						//break;
 					case TSObjType.ARRAY:
 						//console.log("ARRAY:"+i);
 						//let test = i.replace(/^\[/,"").replace(/\]$/,"");
@@ -2104,7 +2106,7 @@ declare module '${n}' {
 				return TSObjType.OBJECT;
 			}else{
 				throw Error("\u001b[31mcan not check type. : \u001b[0m"+ternDef);
-				return;
+				//return;
 			}
 		}
 		
@@ -2340,21 +2342,21 @@ export namespace dtsmake.TernDef{
 	 */
 	export function strToEnum(s:string):EnumTernDef{
 		switch (s) {
-			case this.NAME: return EnumTernDef.NAME;break;
-			case this.DEFINE: return EnumTernDef.DEFINE;break;
-			case this.TYPE: return EnumTernDef.TYPE;break;
-			case this.DOC: return EnumTernDef.DOC;break;
-			case this.URL: return EnumTernDef.URL;break;
-			case this.EFFECTS: return EnumTernDef.EFFECTS;break;
-			case this.THIS: return EnumTernDef.THIS;break;
-			case this.RET: return EnumTernDef.RET;break;
-			case this.SPAN: return EnumTernDef.SPAN;break;
-			case this.PROTO: return EnumTernDef.PROTO;break;
-			case this.STD_PROTO: return EnumTernDef.STR_PROTO;break;
-			case this.NODE: return EnumTernDef.NODE;break;
+			case this.NAME: return EnumTernDef.NAME;//break;
+			case this.DEFINE: return EnumTernDef.DEFINE;//break;
+			case this.TYPE: return EnumTernDef.TYPE;//break;
+			case this.DOC: return EnumTernDef.DOC;//break;
+			case this.URL: return EnumTernDef.URL;//break;
+			case this.EFFECTS: return EnumTernDef.EFFECTS;//break;
+			case this.THIS: return EnumTernDef.THIS;//break;
+			case this.RET: return EnumTernDef.RET;//break;
+			case this.SPAN: return EnumTernDef.SPAN;//break;
+			case this.PROTO: return EnumTernDef.PROTO;//break;
+			case this.STD_PROTO: return EnumTernDef.STR_PROTO;//break;
+			case this.NODE: return EnumTernDef.NODE;//break;
 			default:
 				throw Error("no match enum strings:"+s);
-				break;
+				//break;
 		}
 	}
 }
