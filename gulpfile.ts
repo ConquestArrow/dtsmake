@@ -2,7 +2,7 @@ import gulp = require("gulp");
 import gts = require("gulp-typescript");
 import concat = require("gulp-concat");
 //var sq = require("streamqueue");
-import header from 'gulp-header'//= require('gulp-header');
+//import header from 'gulp-header'//= require('gulp-header');
 const todo = require('gulp-todo');
 
 require('gulp-release-tasks')(gulp);
