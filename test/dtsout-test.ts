@@ -330,7 +330,7 @@ declare function ${defName}(): /* sinon.collection.stub.!ret */ any | (() => voi
 						[
 							{"type":9,"name":"fake","class":"sinon.collection.stub.!ret"},
 							{"type":5,"name":"fake","ret":[{"type":1}],
-			"params":null}
+			"params":<any>null}
 						]
 					]
 				}
@@ -367,7 +367,7 @@ declare function ${defName}(fake : /* sinon.collection.stub.!ret */ any | (() =>
 									"type": 1
 								}
 							],
-							"params": null
+							"params": <any>null
 						}
 					],
 					"!span": [
