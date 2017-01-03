@@ -1,12 +1,9 @@
-/// <reference path="./typings/tsd.d.ts" />
-/// <reference path="./typings/gulp-header.d.ts" />
-
 import gulp = require("gulp");
 import gts = require("gulp-typescript");
 import concat = require("gulp-concat");
 //var sq = require("streamqueue");
-import header = require('gulp-header');
-var todo = require('gulp-todo');
+import header from 'gulp-header'//= require('gulp-header');
+const todo = require('gulp-todo');
 
 require('gulp-release-tasks')(gulp);
 
@@ -37,9 +34,13 @@ gulp.task("cmdbuild", ()=>{
 });*/
 
 gulp.task("build", ()=>{
+	let tsProj = gts.createProject("tsconfig.json")
+	tsProj.src("./node_modules/@types")
+
 	let result = gulp
 		.src("./src/*.ts")
-		.pipe(gts(gts.createProject("./tsconfig.json")));
+		.pipe(tsProj());
+
 	return result
 		.js
 		.pipe(gulp.dest("./lib/"));

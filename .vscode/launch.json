@@ -7,6 +7,18 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "extest1",
+            "program": "${workspaceRoot}/example/node_modules/dtsmake/lib/index.js",
+            "cwd": "${workspaceRoot}",
+            "args": [
+                "-s","${workspaceRoot}/node_modules/sinon/pkg/sinon.js",
+                "--dist","${workspaceRoot}/example/dist/sinon"
+            ],
+            "sourceMaps": false
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Run with mocha",
             "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
             "cwd": "${workspaceRoot}",

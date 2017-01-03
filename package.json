@@ -1,6 +1,6 @@
 {
   "name": "dtsmake",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "TypeScript d.ts file generator from JavaScript files",
   "main": "lib/dtsmake.js",
   "bin": "bin/dtsmake",
