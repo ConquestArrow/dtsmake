@@ -196,6 +196,12 @@ export namespace dtsmake{
 			
 			if(this.option.isOutExport){
 				let n = this.option.exportModuleName ? this.option.exportModuleName : this.userDefinedModuleName;
+				
+				const reg = /^['"]([^']+)['"]$/;
+				if(reg.test(n)){
+					n = RegExp.$1;
+				}
+				
 				s += 
 `
 declare module '${n}' {
