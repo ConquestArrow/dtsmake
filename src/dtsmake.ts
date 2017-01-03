@@ -535,18 +535,30 @@ declare module '${n}' {
 			switch(rt){
 				case ReplaceType.RETURN:
 					if(!ref || !ref[0]){
-						if(this.option.isDebug)console.log("t:"+t+","+JSON.stringify(ref));
+						if(this.option.isDebug)console.warn("t:"+t+","+JSON.stringify(ref));
 						return;
 					}
 					let ret:TSObj[] = ref[0]["ret"];
 					let retLen = ret.length;
+
+					if(this.option.isDebug)console.warn("Ret:", name, path, ret)
+
 					if(retLen===1){
-						ret[0].class = name;
+						const ns = this.resolveNamespace(path)
+
+						if(this.option.isDebug)console.warn("ns",ns)
+
+						ret[0].class = (ns!="") ? ns+"."+name : name;
 						ret[0].type = TSObjType.CLASS;
 					}else{
+
+						const ns = this.resolveNamespace(path)
+
+						if(this.option.isDebug)console.warn("ns",ns)
+
 						//TODO:real replace
 						let o = <TSObj>{};
-						o.class = name;
+						o.class = (ns!="") ? ns+"."+name : name;//name;
 						o.type = TSObjType.CLASS;
 						ret.push(o);
 					}
@@ -675,12 +687,30 @@ declare module '${n}' {
 					continue;
 				}else if(ref[s] === undefined){
 					//no path ref
+
+					//check from top
+					if(i>0){
+						let pname = path.slice(0, i).join(".") +"."+ s;
+						let iData = data[TernDef.DEFINE];
+
+						if(iData[pname]){
+							ref = iData[pname];
+							continue;
+						}
+
+						if(this.option.isDebug){
+							console.warn("pname", pname)
+							console.warn("iData[pname]", JSON.stringify(iData[pname]))
+						}
+					}
 					
 					//TODO: ref path !n or !ret to searching
 					
 					if(this.option.isDebug){
+						
 						console.warn("current ref path:"+ s);
 						console.warn("no path ref:"+path.join("."));
+						console.warn("data", JSON.stringify(ref))
 					}
 					
 					
