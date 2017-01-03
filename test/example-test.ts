@@ -6,8 +6,13 @@ import * as fs from 'fs';
 describe("Example js file tests", ()=>{
 	
 	let dg:dtsmake.DTSMake;
+	const dir = "./test/.tmp"
 	beforeEach(()=>{
 		dg = new dtsmake.DTSMake();
+		
+		if(!fs.existsSync(dir)){
+			fs.mkdirSync(dir)
+		}
 	});
 	
 	
