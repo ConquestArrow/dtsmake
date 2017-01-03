@@ -5,8 +5,8 @@
   "main": "lib/dtsmake.js",
   "bin": "bin/dtsmake",
   "scripts": {
-    "test": "mocha --compilers ts:ts-node/register test/**/*.ts",
-    "testw": "mocha --compilers ts:ts-node/register test/**/*.ts -w",
+    "test": "mocha --compilers ts:ts-node/register test/*.ts",
+    "testw": "mocha --compilers ts:ts-node/register test/*.ts -w",
     "extest": "(cd example && npm install --save-dev ../ && node example.js)",
     "build": "tsc"
   },
