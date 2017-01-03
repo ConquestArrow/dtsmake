@@ -409,7 +409,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 	
 	
 	context("parseTernJson()",()=>{
-		let loadData;
+		let loadData:JSON;
 		beforeEach((done)=>{
 			
 			dg.loadTernJson("sample/infer.js.json",(jsonData)=>{
@@ -421,7 +421,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 			
 		});
 		
-		let nodeDTSObj;
+		let nodeDTSObj:any;
 		it("parseJsonNodeDTS()",(done)=>{
 			nodeDTSObj = dg.parseJsonNodeDTS(loadData);
 			
@@ -573,7 +573,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 							"class": "!this"
 						}
 					],
-					"params": null
+					"params": <any>null
 				},
 				"prop2":{
 					"type":dtsmake.TSObjType.NUMBER
@@ -600,7 +600,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 								"class": "!this"
 							}
 						],
-						"params": null
+						"params": <any>null
 					},
 					"prop2":{
 						"type":dtsmake.TSObjType.NUMBER
@@ -729,7 +729,7 @@ describe("Parsing TernJS definition JSON file(s), ",()=>{
 	
 	
 	context("preModifiedJson()", ()=>{
-		let def;
+		let def:{};
 		
 		beforeEach(()=>{
 			

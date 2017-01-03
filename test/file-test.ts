@@ -20,7 +20,7 @@ describe("File manipulation tests", ()=>{
 	});
 	
 	context.skip("save a JSON file",()=>{
-		let realFile;
+		let realFile:JSON;
 		beforeEach((done)=>{
 			dg.option.isOutVoidAsAny = false;
 			dg.loadTernJson("sample/infer.js.json",(data:JSON)=>{
