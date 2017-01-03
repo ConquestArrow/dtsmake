@@ -6,12 +6,21 @@
         "removeComments": false,
         "preserveConstEnums": false,
 		"noEmitOnError": true,
+        //"strictNullChecks": true,
+        //"noResolve":true,
+        "pretty": true,
 		"target": "es5",
-		"outDir": "lib",
-		"rootDir": "src"
+        "lib": [
+            "es2015"
+        ],
+		"outDir": "lib"//,
+		//"rootDir": "src"
     },
-    "files": [
-        "src/dtsmake.ts",
-		"src/index.ts"
+    "include":[
+        "src/index.ts",
+        "node_modules/@types/*/*.d.ts"
+    ],
+    "exclude": [
+        "gulpfile.ts"
     ]
 }
