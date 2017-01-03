@@ -7373,6 +7373,12 @@ declare namespace sinon{
 		 */
 		function match(actual : any, expectation : any): void;
 	}
+	
+	/**
+	 * 
+	 */
+	interface Float32Array {
+	}
 }
 
 declare module 'sinon' {

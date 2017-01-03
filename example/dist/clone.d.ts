@@ -20,13 +20,17 @@
  *    a particular depth. (optional - defaults to Infinity)
  * @param `prototype` - sets the prototype to be used when cloning an object.
  *    (optional - defaults to parent prototype).
+ * @param `includeNonEnumerable` - set to true if the non-enumerable properties
+ *    should be cloned as well. Non-enumerable properties on the prototype
+ *    chain will be ignored. (optional - false by default)
  * @param parent 
  * @param circular 
  * @param depth 
  * @param prototype 
+ * @param includeNonEnumerable 
  * @return  
  */
-declare function clone(parent : any, circular : boolean, depth : number, prototype : any): any;
+declare function clone(parent : any, circular : boolean, depth : number, prototype : any, includeNonEnumerable : any): any;
 
 /**
  * 
