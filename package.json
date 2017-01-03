@@ -5,8 +5,8 @@
   "main": "lib/dtsmake.js",
   "bin": "bin/dtsmake",
   "scripts": {
-    "test": "mocha --compilers ts:espower-typescript/guess test/*-test.ts",
-    "testw": "mocha --compilers ts:espower-typescript/guess -w test/*-test.ts",
+    "test": "mocha --compilers ts:ts-node/register test/**/*.ts",
+    "testw": "mocha --compilers ts:ts-node/register test/**/*.ts -w",
     "extest": "(cd example && npm install --save-dev ../ && node example.js)",
     "build": "tsc"
   },
@@ -50,7 +50,7 @@
     "mocha": "^2.5.3",
     "power-assert": "^1.4.1",
     "sinon": "^1.17.4",
-    "ts-node": "^1.7.2",
+    "ts-node": "^1.7.3",
     "typescript-node": "^0.1.3",
     "typescript-register": "^1.1.0",
     "typescript-require": "^0.2.9-1"
