@@ -114,17 +114,17 @@ declare namespace sinon{
 				/**
 				 * 
 				 */
+				responseText : string;
+								
+				/**
+				 * 
+				 */
 				response : string;
 								
 				/**
 				 * 
 				 */
 				aborted : boolean;
-								
-				/**
-				 * 
-				 */
-				responseText : string;
 				
 				/**
 				 * 
@@ -136,17 +136,11 @@ declare namespace sinon{
 					 */
 					"Content-Type" : string;
 				}
-				
+								
 				/**
 				 * 
 				 */
-				responseXML : {
-										
-					/**
-					 * 
-					 */
-					async : string;
-				}
+				progress : number;
 								
 				/**
 				 * 
@@ -223,6 +217,11 @@ declare namespace sinon{
 				 * 
 				 */
 				setResponseHeaders : /* sinon.FakeXMLHttpRequest.prototype.setResponseHeaders */ any;
+								
+				/**
+				 * 
+				 */
+				error : /* sinon.FakeXMLHttpRequest.prototype.error */ any;
 								
 				/**
 				 * 
@@ -423,11 +422,17 @@ declare namespace sinon{
 	 * 
 	 */
 	interface GetPropertyDescriptorRet {
-				
+		
 		/**
 		 * 
 		 */
-		restore(): void;
+		restore : {
+						
+			/**
+			 * 
+			 */
+			sinon : boolean;
+		}
 	}
 }
 declare namespace sinon{
@@ -556,6 +561,21 @@ declare namespace sinon{
 		 * 
 		 */
 		behaviors : Array<any>;
+				
+		/**
+		 * 
+		 */
+		enumerable : boolean;
+				
+		/**
+		 * 
+		 */
+		configurable : boolean;
+				
+		/**
+		 * 
+		 */
+		writable : boolean;
 		
 		/**
 		 * 
@@ -663,17 +683,11 @@ declare namespace sinon{
 			 */
 			"Content-Type" : string;
 		}
-		
+				
 		/**
 		 * 
 		 */
-		responseXML : {
-						
-			/**
-			 * 
-			 */
-			async : string;
-		}
+		progress : number;
 				
 		/**
 		 * 
@@ -694,6 +708,11 @@ declare namespace sinon{
 		 * 
 		 */
 		useFilters : boolean;
+				
+		/**
+		 * 
+		 */
+		parseXML : /*no type*/{};
 		
 		/**
 		 * 
@@ -725,6 +744,16 @@ declare namespace sinon{
 		 * 
 		 */
 		throwsException : /* sinon.behavior.throws */ any;
+				
+		/**
+		 * 
+		 */
+		get : /* sinon.collection.fakes.<i>.get */ any;
+				
+		/**
+		 * 
+		 */
+		set : /* sinon.collection.fakes.<i>.set */ any;
 		
 		/**
 		 * 
@@ -1056,6 +1085,11 @@ declare namespace sinon{
 		/**
 		 * 
 		 */
+		error : /* sinon.FakeXMLHttpRequest.prototype.error */ any;
+				
+		/**
+		 * 
+		 */
 		getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
 				
 		/**
@@ -1133,11 +1167,6 @@ declare namespace sinon{
 		 * 
 		 */
 		defake : /*no type*/{};
-				
-		/**
-		 * 
-		 */
-		parseXML : /* sinon.FakeXMLHttpRequest.parseXML */ any;
 				
 		/**
 		 * 
@@ -1222,6 +1251,21 @@ declare namespace sinon.ExtendRet{
 		/**
 		 * 
 		 */
+		enumerable : boolean;
+				
+		/**
+		 * 
+		 */
+		configurable : boolean;
+				
+		/**
+		 * 
+		 */
+		writable : boolean;
+				
+		/**
+		 * 
+		 */
 		toString : /* !proto.toString */ any;
 				
 		/**
@@ -1257,7 +1301,17 @@ declare namespace sinon.ExtendRet{
 		/**
 		 * 
 		 */
-		restore : /* sinon.getPropertyDescriptor.!ret.restore */ any;
+		restore : /* sinon.collection.fakes.<i>.restore */ any;
+				
+		/**
+		 * 
+		 */
+		get : /* sinon.collection.fakes.<i>.get */ any;
+				
+		/**
+		 * 
+		 */
+		set : /* sinon.collection.fakes.<i>.set */ any;
 		
 		/**
 		 * 
@@ -2754,6 +2808,20 @@ declare namespace sinon.ExtendRet{
 		total : number;
 	}
 }
+declare namespace sinon.ExtendRet{
+	// sinon.extend.!ret.parseXML.!ret
+	
+	/**
+	 * 
+	 */
+	interface ParseXMLRet {
+				
+		/**
+		 * 
+		 */
+		async : string;
+	}
+}
 declare namespace sinon.spy{
 	// sinon.spy.reset.!ret
 	
@@ -2811,6 +2879,21 @@ declare namespace sinon.spy{
 		 * 
 		 */
 		invoking : boolean;
+				
+		/**
+		 * 
+		 */
+		enumerable : boolean;
+				
+		/**
+		 * 
+		 */
+		configurable : boolean;
+				
+		/**
+		 * 
+		 */
+		writable : boolean;
 				
 		/**
 		 * 
@@ -3702,17 +3785,13 @@ declare namespace sinon.mock{
 		verify : /* sinon.mock.verify */ any;
 	}
 }
-declare namespace sinon.mock{
-	// sinon.mock.invokeMethod.!2
-	type InvokeMethod2 = Array<any>;
-}
-declare namespace sinon.collection{
-	// sinon.collection.fakes.<i>
+declare namespace sinon.mock.expectations{
+	// sinon.mock.expectations.<i>.<i>
 	
 	/**
 	 * 
 	 */
-	interface FakesI {
+	interface ExpectationsII {
 				
 		/**
 		 * 
@@ -3900,6 +3979,10 @@ declare namespace sinon.collection{
 		lastCall : /* sinon.spy.firstCall */ any;
 	}
 }
+declare namespace sinon.mock{
+	// sinon.mock.invokeMethod.!2
+	type InvokeMethod2 = Array<any>;
+}
 declare namespace sinon.collection{
 	// sinon.collection.stub.!0
 	
@@ -3989,6 +4072,11 @@ declare namespace sinon.collection{
 			/**
 			 * 
 			 */
+			setSystemTime : /* sinon.fakeServerWithClock.clock.setSystemTime */ any;
+						
+			/**
+			 * 
+			 */
 			uninstall : /* sinon.fakeServerWithClock.clock.uninstall */ any;
 		}
 				
@@ -4001,7 +4089,7 @@ declare namespace sinon.collection{
 		 * 
 		 * @return  
 		 */
-		spy(): /* sinon.getPropertyDescriptor.!ret */ any;
+		spy(): any;
 				
 		/**
 		 * 
@@ -4098,6 +4186,11 @@ declare namespace sinon{
 		/**
 		 * 
 		 */
+		setSystemTime : /* sinon.fakeServerWithClock.clock.setSystemTime */ any;
+				
+		/**
+		 * 
+		 */
 		uninstall : /* sinon.fakeServerWithClock.clock.uninstall */ any;
 	}
 }
@@ -4127,6 +4220,11 @@ declare namespace sinon.Event.prototype{
 		/**
 		 * 
 		 */
+		responseText : string;
+				
+		/**
+		 * 
+		 */
 		response : string;
 				
 		/**
@@ -4137,7 +4235,7 @@ declare namespace sinon.Event.prototype{
 		/**
 		 * 
 		 */
-		responseText : string;
+		progress : number;
 				
 		/**
 		 * 
@@ -4192,6 +4290,11 @@ declare namespace sinon.Event.prototype{
 		/**
 		 * 
 		 */
+		error : /* sinon.FakeXMLHttpRequest.prototype.error */ any;
+				
+		/**
+		 * 
+		 */
 		getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
 				
 		/**
@@ -4203,11 +4306,6 @@ declare namespace sinon.Event.prototype{
 		 * 
 		 */
 		setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
-				
-		/**
-		 * 
-		 */
-		responseXML : /* sinon.FakeXMLHttpRequest.prototype.responseXML */ any;
 				
 		/**
 		 * 
@@ -4253,7 +4351,7 @@ declare namespace sinon{
 	// sinon.ProgressEvent.!1
 	
 	/**
-	 * 
+	 * ensure loaded and total are numbers
 	 */
 	interface ProgressEvent1 {
 				
@@ -4277,6 +4375,38 @@ declare namespace sinon{
 	interface CustomEvent1 {
 	}
 }
+declare namespace sinon.logError{
+	// sinon.logError.setTimeout.!0
+	type SetTimeout0 = (() => void);
+}
+declare namespace sinon{
+	// sinon.logError.!1
+	
+	/**
+	 * 
+	 */
+	interface LogError1 {
+				
+		/**
+		 * 
+		 */
+		message : string;
+	}
+}
+declare namespace sinon.xhr.XMLHttpRequest{
+	// sinon.xhr.XMLHttpRequest.parseXML.!ret
+	
+	/**
+	 * 
+	 */
+	interface ParseXMLRet {
+				
+		/**
+		 * 
+		 */
+		async : string;
+	}
+}
 declare namespace sinon.FakeXMLHttpRequest{
 	// sinon.FakeXMLHttpRequest.defake.!0
 	
@@ -4289,6 +4419,20 @@ declare namespace sinon.FakeXMLHttpRequest{
 declare namespace sinon.FakeXMLHttpRequest{
 	// sinon.FakeXMLHttpRequest.defake.!1
 	type Defake1 = Array<any>;
+}
+declare namespace sinon.FakeXMLHttpRequest{
+	// sinon.FakeXMLHttpRequest.parseXML.!ret
+	
+	/**
+	 * 
+	 */
+	interface ParseXMLRet {
+				
+		/**
+		 * 
+		 */
+		async : string;
+	}
 }
 declare namespace sinon.fakeServer{
 	// sinon.fakeServer.create.!ret
@@ -4548,7 +4692,7 @@ declare namespace samsam{
 	 * @param object 
 	 * @return  
 	 */
-	function keys(object : any): KeysRet;
+	function keys(object : any): samsam.KeysRet;
 }
 
 /**
@@ -4568,7 +4712,7 @@ declare namespace formatio{
 	 * @param options 
 	 * @return  
 	 */
-	function configure(options : formatio.Configure0): ConfigureRet;
+	function configure(options : formatio.Configure0): formatio.ConfigureRet;
 		
 	/**
 	 * 
@@ -4633,7 +4777,7 @@ declare namespace sinon{
 	 * @param obj 
 	 * @return  
 	 */
-	function objectKeys(obj : any): ObjectKeysRet;
+	function objectKeys(obj : {} | (() => void)): sinon.ObjectKeysRet;
 		
 	/**
 	 * 
@@ -4641,14 +4785,14 @@ declare namespace sinon{
 	 * @param property 
 	 * @return  
 	 */
-	function getPropertyDescriptor(object : /* sinon.wrapMethod.!0 */ any, property : any): GetPropertyDescriptorRet;
+	function getPropertyDescriptor(object : /* sinon.wrapMethod.!0 */ any, property : any): sinon.GetPropertyDescriptorRet;
 		
 	/**
 	 * 
 	 * @param custom 
 	 * @return  
 	 */
-	function getConfig(custom : any): GetConfigRet;
+	function getConfig(custom : any): sinon.GetConfigRet;
 	
 	/**
 	 * 
@@ -4717,7 +4861,7 @@ declare namespace sinon{
 	 * @param target 
 	 * @return  
 	 */
-	function extend(target : any): ExtendRet;
+	function extend(target : any): sinon.ExtendRet;
 		
 	/**
 	 * 
@@ -4819,7 +4963,7 @@ declare namespace sinon{
 	 * @param types 
 	 * @return  
 	 */
-	function spy(object : sinon.Spy0, property : any, types : any): /* sinon.getPropertyDescriptor.!ret */ any;
+	function spy(object : sinon.Spy0, property : any, types : any): any;
 	
 	/**
 	 * 
@@ -4830,7 +4974,7 @@ declare namespace sinon{
 		 * 
 		 * @return  
 		 */
-		function reset(): ResetRet;
+		function reset(): sinon.spy.ResetRet;
 				
 		/**
 		 * 
@@ -4924,7 +5068,7 @@ declare namespace sinon{
 		 * @param name 
 		 * @return  
 		 */
-		function named(name : any): NamedRet;
+		function named(name : any): sinon.spy.NamedRet;
 				
 		/**
 		 * 
@@ -4937,7 +5081,7 @@ declare namespace sinon{
 		 * 
 		 * @return  
 		 */
-		function getCalls(): GetCallsRet;
+		function getCalls(): sinon.spy.GetCallsRet;
 				
 		/**
 		 * 
@@ -4957,7 +5101,7 @@ declare namespace sinon{
 		 * 
 		 * @return  
 		 */
-		function withArgs(): WithArgsRet;
+		function withArgs(): sinon.spy.WithArgsRet;
 				
 		/**
 		 * 
@@ -5048,7 +5192,7 @@ declare namespace sinon{
 		 * @param stub 
 		 * @return  
 		 */
-		function create(stub : any): CreateRet;		
+		function create(stub : any): sinon.behavior.CreateRet;		
 		/**
 		 * 
 		 */
@@ -5237,7 +5381,7 @@ declare namespace sinon{
 		 * @param methodName 
 		 * @return  
 		 */
-		function create(methodName : string): CreateRet;		
+		function create(methodName : string): sinon.expectation.CreateRet;		
 		/**
 		 * 
 		 */
@@ -5457,7 +5601,7 @@ declare namespace sinon{
 		 * @param object 
 		 * @return  
 		 */
-		function create(object : any): CreateRet;		
+		function create(object : any): sinon.mock.CreateRet;		
 		/**
 		 * 
 		 */
@@ -5518,7 +5662,13 @@ declare namespace sinon{
 		/**
 		 * 
 		 */
-		export var fakes : Array<sinon.collection.FakesI>;
+		export var fakes : Array<any>;
+		
+		/**
+		 * 
+		 */
+		namespace fakes{
+		}
 				
 		/**
 		 * 
@@ -5546,7 +5696,7 @@ declare namespace sinon{
 		 * 
 		 * @return  
 		 */
-		function spy(): /* sinon.getPropertyDescriptor.!ret */ any;
+		function spy(): any;
 				
 		/**
 		 * 
@@ -5555,7 +5705,7 @@ declare namespace sinon{
 		 * @param value 
 		 * @return  
 		 */
-		function stub(object : sinon.collection.Stub0, property : any, value : any): StubRet;
+		function stub(object : sinon.collection.Stub0, property : any, value : any): sinon.collection.StubRet;
 				
 		/**
 		 * 
@@ -5579,7 +5729,7 @@ declare namespace sinon{
 	 * 
 	 * @return  
 	 */
-	function useFakeTimers(): UseFakeTimersRet;
+	function useFakeTimers(): sinon.UseFakeTimersRet;
 	
 	/**
 	 * 
@@ -5676,17 +5826,17 @@ declare namespace sinon{
 			/**
 			 * 
 			 */
+			responseText : string;
+						
+			/**
+			 * 
+			 */
 			response : string;
 						
 			/**
 			 * 
 			 */
 			aborted : boolean;
-						
-			/**
-			 * 
-			 */
-			responseText : string;
 			
 			/**
 			 * 
@@ -5698,17 +5848,11 @@ declare namespace sinon{
 				 */
 				"Content-Type" : string;
 			}
-			
+						
 			/**
 			 * 
 			 */
-			responseXML : {
-								
-				/**
-				 * 
-				 */
-				async : string;
-			}
+			progress : number;
 						
 			/**
 			 * 
@@ -5758,6 +5902,11 @@ declare namespace sinon{
 			/**
 			 * 
 			 */
+			error : /* sinon.FakeXMLHttpRequest.prototype.error */ any;
+						
+			/**
+			 * 
+			 */
 			getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
 						
 			/**
@@ -5803,7 +5952,7 @@ declare namespace sinon{
 		 * @param progressEventRaw 
 		 * @param target 
 		 */
-		new (type : string, progressEventRaw : any, target : any);
+		new (type : string, progressEventRaw : /* sinon.ProgressEvent.!1 */ any, target : /* sinon.ProgressEvent.target */ any);
 				
 		/**
 		 * 
@@ -5848,6 +5997,11 @@ declare namespace sinon{
 			/**
 			 * 
 			 */
+			responseText : string;
+						
+			/**
+			 * 
+			 */
 			response : string;
 						
 			/**
@@ -5858,7 +6012,7 @@ declare namespace sinon{
 			/**
 			 * 
 			 */
-			responseText : string;
+			progress : number;
 						
 			/**
 			 * 
@@ -5913,6 +6067,11 @@ declare namespace sinon{
 			/**
 			 * 
 			 */
+			error : /* sinon.FakeXMLHttpRequest.prototype.error */ any;
+						
+			/**
+			 * 
+			 */
 			getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
 						
 			/**
@@ -5924,11 +6083,6 @@ declare namespace sinon{
 			 * 
 			 */
 			setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
-						
-			/**
-			 * 
-			 */
-			responseXML : /* sinon.FakeXMLHttpRequest.prototype.responseXML */ any;
 						
 			/**
 			 * 
@@ -5999,8 +6153,9 @@ declare namespace sinon{
 		 * 
 		 * @param event 
 		 * @param listener 
+		 * @return  
 		 */
-		function removeEventListener(event : any, listener : any): void;
+		function removeEventListener(event : any, listener : any): Array<any>;
 				
 		/**
 		 * 
@@ -6030,6 +6185,37 @@ declare namespace sinon{
 	 * 
 	 */
 	export var lengthComputable : boolean;
+		
+	/**
+	 * 
+	 */
+	function log(): void;
+		
+	/**
+	 * 
+	 * @param label 
+	 * @param err 
+	 */
+	function logError(label : string, err : sinon.LogError1): void;
+	
+	/**
+	 * 
+	 */
+	namespace logError{
+				
+		/**
+		 * When set to true, any errors logged will be thrown immediately;
+		 * If set to false, the errors will be thrown in separate execution frame.
+		 */
+		export var useImmediateExceptions : boolean;
+				
+		/**
+		 * wrap realSetTimeout with something we can stub in tests
+		 * @param func 
+		 * @param timeout 
+		 */
+		function setTimeout(func : sinon.logError.SetTimeout0, timeout : number): void;
+	}
 	
 	/**
 	 * 
@@ -6355,6 +6541,11 @@ declare namespace sinon{
 			 * 
 			 */
 			export var useFilters : boolean;
+						
+			/**
+			 * 
+			 */
+			export var parseXML : /*no type*/{};
 			
 			/**
 			 * 
@@ -6385,6 +6576,11 @@ declare namespace sinon{
 				/**
 				 * 
 				 */
+				export var responseText : string;
+								
+				/**
+				 * 
+				 */
 				export var response : string;
 								
 				/**
@@ -6395,7 +6591,7 @@ declare namespace sinon{
 				/**
 				 * 
 				 */
-				export var responseText : string;
+				export var progress : number;
 								
 				/**
 				 * 
@@ -6455,6 +6651,11 @@ declare namespace sinon{
 				/**
 				 * 
 				 */
+				export var error : /* sinon.FakeXMLHttpRequest.prototype.error */ any;
+								
+				/**
+				 * 
+				 */
 				export var getResponseHeader : /* sinon.FakeXMLHttpRequest.prototype.getResponseHeader */ any;
 								
 				/**
@@ -6466,11 +6667,6 @@ declare namespace sinon{
 				 * 
 				 */
 				export var setResponseBody : /* sinon.FakeXMLHttpRequest.prototype.setResponseBody */ any;
-								
-				/**
-				 * 
-				 */
-				export var responseXML : /* sinon.FakeXMLHttpRequest.prototype.responseXML */ any;
 								
 				/**
 				 * 
@@ -6566,11 +6762,6 @@ declare namespace sinon{
 			/**
 			 * 
 			 */
-			export var parseXML : /* sinon.FakeXMLHttpRequest.parseXML */ any;
-						
-			/**
-			 * 
-			 */
 			export var restore : /* sinon.FakeXMLHttpRequest.restore */ any;
 		}
 				
@@ -6584,7 +6775,7 @@ declare namespace sinon{
 			 * @param objId 
 			 * @return  
 			 */
-			new (objId : string): GlobalActiveXObject;
+			new (objId : string): /* sinon.xhr.GlobalActiveXObject */ any;
 		}
 
 				
@@ -6686,6 +6877,11 @@ declare namespace sinon{
 		/**
 		 * 
 		 */
+		responseText : string;
+				
+		/**
+		 * 
+		 */
 		response : string;
 				
 		/**
@@ -6697,11 +6893,6 @@ declare namespace sinon{
 		 * 
 		 */
 		aborted : boolean;
-				
-		/**
-		 * 
-		 */
-		responseText : string;
 		
 		/**
 		 * 
@@ -6713,6 +6904,11 @@ declare namespace sinon{
 			 */
 			"Content-Type" : string;
 		}
+				
+		/**
+		 * 
+		 */
+		error(): void;
 				
 		/**
 		 * 
@@ -6732,17 +6928,11 @@ declare namespace sinon{
 		 * @param body 
 		 */
 		setResponseBody(body : string): void;
-		
+				
 		/**
 		 * 
 		 */
-		responseXML : {
-						
-			/**
-			 * 
-			 */
-			async : string;
-		}
+		progress : number;
 				
 		/**
 		 * 
@@ -6828,7 +7018,7 @@ declare namespace sinon{
 		 * @param text 
 		 * @return  
 		 */
-		parseXML(text : string): /* sinon.FakeXMLHttpRequest.prototype.responseXML */ any;
+		parseXML(text : string): sinon.FakeXMLHttpRequest.ParseXMLRet;
 		
 		/**
 		 * 
@@ -6880,7 +7070,12 @@ declare namespace sinon{
 				/**
 				 * 
 				 */
-				progress : Array<any>;
+				abort : Array<any>;
+								
+				/**
+				 * 
+				 */
+				error : Array<any>;
 								
 				/**
 				 * 
@@ -6890,12 +7085,12 @@ declare namespace sinon{
 				/**
 				 * 
 				 */
-				abort : Array<any>;
+				loadend : Array<any>;
 								
 				/**
 				 * 
 				 */
-				error : Array<any>;
+				progress : Array<any>;
 			}
 		}
 				
@@ -6930,7 +7125,7 @@ declare namespace sinon{
 		 * @param config 
 		 * @return  
 		 */
-		function create(config : any): CreateRet;
+		function create(config : any): sinon.fakeServer.CreateRet;
 				
 		/**
 		 * 
@@ -7104,6 +7299,12 @@ declare namespace sinon{
 						
 			/**
 			 * 
+			 * @param now 
+			 */
+			setSystemTime(now : any): void;
+						
+			/**
+			 * 
 			 */
 			uninstall(): void;
 						
@@ -7171,22 +7372,6 @@ declare namespace sinon{
 		 * @param expectation 
 		 */
 		function match(actual : any, expectation : any): void;
-	}
-	
-	/**
-	 * 
-	 */
-	interface Error {
-				
-		/**
-		 * 
-		 */
-		code : string;
-				
-		/**
-		 * 
-		 */
-		name : string;
 	}
 }
 
