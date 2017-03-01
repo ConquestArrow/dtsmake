@@ -13,7 +13,9 @@
         "lib": [
             "es2015"
         ],
-		"outDir": "lib"//,
+		"outDir": "lib",
+        "newLine": "LF"
+        //,
 		//"rootDir": "src"
     },
     "include":[
