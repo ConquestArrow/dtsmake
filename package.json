@@ -36,7 +36,7 @@
     "@types/gulp-concat": "0.0.29",
     "@types/gulp-typescript": "0.0.32",
     "@types/mocha": "^2.2.33",
-    "@types/node": "^6.0.52",
+    "@types/node": "^7.0.5",
     "@types/power-assert": "^1.4.29",
     "@types/power-assert-formatter": "^1.4.28",
     "@types/sinon": "^1.16.33",
@@ -59,6 +59,6 @@
   "dependencies": {
     "clone": "^2.1.0",
     "commander": "^2.9.0",
-    "tern": "^0.20.0"
+    "tern": "^0.21.0"
   }
 }
