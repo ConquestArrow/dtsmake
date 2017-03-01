@@ -35,7 +35,7 @@ gulp.task("cmdbuild", ()=>{
 
 gulp.task("build", ()=>{
 	let tsProj = gts.createProject("tsconfig.json")
-	tsProj.src("./node_modules/@types")
+	//tsProj.src("./node_modules/@types")
 
 	let result = gulp
 		.src("./src/*.ts")
